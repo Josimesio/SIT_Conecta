@@ -33,7 +33,7 @@ env/
 # Generated files
 # =========================
 downloads/
-output/
+
 
 # Se quiser manter a pasta vazia no Git, use um .gitkeep dentro dela
 # e depois ajuste a regra assim:
