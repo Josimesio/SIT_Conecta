@@ -180,8 +180,16 @@ function renderLeaderboard(rows) {
   });
 
   const ranking = [...grouped.values()]
-    .map(item => ({ ...item, percent: item.total ? Math.round((item.concluded / item.total) * 100) : 0 }))
-    .sort((a, b) => b.concluded - a.concluded || b.percent - a.percent || a.lider.localeCompare(b.lider, 'pt-BR'))
+    .map(item => ({
+      ...item,
+      percent: item.total ? Math.round((item.concluded / item.total) * 100) : 0
+    }))
+    .sort((a, b) =>
+      b.percent - a.percent ||
+      b.concluded - a.concluded ||
+      a.inProgress - b.inProgress ||
+      a.lider.localeCompare(b.lider, 'pt-BR')
+    )
     .slice(0, 20);
 
   els.leaderboard.innerHTML = ranking.map((item, index) => `
@@ -240,7 +248,11 @@ function renderAreaBoard(rows) {
   });
 
   const cards = [...grouped.values()]
-    .map(item => ({ ...item, percent: getPercent(item.concluded, item.total), leaderCount: item.leaders.size }))
+    .map(item => ({
+      ...item,
+      percent: getPercent(item.concluded, item.total),
+      leaderCount: item.leaders.size
+    }))
     .sort((a, b) => b.percent - a.percent || b.concluded - a.concluded || a.area.localeCompare(b.area, 'pt-BR'))
     .slice(0, 12);
 
