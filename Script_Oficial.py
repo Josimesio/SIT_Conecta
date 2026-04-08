@@ -170,14 +170,30 @@ def fazer_login(page: Page) -> None:
 
     log("➡️ Clicando em Acessar...")
     page.get_by_role("button", name="Acessar").click()
+
+    try:
+        page.wait_for_url(lambda url: "login" not in url.lower(), timeout=DEFAULT_TIMEOUT_MS)
+    except Exception:
+        pass
+
     aguardar_estabilidade(page, "pós-login")
-    log(f"✅ Login concluído. URL atual: {page.url}")
+    log(f"✅ Pós-login. URL atual: {page.url}")
 
     if "login" in page.url.lower():
-        log("ℹ️ Ainda na tela de login. Tentando abrir home...")
-        page.goto(GTN_HOME_URL, wait_until="domcontentloaded", timeout=DEFAULT_TIMEOUT_MS)
-        aguardar_estabilidade(page, "abertura da home")
-        log(f"✅ Home aberta. URL atual: {page.url}")
+        salvar_debug(page, "falha_login")
+        raise RuntimeError(
+            "O sistema permaneceu na tela de login após o acesso. "
+            "Verifique credenciais, expiração de sessão ou bloqueio do APEX."
+        )
+
+    if not url_tem_sessao(page.url):
+        log("ℹ️ URL sem session explícita. Tentando validar contexto da aplicação...")
+        try:
+            page.goto(GTN_HOME_URL, wait_until="domcontentloaded", timeout=DEFAULT_TIMEOUT_MS)
+            aguardar_estabilidade(page, "validação da home após login")
+            log(f"✅ Home validada. URL atual: {page.url}")
+        except Exception as e:
+            raise RuntimeError(f"Login aparentemente efetuado, mas a home não abriu corretamente: {e}")
 
 
 def listar_botoes_visiveis(page: Page) -> None:
@@ -202,7 +218,6 @@ def listar_botoes_visiveis(page: Page) -> None:
         pass
 
 
-
 def tela_execucao_testes_ativa(page: Page) -> bool:
     candidatos = [
         "#R35932200234408468_saved_reports",
@@ -216,7 +231,6 @@ def tela_execucao_testes_ativa(page: Page) -> bool:
         except Exception:
             continue
     return False
-
 
 
 def tentar_abrir_menu_navegacao(page: Page) -> bool:
@@ -245,7 +259,6 @@ def tentar_abrir_menu_navegacao(page: Page) -> bool:
     return False
 
 
-
 def tentar_expandir_arvore(page: Page) -> None:
     candidatos = [
         page.locator(".a-TreeView-toggle"),
@@ -265,7 +278,6 @@ def tentar_expandir_arvore(page: Page) -> None:
             continue
 
     log("ℹ️ Não encontrei toggle da árvore. Vou tentar achar 'Execução de Testes' direto.")
-
 
 
 def tentar_abrir_execucao_testes_pelo_menu(page: Page) -> bool:
@@ -290,7 +302,6 @@ def tentar_abrir_execucao_testes_pelo_menu(page: Page) -> bool:
             continue
 
     return False
-
 
 
 def abrir_execucao_testes(page: Page) -> None:
@@ -358,7 +369,6 @@ def selecionar_relatorio(page: Page, relatorio_id: str, relatorio_nome: str) -> 
         )
 
 
-
 def obter_texto_relatorio_selecionado(page: Page) -> str:
     try:
         seletor = page.locator("#R35932200234408468_saved_reports")
@@ -394,6 +404,7 @@ def contar_linhas_csv(caminho: Path) -> int:
             return 0
 
         return sum(1 for linha in reader if any((col or '').strip() for col in linha))
+
 
 def ajustar_quantidade_linhas(page: Page) -> None:
     log("📄 Ajustando quantidade de linhas para 100000...")
@@ -569,8 +580,6 @@ def processar_relatorios(page: Page) -> list[Path]:
     return arquivos_baixados
 
 
-
-
 def abrir_csv_com_encoding_flexivel(caminho: Path):
     encodings_teste = ["utf-8-sig", "utf-8", "cp1252", "latin-1"]
     ultimo_erro = None
@@ -598,6 +607,7 @@ def abrir_csv_com_encoding_flexivel(caminho: Path):
 def obter_timestamp_geracao() -> str:
     return datetime.now(ZoneInfo("America/Sao_Paulo")).strftime("%Y-%m-%d %H:%M")
 
+
 def consolidar_csvs(arquivos_csv: list[Path]) -> Path:
     if not arquivos_csv:
         raise RuntimeError("Nenhum CSV foi baixado para consolidar.")
@@ -622,7 +632,7 @@ def consolidar_csvs(arquivos_csv: list[Path]) -> Path:
                 entrada.seek(0)
 
                 try:
-                    dialect = csv.Sniffer().sniff(amostra, delimiters=",;	|")
+                    dialect = csv.Sniffer().sniff(amostra, delimiters=",;\t|")
                 except Exception:
                     dialect = csv.excel
                     dialect.delimiter = ";" if ";" in amostra else ","
@@ -665,6 +675,7 @@ def consolidar_csvs(arquivos_csv: list[Path]) -> Path:
     log(f"📦 Consolidado gerado em: {destino}")
     log(f"📊 Total de linhas no geral.csv: {total_linhas}")
     return destino
+
 
 def executar_fluxo() -> None:
     validar_env()

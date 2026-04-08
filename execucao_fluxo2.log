@@ -85,3 +85,425 @@ Call log:
   - navigating to "https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00", waiting until "domcontentloaded"
 
 
+[2026-04-08 10:58:40] ==================================================
+[2026-04-08 10:58:40] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 10:58:40] ==================================================
+[2026-04-08 10:58:40] ❌ Falha geral na execução: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+[2026-04-08 10:58:40] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 670, in executar_fluxo
+    validar_env()
+    ~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 77, in validar_env
+    raise ValueError(f"Variáveis ausentes no .env: {', '.join(faltando)}")
+ValueError: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+
+[2026-04-08 10:58:44] ==================================================
+[2026-04-08 10:58:44] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 10:58:44] ==================================================
+[2026-04-08 10:58:44] ❌ Falha geral na execução: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+[2026-04-08 10:58:44] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 670, in executar_fluxo
+    validar_env()
+    ~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 77, in validar_env
+    raise ValueError(f"Variáveis ausentes no .env: {', '.join(faltando)}")
+ValueError: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+
+[2026-04-08 11:00:18] ==================================================
+[2026-04-08 11:00:18] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 11:00:18] ==================================================
+[2026-04-08 11:00:22] 🌐 Abrindo tela de login...
+[2026-04-08 11:00:26] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-04-08 11:00:30] 🔐 Preenchendo credenciais...
+[2026-04-08 11:00:30] ➡️ Clicando em Acessar...
+[2026-04-08 11:00:31] ⏳ Aguardando estabilidade: pós-login
+[2026-04-08 11:00:32] ✅ Login concluído. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00
+[2026-04-08 11:00:32] ℹ️ Ainda na tela de login. Tentando abrir home...
+[2026-04-08 11:00:33] ⏳ Aguardando estabilidade: abertura da home
+[2026-04-08 11:00:39] ✅ Home aberta. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=114437296354927&tz=-3:00
+[2026-04-08 11:00:39] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=114437296354927&tz=-3:00
+[2026-04-08 11:00:39] ⏳ Aguardando estabilidade: estado atual após login
+[2026-04-08 11:00:41] 🔎 Ações/botões visíveis na tela: ['Mostrar Senha', 'Acessar', 'Esqueci a Senha']
+[2026-04-08 11:00:41] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110041.png
+[2026-04-08 11:00:41] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110041.html
+[2026-04-08 11:00:41] ❌ Erro: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:00:41] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110041.png
+[2026-04-08 11:00:41] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110041.html
+[2026-04-08 11:00:42] ❌ Falha geral na execução: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:00:42] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 686, in executar_fluxo
+    abrir_execucao_testes(page)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 318, in abrir_execucao_testes
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+
+[2026-04-08 11:01:11] ==================================================
+[2026-04-08 11:01:11] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 11:01:11] ==================================================
+[2026-04-08 11:01:13] 🌐 Abrindo tela de login...
+[2026-04-08 11:01:17] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-04-08 11:01:22] 🔐 Preenchendo credenciais...
+[2026-04-08 11:01:22] ➡️ Clicando em Acessar...
+[2026-04-08 11:01:22] ⏳ Aguardando estabilidade: pós-login
+[2026-04-08 11:01:24] ✅ Login concluído. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00
+[2026-04-08 11:01:24] ℹ️ Ainda na tela de login. Tentando abrir home...
+[2026-04-08 11:01:25] ⏳ Aguardando estabilidade: abertura da home
+[2026-04-08 11:01:32] ✅ Home aberta. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=106892046558586&tz=-3:00
+[2026-04-08 11:01:32] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=106892046558586&tz=-3:00
+[2026-04-08 11:01:32] ⏳ Aguardando estabilidade: estado atual após login
+[2026-04-08 11:01:34] 🔎 Ações/botões visíveis na tela: ['Mostrar Senha', 'Acessar', 'Esqueci a Senha']
+[2026-04-08 11:01:34] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110134.png
+[2026-04-08 11:01:34] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110134.html
+[2026-04-08 11:01:34] ❌ Erro: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:01:34] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110134.png
+[2026-04-08 11:01:34] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110134.html
+[2026-04-08 11:01:34] ❌ Falha geral na execução: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:01:34] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 686, in executar_fluxo
+    abrir_execucao_testes(page)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 318, in abrir_execucao_testes
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+
+[2026-04-08 11:03:49] ==================================================
+[2026-04-08 11:03:49] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 11:03:49] ==================================================
+[2026-04-08 11:03:51] 🌐 Abrindo tela de login...
+[2026-04-08 11:04:12] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-04-08 11:04:20] 🔐 Preenchendo credenciais...
+[2026-04-08 11:04:20] ➡️ Clicando em Acessar...
+[2026-04-08 11:04:21] ⏳ Aguardando estabilidade: pós-login
+[2026-04-08 11:04:22] ✅ Login concluído. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00
+[2026-04-08 11:04:22] ℹ️ Ainda na tela de login. Tentando abrir home...
+[2026-04-08 11:04:23] ⏳ Aguardando estabilidade: abertura da home
+[2026-04-08 11:04:30] ✅ Home aberta. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=102514260993260&tz=-3:00
+[2026-04-08 11:04:30] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?session=102514260993260&tz=-3:00
+[2026-04-08 11:04:30] ⏳ Aguardando estabilidade: estado atual após login
+[2026-04-08 11:04:31] 🔎 Ações/botões visíveis na tela: ['Mostrar Senha', 'Acessar', 'Esqueci a Senha']
+[2026-04-08 11:04:32] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110431.png
+[2026-04-08 11:04:32] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\sem_menu_no_estado_atual_20260408_110431.html
+[2026-04-08 11:04:32] ❌ Erro: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:04:32] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110432.png
+[2026-04-08 11:04:32] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_110432.html
+[2026-04-08 11:04:32] ❌ Falha geral na execução: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+[2026-04-08 11:04:32] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 686, in executar_fluxo
+    abrir_execucao_testes(page)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 318, in abrir_execucao_testes
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: Não encontrei o botão/menu de navegação principal no estado atual da página. Não vou redirecionar para HOME sem session para não derrubar o login.
+
+[2026-04-08 11:09:38] ==================================================
+[2026-04-08 11:09:38] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 11:09:38] ==================================================
+[2026-04-08 11:09:40] 🌐 Abrindo tela de login...
+[2026-04-08 11:09:47] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-04-08 11:09:52] 🔐 Preenchendo credenciais...
+[2026-04-08 11:09:52] ➡️ Clicando em Acessar...
+[2026-04-08 11:10:00] ⏳ Aguardando estabilidade: pós-login
+[2026-04-08 11:10:04] ✅ Pós-login. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=109225394646175
+[2026-04-08 11:10:04] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=109225394646175
+[2026-04-08 11:10:04] ⏳ Aguardando estabilidade: estado atual após login
+[2026-04-08 11:10:06] 🧭 Abrindo navegação principal com seletor alternativo #1...
+[2026-04-08 11:10:07] 🌲 Expandindo árvore...
+[2026-04-08 11:10:08] 🧪 Entrando em Execução de Testes com seletor alternativo #1...
+[2026-04-08 11:10:15] ⏳ Aguardando estabilidade: entrada em Execução de Testes
+[2026-04-08 11:10:35] ✅ Tela de execução carregada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=109225394646175&cs=3f_KaODVY1eQvjPxyerPD9RoB-_4nT5tLrTg532iZu3GUORADg1Nm2QDy4gDp5CsYYiqdrNNBRKEI9ppGVBq_ag
+[2026-04-08 11:10:35] --------------------------------------------------
+[2026-04-08 11:10:35] 🚚 Processando relatório 1/9: relatorio_01
+[2026-04-08 11:10:35] 📑 Selecionando relatório relatorio_01 (75126574677490011)...
+[2026-04-08 11:10:35] ⏳ Aguardando estabilidade: seleção do relatório relatorio_01
+[2026-04-08 11:10:37] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 1. LINHA 1
+[2026-04-08 11:10:37] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:10:37] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:10:38] 📤 Abrindo menu de download...
+[2026-04-08 11:10:39] 📄 Selecionando opção de download...
+[2026-04-08 11:10:41] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:10:41] ⬇️ Iniciando rotina blindada de download do relatório relatorio_01...
+[2026-04-08 11:10:41] ⬇️ Tentativa 1/3 de download para relatorio_01...
+[2026-04-08 11:10:51] ✅ Evento de download capturado para relatorio_01.
+[2026-04-08 11:11:03] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111103_relatorio_01_Cenários.csv
+[2026-04-08 11:11:03] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:11:04] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:11:04] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:11:11] 🔤 Lendo 20260408_111103_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-04-08 11:11:11] 🧮 20260408_111103_relatorio_01_Cenários.csv -> linhas de dados: 1565 | hash: 1233e6ac59c36443
+[2026-04-08 11:11:11] --------------------------------------------------
+[2026-04-08 11:11:11] 🚚 Processando relatório 2/9: relatorio_02
+[2026-04-08 11:11:11] 📑 Selecionando relatório relatorio_02 (75307651324595294)...
+[2026-04-08 11:11:11] ⏳ Aguardando estabilidade: seleção do relatório relatorio_02
+[2026-04-08 11:11:15] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 1. LINHA 1
+[2026-04-08 11:11:15] ❌ Erro: O select não confirmou o ID esperado. Esperado: 75307651324595294 | Atual na tela: 75126574677490011
+[2026-04-08 11:11:16] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_111115.png
+[2026-04-08 11:11:16] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\erro_20260408_111115.html
+[2026-04-08 11:11:16] ❌ Falha geral na execução: O select não confirmou o ID esperado. Esperado: 75307651324595294 | Atual na tela: 75126574677490011
+[2026-04-08 11:11:16] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 738, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 699, in executar_fluxo
+    arquivos_baixados = processar_relatorios(page)
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 550, in processar_relatorios
+    selecionar_relatorio(page, relatorio["id"], relatorio["nome"])
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial.py", line 367, in selecionar_relatorio
+    raise RuntimeError(
+        f"O select não confirmou o ID esperado. Esperado: {relatorio_id} | Atual na tela: {valor_atual}"
+    )
+RuntimeError: O select não confirmou o ID esperado. Esperado: 75307651324595294 | Atual na tela: 75126574677490011
+
+[2026-04-08 11:12:55] ==================================================
+[2026-04-08 11:12:55] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 11:12:55] ==================================================
+[2026-04-08 11:12:57] 🌐 Abrindo tela de login...
+[2026-04-08 11:13:02] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-04-08 11:13:08] 🔐 Preenchendo credenciais...
+[2026-04-08 11:13:08] ➡️ Clicando em Acessar...
+[2026-04-08 11:13:15] ⏳ Aguardando estabilidade: pós-login
+[2026-04-08 11:13:19] ✅ Pós-login. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=107834376967772
+[2026-04-08 11:13:19] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=107834376967772
+[2026-04-08 11:13:19] ⏳ Aguardando estabilidade: estado atual após login
+[2026-04-08 11:13:20] 🧭 Abrindo navegação principal com seletor alternativo #1...
+[2026-04-08 11:13:21] 🌲 Expandindo árvore...
+[2026-04-08 11:13:22] 🧪 Entrando em Execução de Testes com seletor alternativo #1...
+[2026-04-08 11:13:26] ⏳ Aguardando estabilidade: entrada em Execução de Testes
+[2026-04-08 11:13:29] ✅ Tela de execução carregada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=107834376967772&cs=3-7dx2RSs7rOlFydMkxddn_jMS4_B6JpojPhrRieuaVTghRHk44LKwf5CaPJk6pS96Vm9wds64ByJ6T98kagAWw
+[2026-04-08 11:13:29] --------------------------------------------------
+[2026-04-08 11:13:29] 🚚 Processando relatório 1/9: relatorio_01
+[2026-04-08 11:13:29] 📑 Selecionando relatório relatorio_01 (75126574677490011)...
+[2026-04-08 11:13:29] ⏳ Aguardando estabilidade: seleção do relatório relatorio_01
+[2026-04-08 11:13:30] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 1. LINHA 1
+[2026-04-08 11:13:30] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:13:30] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:13:32] 📤 Abrindo menu de download...
+[2026-04-08 11:13:33] 📄 Selecionando opção de download...
+[2026-04-08 11:13:34] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:13:35] ⬇️ Iniciando rotina blindada de download do relatório relatorio_01...
+[2026-04-08 11:13:35] ⬇️ Tentativa 1/3 de download para relatorio_01...
+[2026-04-08 11:13:42] ✅ Evento de download capturado para relatorio_01.
+[2026-04-08 11:13:47] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111347_relatorio_01_Cenários.csv
+[2026-04-08 11:13:48] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:13:49] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:13:49] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:13:56] 🔤 Lendo 20260408_111347_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-04-08 11:13:56] 🧮 20260408_111347_relatorio_01_Cenários.csv -> linhas de dados: 1565 | hash: 1233e6ac59c36443
+[2026-04-08 11:13:56] --------------------------------------------------
+[2026-04-08 11:13:56] 🚚 Processando relatório 2/9: relatorio_02
+[2026-04-08 11:13:56] 📑 Selecionando relatório relatorio_02 (75307651324595294)...
+[2026-04-08 11:13:56] ⏳ Aguardando estabilidade: seleção do relatório relatorio_02
+[2026-04-08 11:13:57] 🧾 Relatório selecionado na tela -> id atual: 75307651324595294 | nome visível: 2. LINHA 2
+[2026-04-08 11:13:57] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:13:57] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:13:59] 📤 Abrindo menu de download...
+[2026-04-08 11:14:00] 📄 Selecionando opção de download...
+[2026-04-08 11:14:01] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:14:02] ⬇️ Iniciando rotina blindada de download do relatório relatorio_02...
+[2026-04-08 11:14:02] ⬇️ Tentativa 1/3 de download para relatorio_02...
+[2026-04-08 11:14:19] ✅ Evento de download capturado para relatorio_02.
+[2026-04-08 11:14:19] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111419_relatorio_02_Cenários.csv
+[2026-04-08 11:14:19] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:14:20] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:14:20] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:14:27] 🔤 Lendo 20260408_111419_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-04-08 11:14:27] 🧮 20260408_111419_relatorio_02_Cenários.csv -> linhas de dados: 8548 | hash: 3a6e52f51531e39c
+[2026-04-08 11:14:27] --------------------------------------------------
+[2026-04-08 11:14:27] 🚚 Processando relatório 3/9: relatorio_03
+[2026-04-08 11:14:27] 📑 Selecionando relatório relatorio_03 (75308641635576924)...
+[2026-04-08 11:14:27] ⏳ Aguardando estabilidade: seleção do relatório relatorio_03
+[2026-04-08 11:14:29] 🧾 Relatório selecionado na tela -> id atual: 75308641635576924 | nome visível: 3. LINHA 3
+[2026-04-08 11:14:29] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:14:29] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:14:30] 📤 Abrindo menu de download...
+[2026-04-08 11:14:31] 📄 Selecionando opção de download...
+[2026-04-08 11:14:33] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:14:33] ⬇️ Iniciando rotina blindada de download do relatório relatorio_03...
+[2026-04-08 11:14:33] ⬇️ Tentativa 1/3 de download para relatorio_03...
+[2026-04-08 11:14:38] ✅ Evento de download capturado para relatorio_03.
+[2026-04-08 11:14:38] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111438_relatorio_03_Cenários.csv
+[2026-04-08 11:14:38] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:14:39] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:14:39] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:14:46] 🔤 Lendo 20260408_111438_relatorio_03_Cenários.csv com encoding: cp1252
+[2026-04-08 11:14:46] 🧮 20260408_111438_relatorio_03_Cenários.csv -> linhas de dados: 1574 | hash: d7ac0e337aeda272
+[2026-04-08 11:14:46] --------------------------------------------------
+[2026-04-08 11:14:46] 🚚 Processando relatório 4/9: relatorio_04
+[2026-04-08 11:14:46] 📑 Selecionando relatório relatorio_04 (75312931254550487)...
+[2026-04-08 11:14:47] ⏳ Aguardando estabilidade: seleção do relatório relatorio_04
+[2026-04-08 11:14:49] 🧾 Relatório selecionado na tela -> id atual: 75312931254550487 | nome visível: 4. LINHA 4
+[2026-04-08 11:14:49] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:14:49] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:14:51] 📤 Abrindo menu de download...
+[2026-04-08 11:14:51] 📄 Selecionando opção de download...
+[2026-04-08 11:14:53] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:14:53] ⬇️ Iniciando rotina blindada de download do relatório relatorio_04...
+[2026-04-08 11:14:53] ⬇️ Tentativa 1/3 de download para relatorio_04...
+[2026-04-08 11:15:04] ✅ Evento de download capturado para relatorio_04.
+[2026-04-08 11:15:05] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111504_relatorio_04_Cenários.csv
+[2026-04-08 11:15:05] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:15:06] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:15:06] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:15:13] 🔤 Lendo 20260408_111504_relatorio_04_Cenários.csv com encoding: cp1252
+[2026-04-08 11:15:13] 🧮 20260408_111504_relatorio_04_Cenários.csv -> linhas de dados: 5907 | hash: ead67141390df721
+[2026-04-08 11:15:13] --------------------------------------------------
+[2026-04-08 11:15:13] 🚚 Processando relatório 5/9: relatorio_05
+[2026-04-08 11:15:13] 📑 Selecionando relatório relatorio_05 (75313445605545355)...
+[2026-04-08 11:15:13] ⏳ Aguardando estabilidade: seleção do relatório relatorio_05
+[2026-04-08 11:15:14] 🧾 Relatório selecionado na tela -> id atual: 75313445605545355 | nome visível: 5. LINHA 5
+[2026-04-08 11:15:14] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:15:14] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:15:16] 📤 Abrindo menu de download...
+[2026-04-08 11:15:17] 📄 Selecionando opção de download...
+[2026-04-08 11:15:18] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:15:19] ⬇️ Iniciando rotina blindada de download do relatório relatorio_05...
+[2026-04-08 11:15:19] ⬇️ Tentativa 1/3 de download para relatorio_05...
+[2026-04-08 11:15:22] ✅ Evento de download capturado para relatorio_05.
+[2026-04-08 11:15:22] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111522_relatorio_05_Cenários.csv
+[2026-04-08 11:15:26] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:15:27] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:15:27] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:15:34] 🔤 Lendo 20260408_111522_relatorio_05_Cenários.csv com encoding: cp1252
+[2026-04-08 11:15:34] 🧮 20260408_111522_relatorio_05_Cenários.csv -> linhas de dados: 2039 | hash: 527d47c080171730
+[2026-04-08 11:15:34] --------------------------------------------------
+[2026-04-08 11:15:34] 🚚 Processando relatório 6/9: relatorio_06
+[2026-04-08 11:15:34] 📑 Selecionando relatório relatorio_06 (75313959829541095)...
+[2026-04-08 11:15:34] ⏳ Aguardando estabilidade: seleção do relatório relatorio_06
+[2026-04-08 11:15:36] 🧾 Relatório selecionado na tela -> id atual: 75313959829541095 | nome visível: 6. LINHA 6
+[2026-04-08 11:15:36] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:15:36] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:15:37] 📤 Abrindo menu de download...
+[2026-04-08 11:15:38] 📄 Selecionando opção de download...
+[2026-04-08 11:15:40] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:15:40] ⬇️ Iniciando rotina blindada de download do relatório relatorio_06...
+[2026-04-08 11:15:40] ⬇️ Tentativa 1/3 de download para relatorio_06...
+[2026-04-08 11:15:41] ✅ Evento de download capturado para relatorio_06.
+[2026-04-08 11:15:42] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111542_relatorio_06_Cenários.csv
+[2026-04-08 11:15:42] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:15:43] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:15:43] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:15:50] 🔤 Lendo 20260408_111542_relatorio_06_Cenários.csv com encoding: cp1252
+[2026-04-08 11:15:50] 🧮 20260408_111542_relatorio_06_Cenários.csv -> linhas de dados: 608 | hash: 685eedc61268eeb5
+[2026-04-08 11:15:50] --------------------------------------------------
+[2026-04-08 11:15:50] 🚚 Processando relatório 7/9: relatorio_07
+[2026-04-08 11:15:50] 📑 Selecionando relatório relatorio_07 (75314469764536662)...
+[2026-04-08 11:15:50] ⏳ Aguardando estabilidade: seleção do relatório relatorio_07
+[2026-04-08 11:15:51] 🧾 Relatório selecionado na tela -> id atual: 75314469764536662 | nome visível: 7. LINHA 7
+[2026-04-08 11:15:51] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:15:51] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:15:53] 📤 Abrindo menu de download...
+[2026-04-08 11:15:54] 📄 Selecionando opção de download...
+[2026-04-08 11:15:55] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:15:56] ⬇️ Iniciando rotina blindada de download do relatório relatorio_07...
+[2026-04-08 11:15:56] ⬇️ Tentativa 1/3 de download para relatorio_07...
+[2026-04-08 11:16:01] ✅ Evento de download capturado para relatorio_07.
+[2026-04-08 11:16:01] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111601_relatorio_07_Cenários.csv
+[2026-04-08 11:16:02] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:16:03] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:16:03] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:16:10] 🔤 Lendo 20260408_111601_relatorio_07_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:10] 🧮 20260408_111601_relatorio_07_Cenários.csv -> linhas de dados: 3624 | hash: 5d7831b12e954db9
+[2026-04-08 11:16:10] --------------------------------------------------
+[2026-04-08 11:16:10] 🚚 Processando relatório 8/9: relatorio_08
+[2026-04-08 11:16:10] 📑 Selecionando relatório relatorio_08 (75314905291531893)...
+[2026-04-08 11:16:10] ⏳ Aguardando estabilidade: seleção do relatório relatorio_08
+[2026-04-08 11:16:11] 🧾 Relatório selecionado na tela -> id atual: 75314905291531893 | nome visível: 8. LINHA 8
+[2026-04-08 11:16:11] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:16:11] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:16:13] 📤 Abrindo menu de download...
+[2026-04-08 11:16:14] 📄 Selecionando opção de download...
+[2026-04-08 11:16:15] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:16:16] ⬇️ Iniciando rotina blindada de download do relatório relatorio_08...
+[2026-04-08 11:16:16] ⬇️ Tentativa 1/3 de download para relatorio_08...
+[2026-04-08 11:16:19] ✅ Evento de download capturado para relatorio_08.
+[2026-04-08 11:16:19] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111619_relatorio_08_Cenários.csv
+[2026-04-08 11:16:20] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:16:21] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:16:21] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:16:28] 🔤 Lendo 20260408_111619_relatorio_08_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:29] 🧮 20260408_111619_relatorio_08_Cenários.csv -> linhas de dados: 2143 | hash: 7cf9dbe477d76a20
+[2026-04-08 11:16:29] --------------------------------------------------
+[2026-04-08 11:16:29] 🚚 Processando relatório 9/9: relatorio_09
+[2026-04-08 11:16:29] 📑 Selecionando relatório relatorio_09 (75315471314525895)...
+[2026-04-08 11:16:29] ⏳ Aguardando estabilidade: seleção do relatório relatorio_09
+[2026-04-08 11:16:30] 🧾 Relatório selecionado na tela -> id atual: 75315471314525895 | nome visível: 9. LINHA 9
+[2026-04-08 11:16:30] 📄 Ajustando quantidade de linhas para 100000...
+[2026-04-08 11:16:30] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-04-08 11:16:32] 📤 Abrindo menu de download...
+[2026-04-08 11:16:33] 📄 Selecionando opção de download...
+[2026-04-08 11:16:34] ✅ Formato CSV selecionado explicitamente.
+[2026-04-08 11:16:34] ⬇️ Iniciando rotina blindada de download do relatório relatorio_09...
+[2026-04-08 11:16:34] ⬇️ Tentativa 1/3 de download para relatorio_09...
+[2026-04-08 11:16:38] ✅ Evento de download capturado para relatorio_09.
+[2026-04-08 11:16:38] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111638_relatorio_09_Cenários.csv
+[2026-04-08 11:16:38] 🪟 Janela/modal de download fechada.
+[2026-04-08 11:16:39] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-04-08 11:16:40] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111638_relatorio_09_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] 🧮 20260408_111638_relatorio_09_Cenários.csv -> linhas de dados: 1918 | hash: 614406e412f6274f
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111347_relatorio_01_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111347_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] 🧱 Cabeçalho base definido com 12 colunas.
+[2026-04-08 11:16:47] ✅ 20260408_111347_relatorio_01_Cenários.csv: 1565 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111419_relatorio_02_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111419_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111419_relatorio_02_Cenários.csv: 8548 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111438_relatorio_03_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111438_relatorio_03_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111438_relatorio_03_Cenários.csv: 1574 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111504_relatorio_04_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111504_relatorio_04_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111504_relatorio_04_Cenários.csv: 5907 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111522_relatorio_05_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111522_relatorio_05_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111522_relatorio_05_Cenários.csv: 2039 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111542_relatorio_06_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111542_relatorio_06_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111542_relatorio_06_Cenários.csv: 608 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111601_relatorio_07_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111601_relatorio_07_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111601_relatorio_07_Cenários.csv: 3624 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111619_relatorio_08_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111619_relatorio_08_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111619_relatorio_08_Cenários.csv: 2143 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 🧩 Consolidando arquivo: 20260408_111638_relatorio_09_Cenários.csv
+[2026-04-08 11:16:47] 🔤 Lendo 20260408_111638_relatorio_09_Cenários.csv com encoding: cp1252
+[2026-04-08 11:16:47] ✅ 20260408_111638_relatorio_09_Cenários.csv: 1918 linhas adicionadas ao consolidado.
+[2026-04-08 11:16:47] 📦 Consolidado gerado em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
+[2026-04-08 11:16:48] 📊 Total de linhas no geral.csv: 27926
+[2026-04-08 11:16:48] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\final_sucesso_20260408_111648.png
+[2026-04-08 11:16:48] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\final_sucesso_20260408_111648.html
+[2026-04-08 11:16:48] 🎯 Processo concluído com sucesso.
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111347_relatorio_01_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111419_relatorio_02_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111438_relatorio_03_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111504_relatorio_04_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111522_relatorio_05_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111542_relatorio_06_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111601_relatorio_07_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111619_relatorio_08_Cenários.csv
+[2026-04-08 11:16:48] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260408_111638_relatorio_09_Cenários.csv
+[2026-04-08 11:16:48] 🗂️ Arquivo consolidado final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
+[2026-04-08 11:16:49] ✅ Execução encerrada com sucesso.
