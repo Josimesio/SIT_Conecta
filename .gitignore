@@ -1,0 +1,55 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Virtual environment
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# Secrets
+# =========================
+.env
+
+# =========================
+# Logs and temp files
+# =========================
+*.log
+*.tmp
+*.temp
+
+# =========================
+# Generated files
+# =========================
+downloads/
+output/
+
+# Se quiser manter a pasta vazia no Git, use um .gitkeep dentro dela
+# e depois ajuste a regra assim:
+# output/*
+# !output/.gitkeep
+
+# =========================
+# Playwright / test artifacts
+# =========================
+playwright-report/
+test-results/
+
+# =========================
+# IDE / OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
