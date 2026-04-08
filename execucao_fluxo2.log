@@ -1,0 +1,87 @@
+[2026-04-08 08:35:49] ==================================================
+[2026-04-08 08:35:49] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 08:35:49] ==================================================
+[2026-04-08 08:35:49] ❌ Falha geral na execução: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+[2026-04-08 08:35:49] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 670, in executar_fluxo
+    validar_env()
+    ~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 77, in validar_env
+    raise ValueError(f"Variáveis ausentes no .env: {', '.join(faltando)}")
+ValueError: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+
+[2026-04-08 08:35:59] ==================================================
+[2026-04-08 08:35:59] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 08:35:59] ==================================================
+[2026-04-08 08:35:59] ❌ Falha geral na execução: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+[2026-04-08 08:35:59] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 670, in executar_fluxo
+    validar_env()
+    ~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 77, in validar_env
+    raise ValueError(f"Variáveis ausentes no .env: {', '.join(faltando)}")
+ValueError: Variáveis ausentes no .env: GTN_USER, GTN_PASS
+
+[2026-04-08 08:38:22] ==================================================
+[2026-04-08 08:38:22] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-04-08 08:38:22] ==================================================
+[2026-04-08 08:38:24] 🌐 Abrindo tela de login...
+[2026-04-08 08:38:26] ❌ Erro: Page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+  - navigating to "https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00", waiting until "domcontentloaded"
+
+[2026-04-08 08:38:26] ⚠️ Falha ao salvar debug: Page.screenshot: Target page, context or browser has been closed
+[2026-04-08 08:38:27] ❌ Falha geral na execução: Page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+  - navigating to "https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00", waiting until "domcontentloaded"
+
+[2026-04-08 08:38:27] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 727, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 685, in executar_fluxo
+    fazer_login(page)
+    ~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\script_Pontual_GTN_blindado_v6_alterado_v2.py", line 163, in fazer_login
+    page.goto(GTN_URL, wait_until="domcontentloaded", timeout=DEFAULT_TIMEOUT_MS)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\sync_api\_generated.py", line 9054, in goto
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.goto(
+        ^^^^^^^^^^^^^^^^^^^^
+            url=url, timeout=timeout, waitUntil=wait_until, referer=referer
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_page.py", line 552, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_frame.py", line 153, in goto
+    await self._channel.send(
+        "goto", self._navigation_timeout, locals_to_params(locals())
+    )
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: Page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+  - navigating to "https://gtn.ninecon.com.br/ords/r/gtn/gtn/login?tz=-3:00", waiting until "domcontentloaded"
+
+

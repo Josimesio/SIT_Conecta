@@ -25,14 +25,10 @@ env/
 # =========================
 # Logs and temp files
 # =========================
-*.log
 *.tmp
 *.temp
 
-# =========================
-# Generated files
-# =========================
-downloads/
+
 
 
 # Se quiser manter a pasta vazia no Git, use um .gitkeep dentro dela
