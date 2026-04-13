@@ -49,3 +49,5 @@ test-results/
 .idea/
 .DS_Store
 Thumbs.dbdownloads/
+downloads/
+.log
