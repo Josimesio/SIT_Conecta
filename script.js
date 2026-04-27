@@ -8,6 +8,7 @@ const els = {
   totalEmAndamento: document.getElementById('totalEmAndamento'),
   totalNaoIniciado: document.getElementById('totalNaoIniciado'),
   totalBloqueados: document.getElementById('totalBloqueados'),
+  totalCancelados: document.getElementById('totalCancelados'),
   headlineCallout: document.getElementById('headlineCallout'),
   headlinePill: document.getElementById('headlinePill'),
   leaderboard: document.getElementById('leaderboard'),
@@ -139,22 +140,26 @@ function renderDashboard(rows) {
   const inProgress = cleanRows.filter(row => isInProgress(row.statusOriginal)).length;
   const blocked = cleanRows.filter(row => isBlocked(row.statusOriginal)).length;
   const notStarted = cleanRows.filter(row => isNotStarted(row.statusOriginal)).length;
+  const cancelled = cleanRows.filter(row => isCancelled(row.statusOriginal)).length;
   const percent = total ? Math.round((concluded / total) * 100) : 0;
 
-  updateSummary(total, concluded, inProgress, notStarted, blocked, percent);
+  updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent);
   renderLeaderboard(cleanRows);
-  renderStatusBars(total, concluded, inProgress, notStarted, blocked);
+  renderStatusBars(total, concluded, inProgress, notStarted, blocked, cancelled);
   renderAreaBoard(cleanRows);
   renderFocusTable(cleanRows);
 }
 
-function updateSummary(total, concluded, inProgress, notStarted, blocked, percent) {
+function updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent) {
   els.totalCenarios.textContent = total.toLocaleString('pt-BR');
   els.totalConcluidos.textContent = concluded.toLocaleString('pt-BR');
   els.totalEmAndamento.textContent = inProgress.toLocaleString('pt-BR');
   els.totalNaoIniciado.textContent = notStarted.toLocaleString('pt-BR');
   if (els.totalBloqueados) {
     els.totalBloqueados.textContent = blocked.toLocaleString('pt-BR');
+  }
+  if (els.totalCancelados) {
+    els.totalCancelados.textContent = cancelled.toLocaleString('pt-BR');
   }
   els.globalPercent.textContent = `${percent}%`;
   els.ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
@@ -241,14 +246,15 @@ function renderLeaderboard(rows) {
   `;
 }
 
-function renderStatusBars(total, concluded, inProgress, notStarted, blocked) {
-  const other = Math.max(total - concluded - inProgress - notStarted - blocked, 0);
+function renderStatusBars(total, concluded, inProgress, notStarted, blocked, cancelled) {
+  const other = Math.max(total - concluded - inProgress - notStarted - blocked - cancelled, 0);
   const statuses = [
     { label: 'Concluído', value: concluded, percent: getPercent(concluded, total), color: 'linear-gradient(90deg, #14d3a6, #7dffd8)' },
     { label: 'Em andamento', value: inProgress, percent: getPercent(inProgress, total), color: 'linear-gradient(90deg, #ffb84d, #ffd88d)' },
     { label: 'Bloqueado', value: blocked, percent: getPercent(blocked, total), color: 'linear-gradient(90deg, #ff4d6d, #ff8fa3)' },
     { label: 'Não iniciado', value: notStarted, percent: getPercent(notStarted, total), color: 'linear-gradient(90deg, #7c5cff, #b7a6ff)' },
-    { label: 'Cancelados', value: other, percent: getPercent(other, total), color: 'linear-gradient(90deg, #98a7d8, #cad5ff)' }
+    { label: 'Cancelado', value: cancelled, percent: getPercent(cancelled, total), color: 'linear-gradient(90deg, #98a7d8, #cad5ff)' },
+    { label: 'Outros', value: other, percent: getPercent(other, total), color: 'linear-gradient(90deg, #8a94a6, #c6ccd8)' }
   ];
 
   els.statusBars.innerHTML = statuses.map(item => `
@@ -345,6 +351,11 @@ function isNotStarted(status) {
   return s.includes('nao iniciado') || s.includes('não iniciado');
 }
 
+function isCancelled(status) {
+  const s = normalize(status);
+  return s.includes('cancelado') || s.includes('cancelada') || s.includes('cancel');
+}
+
 function compareStatusForUnlock(a, b) {
   const weight = status => {
     if (isBlocked(status)) return 2;
@@ -377,6 +388,7 @@ function statusPill(status) {
   if (isConcluded(status)) className = 'status-concluido';
   else if (isInProgress(status)) className = 'status-andamento';
   else if (isNotStarted(status)) className = 'status-nao-iniciado';
+  else if (isCancelled(status)) className = 'status-cancelado';
   else className = 'status-outro';
 
   return `<span class="status-pill ${className}">${label}</span>`;
