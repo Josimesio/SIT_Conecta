@@ -142,11 +142,7 @@ function renderDashboard(rows) {
   const blocked = cleanRows.filter(row => isBlocked(row.statusOriginal)).length;
   const notStarted = cleanRows.filter(row => isNotStarted(row.statusOriginal)).length;
   const cancelled = cleanRows.filter(row => isCancelled(row.statusOriginal)).length;
-<<<<<<< HEAD
   const percent = getPercent(concluded, total);
-=======
-  const percent = total ? Math.round((concluded / total) * 100) : 0;
->>>>>>> 250fba369df3b9fe10bc70826f785d468488e7ab
 
   updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent);
   renderLeaderboard(cleanRows);
@@ -166,11 +162,7 @@ function updateSummary(total, concluded, inProgress, notStarted, blocked, cancel
   if (els.totalCancelados) {
     els.totalCancelados.textContent = cancelled.toLocaleString('pt-BR');
   }
-<<<<<<< HEAD
   els.globalPercent.textContent = formatPercent(percent);
-=======
-  els.globalPercent.textContent = `${percent}%`;
->>>>>>> 250fba369df3b9fe10bc70826f785d468488e7ab
   els.ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
 
   const currentMessage = [...motivationalMessages].reverse().find(item => percent >= item.threshold) || motivationalMessages[0];
