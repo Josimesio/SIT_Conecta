@@ -1,6 +1,6 @@
 const AUTH_CONFIG = {
   usuario: "conecta",
-  senha: "pluma@2026",
+  senha: "ti@2026",
   chaveAuth: "dashboard_auth"
 };
 
