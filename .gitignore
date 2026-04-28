@@ -1,26 +1,23 @@
-# =========================
-# Python
-# =========================
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-.coverage
-htmlcov/
+# Arquivos gerados pelo robô / Playwright
+output/*.png
+output/*.html
+output/*erro*.png
+output/*erro*.html
+output/*screenshot*.png
+output/*screenshot*.html
+output/*fatal*.png
+output/*fatal*.html
 
-# =========================
-# Virtual environment
-# =========================
-.venv/
-venv/
-env/
+# Logs
+*.log
 
-# =========================
-# Secrets
-# =========================
+# Ambiente local
 .env
+<<<<<<< HEAD
+.venv/
+__pycache__/
+downloads/
+=======
 
 # =========================
 # Logs and temp files
@@ -51,3 +48,4 @@ test-results/
 Thumbs.dbdownloads/
 downloads/
 .log
+>>>>>>> 250fba369df3b9fe10bc70826f785d468488e7ab

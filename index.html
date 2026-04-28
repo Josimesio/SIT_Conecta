@@ -215,6 +215,100 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
+
+
+    .leaderboard-rest {
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .leaderboard-rest-title {
+      color: #aab8df;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .leaderboard-rest-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .leaderboard-rest-row {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.065);
+    }
+
+    .rest-position {
+      width: 38px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #d8e1ff;
+      font-weight: 800;
+    }
+
+    .rest-main {
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+    }
+
+    .rest-main strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+
+    .rest-main span {
+      color: #aab8df;
+      font-size: 0.82rem;
+    }
+
+    .rest-percent {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff5a6;
+      white-space: nowrap;
+    }
+
+    .front-label {
+      color: #8ea0d7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .front-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    @media (max-width: 640px) {
+      .leaderboard-rest-row {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .rest-percent {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
   </style>
 
 </head>
@@ -254,7 +348,7 @@
               <circle cx="60" cy="60" r="48" class="ring-progress" id="ringProgress"></circle>
             </svg>
             <div class="ring-center">
-              <strong id="globalPercent">0%</strong>
+              <strong id="globalPercent">0,00%</strong>
               <span>concluído</span>
             </div>
           </div>
@@ -310,7 +404,7 @@
             <p class="eyebrow">Ranking</p>
             <h3>🏆 Líderes do cenário</h3>
           </div>
-          <span class="section-hint">campeão em destaque, perseguição logo atrás</span>
+          <span class="section-hint">pódio em cards, demais líderes em lista</span>
         </div>
         <div id="leaderboard" class="leaderboard-list empty-state">
           Carregue um CSV para montar o ranking.
@@ -332,13 +426,13 @@
       <article class="card section-card wide">
         <div class="section-title-wrap">
           <div>
-            <p class="eyebrow">Frente de batalha</p>
-            <h3>⚔️ Áreas em competição</h3>
+            <p class="eyebrow">Frentes</p>
+            <h3>⚔️ Frentes em competição</h3>
           </div>
-          <span class="section-hint">mais eficiência, mais moral</span>
+          <span class="section-hint">percentual de conclusão por frente</span>
         </div>
         <div id="areaBoard" class="area-board empty-state">
-          Sem dados carregados ainda.
+          Sem frentes carregadas ainda.
         </div>
       </article>
 
@@ -357,7 +451,7 @@
                 <th>Identificador</th>
                 <th>Cenário</th>
                 <th>Líder</th>
-                <th>Área</th>
+                <th>Frente</th>
                 <th>Status</th>
               </tr>
             </thead>

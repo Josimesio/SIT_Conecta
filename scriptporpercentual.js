@@ -128,6 +128,7 @@ function renderDashboard(rows) {
       identificador: getValue(row, 'Identificador'),
       cenario: getValue(row, 'Cenário') || getValue(row, 'Cenario'),
       area: getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
+      frente: getValue(row, 'Frente') || getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
       lider: getValue(row, 'Lider do Cenário') || getValue(row, 'Líder do Cenário') || 'Sem líder',
       statusOriginal: getValue(row, 'Status') || 'Sem status',
       prioridade: getValue(row, 'Grupo de Prioridade'),
@@ -139,7 +140,11 @@ function renderDashboard(rows) {
   const inProgress = cleanRows.filter(row => isInProgress(row.statusOriginal)).length;
   const notStarted = cleanRows.filter(row => isNotStarted(row.statusOriginal)).length;
   const cancelled = cleanRows.filter(row => isCancelled(row.statusOriginal)).length;
+<<<<<<< HEAD
+  const percent = getPercent(concluded, total);
+=======
   const percent = total ? Math.round((concluded / total) * 100) : 0;
+>>>>>>> 250fba369df3b9fe10bc70826f785d468488e7ab
 
   updateSummary(total, concluded, inProgress, notStarted, cancelled, percent);
   renderLeaderboard(cleanRows);
@@ -156,7 +161,11 @@ function updateSummary(total, concluded, inProgress, notStarted, cancelled, perc
   if (els.totalCancelados) {
     els.totalCancelados.textContent = cancelled.toLocaleString('pt-BR');
   }
+<<<<<<< HEAD
+  els.globalPercent.textContent = formatPercent(percent);
+=======
   els.globalPercent.textContent = `${percent}%`;
+>>>>>>> 250fba369df3b9fe10bc70826f785d468488e7ab
   els.ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
 
   const currentMessage = [...motivationalMessages].reverse().find(item => percent >= item.threshold) || motivationalMessages[0];
@@ -187,7 +196,7 @@ function renderLeaderboard(rows) {
   const ranking = [...grouped.values()]
     .map(item => ({
       ...item,
-      percent: item.total ? Math.round((item.concluded / item.total) * 100) : 0
+      percent: getPercent(item.concluded, item.total)
     }))
     .sort((a, b) =>
       b.percent - a.percent ||
@@ -205,7 +214,7 @@ function renderLeaderboard(rows) {
         <div class="leader-meta">${item.concluded} concluídos de ${item.total} cenários · ${item.inProgress} em andamento</div>
       </div>
       <div class="leader-score">
-        <strong>${item.percent}%</strong>
+        <strong>${formatPercent(item.percent)}</strong>
         <span>aproveitamento</span>
       </div>
     </div>
@@ -226,10 +235,10 @@ function renderStatusBars(total, concluded, inProgress, notStarted, cancelled) {
     <div class="status-item">
       <div class="status-head">
         <strong>${item.label}</strong>
-        <span>${item.value} · ${item.percent}%</span>
+        <span>${item.value} · ${formatPercent(item.percent)}</span>
       </div>
       <div class="status-track">
-        <div class="status-fill" style="width:${item.percent}%; background:${item.color}"></div>
+        <div class="status-fill" style="width:${percentWidth(item.percent)}%; background:${item.color}"></div>
       </div>
     </div>
   `).join('');
@@ -266,10 +275,10 @@ function renderAreaBoard(rows) {
     <div class="area-card">
       <div class="area-top">
         <div class="area-title">${escapeHtml(item.area)}</div>
-        <div class="area-badge">${item.percent}%</div>
+        <div class="area-badge">${formatPercent(item.percent)}</div>
       </div>
       <div class="status-track" style="margin-top:12px;">
-        <div class="status-fill" style="width:${item.percent}%; background: linear-gradient(90deg, #7c5cff, #14d3a6);"></div>
+        <div class="status-fill" style="width:${percentWidth(item.percent)}%; background: linear-gradient(90deg, #7c5cff, #14d3a6);"></div>
       </div>
       <div class="area-stats">
         <span>${item.concluded}/${item.total} concluídos</span>
@@ -295,7 +304,7 @@ function renderFocusTable(rows) {
       <td>${escapeHtml(row.identificador || '-')}</td>
       <td>${escapeHtml(row.cenario || '-')}</td>
       <td>${escapeHtml(row.lider || '-')}</td>
-      <td>${escapeHtml(row.area || '-')}</td>
+      <td>${escapeHtml(row.frente || row.area || '-')}</td>
       <td>${statusPill(row.statusOriginal)}</td>
     </tr>
   `).join('');
@@ -321,7 +330,17 @@ function isCancelled(status) {
 }
 
 function getPercent(value, total) {
-  return total ? Math.round((value / total) * 100) : 0;
+  return total ? Number(((value / total) * 100).toFixed(2)) : 0;
+}
+
+function formatPercent(value) {
+  const number = Number(value) || 0;
+  return `${number.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+}
+
+function percentWidth(value) {
+  const number = Number(value) || 0;
+  return Math.max(0, Math.min(100, number)).toFixed(2);
 }
 
 function comparePriority(a, b) {
