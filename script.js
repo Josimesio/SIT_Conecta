@@ -20,8 +20,12 @@ const els = {
 };
 
 const RING_CIRCUMFERENCE = 301.59;
-const AUTO_CSV_NAME = 'output/Cenarios_Consolidados_atualizado.csv';
+const AUTO_CSV_NAME = 'Cenarios_Consolidados_atualizado.csv';
+const AUTO_CSV_PATH = `output/${AUTO_CSV_NAME}`;
 const AUTO_REFRESH_INTERVAL_MS = 180000; // 3 minutos
+let lastCsvLoadOk = false;
+let lastCsvSource = '';
+let lastDataAtualizacaoValue = '';
 
 const motivationalMessages = [
   { threshold: 0, tag: 'Aquecendo os motores', title: 'O jogo começou. Agora é sair do planejamento e entrar na execução.', pill: 'Sem moleza' },
@@ -188,61 +192,110 @@ function initViewSelector() {
     showPageLoader('Abrindo nova visão...', `Carregando ${selectedLabel} e sincronizando o CSV.`);
 
     window.setTimeout(() => {
-      window.location.href = targetPage;
+      window.location.assign(targetPage);
     }, 120);
   });
 }
 async function tryAutoLoadCsv(options = {}) {
   const { showLoader = false } = options;
-  const candidates = [
-    AUTO_CSV_NAME,
-    `./${AUTO_CSV_NAME}`,
-    '/output/Cenarios_Consolidados_atualizado.csv'
-  ];
+  const candidates = getCsvCandidates();
+  const isInitialLoad = !lastCsvLoadOk;
 
   if (showLoader) {
     showPageLoader('Sincronizando dados do GTN...', 'Lendo o CSV consolidado e montando a visão selecionada.');
   }
 
-  setGeneratedAt(`Lendo ${AUTO_CSV_NAME}...`);
+  if (isInitialLoad) {
+    setGeneratedAt(`Lendo ${AUTO_CSV_PATH}...`);
+  }
 
   for (const candidate of candidates) {
     try {
-      const response = await fetch(`${candidate}?t=${Date.now()}`, {
-        cache: 'no-store'
-      });
+      const response = await fetch(withCacheBuster(candidate), { cache: 'no-store' });
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
       const buffer = await response.arrayBuffer();
-      const text = new TextDecoder('utf-8').decode(buffer);
+      const text = decodeCsvBuffer(buffer);
       parseCsvText(text);
+
+      lastCsvLoadOk = true;
+      lastCsvSource = candidate;
+
       if (showLoader) hidePageLoader();
-      return;
+      return true;
     } catch (error) {
       console.warn(`Falha ao carregar CSV em ${candidate}:`, error);
     }
   }
 
-  setGeneratedAt(`Arquivo processado não encontrado. Verifique a pasta output e o nome ${AUTO_CSV_NAME}.`);
-  if (showLoader) {
-    showPageLoader('Não foi possível carregar os dados', `Verifique se o arquivo ${AUTO_CSV_NAME} existe na pasta output.`);
-    window.setTimeout(hidePageLoader, 1800);
+  const message = `Arquivo processado não encontrado. Verifique se existe ${AUTO_CSV_PATH}.`;
+
+  // Proteção importante: se os dados já foram carregados uma vez, não sobrescreve
+  // o cabeçalho com falso erro em atualização automática. Mantém o último CSV bom.
+  if (!lastCsvLoadOk) {
+    setGeneratedAt(message);
+  } else if (lastDataAtualizacaoValue) {
+    setGeneratedAt(`${lastDataAtualizacaoValue} · último carregamento válido`);
   }
+
+  if (showLoader) {
+    if (!lastCsvLoadOk) {
+      showPageLoader('Não foi possível carregar os dados', `Verifique se o arquivo ${AUTO_CSV_PATH} existe na pasta output.`);
+      window.setTimeout(hidePageLoader, 1800);
+    } else {
+      hidePageLoader();
+    }
+  }
+
+  return false;
+}
+
+function getCsvCandidates() {
+  const currentPath = window.location.pathname || '';
+  const currentDir = currentPath.replace(/[^/]*$/, '');
+  const repoBase = currentDir.split('/').filter(Boolean)[0] || '';
+  const repoRelative = repoBase ? `/${repoBase}/${AUTO_CSV_PATH}` : '';
+
+  return [
+    AUTO_CSV_PATH,
+    `./${AUTO_CSV_PATH}`,
+    repoRelative
+  ].filter(Boolean).filter((value, index, array) => array.indexOf(value) === index);
+}
+
+function withCacheBuster(path) {
+  const separator = path.includes('?') ? '&' : '?';
+  return `${path}${separator}v=${Date.now()}`;
+}
+
+function decodeCsvBuffer(buffer) {
+  const utf8 = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+  if (!utf8.includes('�')) return utf8;
+  return new TextDecoder('windows-1252', { fatal: false }).decode(buffer);
 }
 
 function parseCsvText(text) {
   const parsed = Papa.parse(text, {
     header: true,
     skipEmptyLines: true,
-    delimiter: ';'
+    delimiter: detectDelimiter(text),
+    quoteChar: '"'
   });
 
   const rows = parsed.data || [];
   renderDashboard(rows);
   updateGeneratedAt(rows);
+}
+
+function detectDelimiter(text) {
+  const firstLine = String(text || '').split(/\r?\n/).find(line => line.trim()) || '';
+  const candidates = [';', ',', '\t', '|'];
+  return candidates
+    .map(delimiter => ({ delimiter, count: firstLine.split(delimiter).length - 1 }))
+    .sort((a, b) => b.count - a.count)[0]?.delimiter || ';';
 }
 
 function updateGeneratedAt(rows) {
@@ -255,6 +308,7 @@ function updateGeneratedAt(rows) {
 
   const generatedAt = getValue(rows[0], 'Gerado em');
   if (generatedAt) {
+    lastDataAtualizacaoValue = generatedAt;
     setGeneratedAt(generatedAt);
   } else {
     setGeneratedAt("Coluna 'Gerado em' não encontrada no CSV processado.");

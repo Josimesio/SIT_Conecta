@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260429_1712" />
 
   <script src="auth.js"></script>
   <script>
@@ -773,7 +773,7 @@
         <div class="occurrence-head compact">
           <div class="occurrence-title">
             <p class="eyebrow">Geral</p>
-            <h3>📌 Ocorrências gerais abertas</h3>
+            <h3>📌 Todas as ocorrências gerais abertas</h3>
           </div>
         </div>
         <div id="occStatusBoard" class="occurrence-status-board scrollable-status">
@@ -784,7 +784,7 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260429_1712"></script>
   <script>
     const OCCURRENCES_CSV_CANDIDATES = [
       'output/Ocorrencias_Consolidadas_atualizado.csv',
@@ -853,9 +853,10 @@
       setText('occCenariosAbertosQtd', abertasPorCenario.length.toLocaleString('pt-BR'));
 
       renderizarResumoStatus(abertas);
-      renderizarRanking('occAbertasCenarioBoard', abertasPorCenario, { limite: 20, contadorClasse: '', vazio: 'Sem ocorrências abertas vinculadas aos cenários.' });
-      renderizarRanking('occAbertasAnalistaBoard', agruparOcorrencias(abertas, 'analista'), { limite: 15, contadorClasse: '', vazio: 'Sem ocorrências abertas por analista.' });
-      renderizarRanking('occFechadasCenarioBoard', agruparOcorrencias(fechadas, 'cenario'), { limite: 15, contadorClasse: 'success', vazio: 'Sem ocorrências fechadas por cenário.' });
+      renderizarRanking('occAbertasCenarioBoard', abertasPorCenario, { limite: abertasPorCenario.length, contadorClasse: '', vazio: 'Sem ocorrências abertas vinculadas aos cenários.' });
+      renderizarRanking('occAbertasAnalistaBoard', agruparOcorrencias(abertas, 'analista'), { limite: abertas.length, contadorClasse: '', vazio: 'Sem ocorrências abertas por analista.' });
+      renderizarRanking('occFechadasCenarioBoard', agruparOcorrencias(fechadas, 'cenario'), { limite: fechadas.length, contadorClasse: 'success', vazio: 'Sem ocorrências fechadas por cenário.' });
+      renderizarTodasOcorrenciasAbertas(abertas);
     }
 
     function agruparOcorrencias(items, campo) {
@@ -897,6 +898,46 @@
           <div class="occurrence-rank-count ${options.contadorClasse || ''}">${item.total.toLocaleString('pt-BR')}</div>
         </div>
       `).join('');
+    }
+
+    function renderizarTodasOcorrenciasAbertas(abertas) {
+      const el = document.getElementById('occStatusBoard');
+      if (!el) return;
+
+      if (!abertas.length) {
+        el.innerHTML = '<div class="occurrence-empty">Sem ocorrências abertas no momento.</div>';
+        return;
+      }
+
+      const ordenadas = [...abertas].sort((a, b) =>
+        String(a.cenario || '').localeCompare(String(b.cenario || ''), 'pt-BR') ||
+        String(a.analista || '').localeCompare(String(b.analista || ''), 'pt-BR') ||
+        String(a.status || '').localeCompare(String(b.status || ''), 'pt-BR')
+      );
+
+      el.innerHTML = ordenadas.map((item, index) => {
+        const meta = [
+          item.codigo ? `Código: ${item.codigo}` : '',
+          item.status ? `Status: ${item.status}` : 'Status não informado',
+          item.analista ? `Analista: ${item.analista}` : 'Analista não informado',
+          item.area ? `Área: ${item.area}` : '',
+          item.modulo ? `Módulo: ${item.modulo}` : ''
+        ].filter(Boolean).join(' · ');
+
+        const detalhe = item.descricao || 'Sem descrição informada';
+
+        return `
+          <div class="occurrence-rank-row" title="${escapeHtml(detalhe)}">
+            <div class="occurrence-rank-pos">${index + 1}</div>
+            <div class="occurrence-rank-main">
+              <strong>${escapeHtml(item.cenario || 'Cenário não informado')}</strong>
+              <span>${escapeHtml(meta)}</span>
+              <span>${escapeHtml(detalhe)}</span>
+            </div>
+            <div class="occurrence-rank-count">1</div>
+          </div>
+        `;
+      }).join('');
     }
 
     function renderizarResumoStatus(abertas) {
