@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocorrências Abertas - Missão Cenários</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="auth.js"></script>
+  <script>
+    protegerPagina("login.html");
+  </script>
+
+  <style>
+    .leaderboard-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .leader-spotlight {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, 0.20), transparent 35%),
+        linear-gradient(135deg, rgba(124, 92, 255, 0.24), rgba(20, 211, 166, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    .leader-spotlight::after {
+      content: "🏆";
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      font-size: 30px;
+      opacity: 0.95;
+    }
+
+    .leader-spotlight-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .leader-crown {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 215, 0, 0.16);
+      color: #ffe28a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .leader-spotlight-name {
+      margin: 0;
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .leader-spotlight-meta {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      opacity: 0.86;
+    }
+
+    .leader-spotlight-score {
+      min-width: 110px;
+      text-align: right;
+    }
+
+    .leader-spotlight-score strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .leader-spotlight-score span {
+      font-size: 0.8rem;
+      opacity: 0.82;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .leader-spotlight-track {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    .leader-spotlight-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ffd86b, #14d3a6);
+    }
+
+    .leaderboard-chasers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+    }
+
+    .chaser-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .chaser-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(125, 255, 216, 0.35);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .chaser-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .chaser-place {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .chaser-card.top-2 {
+      background:
+        radial-gradient(circle at top right, rgba(220, 220, 220, 0.22), transparent 38%),
+        linear-gradient(135deg, rgba(185, 192, 205, 0.28), rgba(255, 255, 255, 0.07));
+      border-color: rgba(220, 230, 255, 0.22);
+    }
+
+    .chaser-card.top-3 {
+      background:
+        radial-gradient(circle at top right, rgba(205, 127, 50, 0.20), transparent 38%),
+        linear-gradient(135deg, rgba(166, 104, 53, 0.28), rgba(255, 255, 255, 0.06));
+      border-color: rgba(230, 170, 120, 0.20);
+    }
+
+    .chaser-card.top-2 .chaser-place {
+      background: linear-gradient(135deg, rgba(210, 215, 225, 0.85), rgba(140, 150, 168, 0.65));
+      color: #142033;
+      box-shadow: 0 8px 20px rgba(200, 210, 230, 0.18);
+    }
+
+    .chaser-card.top-3 .chaser-place {
+      background: linear-gradient(135deg, rgba(214, 145, 91, 0.88), rgba(126, 73, 36, 0.72));
+      color: #fff6ef;
+      box-shadow: 0 8px 20px rgba(205, 127, 50, 0.18);
+    }
+
+    .chaser-card.top-2 .chaser-score strong {
+      color: #e7eefc;
+    }
+
+    .chaser-card.top-3 .chaser-score strong {
+      color: #ffd8bc;
+    }
+
+    .chaser-name {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .chaser-meta {
+      margin-top: 6px;
+      font-size: 0.84rem;
+      opacity: 0.8;
+    }
+
+    .chaser-score {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .chaser-score strong {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .chaser-score span {
+      font-size: 0.74rem;
+      opacity: 0.78;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+
+    .leaderboard-rest {
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .leaderboard-rest-title {
+      color: #aab8df;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .leaderboard-rest-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .leaderboard-rest-row {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.065);
+    }
+
+    .rest-position {
+      width: 38px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #d8e1ff;
+      font-weight: 800;
+    }
+
+    .rest-main {
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+    }
+
+    .rest-main strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+
+    .rest-main span {
+      color: #aab8df;
+      font-size: 0.82rem;
+    }
+
+    .rest-percent {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff5a6;
+      white-space: nowrap;
+    }
+
+    .front-label {
+      color: #8ea0d7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .front-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+
+
+
+    .view-switcher-panel {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 245, 166, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(124, 92, 255, 0.18), rgba(20, 211, 166, 0.10));
+      border: 1px solid rgba(255, 245, 166, 0.22);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+    }
+
+    .view-switcher-copy { min-width: 0; }
+
+    .view-switcher-copy h2 {
+      margin: 4px 0 5px;
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .view-switcher-copy p {
+      margin: 0;
+      color: #b9c5ed;
+      font-size: 0.88rem;
+    }
+
+    .view-switcher-control {
+      min-width: 280px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .view-switcher-control label {
+      color: #fff5a6;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .view-select {
+      width: 100%;
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 16px;
+      padding: 13px 44px 13px 14px;
+      color: #f8fbff;
+      font: inherit;
+      font-weight: 800;
+      background:
+        linear-gradient(45deg, transparent 50%, #fff5a6 50%) calc(100% - 22px) center / 7px 7px no-repeat,
+        linear-gradient(135deg, rgba(8, 18, 44, 0.92), rgba(20, 37, 76, 0.92));
+      cursor: pointer;
+      outline: none;
+    }
+
+    .view-select:focus {
+      border-color: rgba(255, 245, 166, 0.65);
+      box-shadow: 0 0 0 4px rgba(255, 245, 166, 0.10);
+    }
+
+    .view-select option {
+      background: #111a35;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .view-switcher-panel {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .view-switcher-control { min-width: 0; }
+    }
+    .occurrence-panel {
+      margin-top: 18px;
+      padding: 22px;
+      border: 1px solid rgba(255, 77, 109, 0.30);
+      background:
+        radial-gradient(circle at top right, rgba(255, 77, 109, 0.22), transparent 34%),
+        linear-gradient(135deg, rgba(255, 77, 109, 0.13), rgba(124, 92, 255, 0.12));
+      box-shadow: 0 18px 42px rgba(255, 77, 109, 0.10), 0 14px 36px rgba(0, 0, 0, 0.18);
+    }
+
+    .occurrence-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .occurrence-title h3 {
+      margin: 4px 0 0;
+      font-size: 1.35rem;
+    }
+
+    .occurrence-total {
+      min-width: 150px;
+      text-align: right;
+    }
+
+    .occurrence-total strong {
+      display: block;
+      font-size: 2.45rem;
+      line-height: 1;
+      font-weight: 800;
+      color: #ffb4c1;
+    }
+
+    .occurrence-total span {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.78rem;
+      color: #ffd8df;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .occurrence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .occurrence-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.095);
+    }
+
+    .occurrence-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .occurrence-scenario {
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .occurrence-count {
+      min-width: 38px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255, 77, 109, 0.20);
+      color: #ffd8df;
+      font-weight: 800;
+    }
+
+    .occurrence-meta {
+      display: grid;
+      gap: 4px;
+      color: #c7d3ff;
+      font-size: 0.82rem;
+    }
+
+    .occurrence-empty {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(20, 211, 166, 0.10);
+      border: 1px solid rgba(20, 211, 166, 0.20);
+      color: #c9fff1;
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .occurrence-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .occurrence-total {
+        text-align: left;
+      }
+    }
+
+
+    @media (max-width: 640px) {
+      .leaderboard-rest-row {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .rest-percent {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
+
+
+    .page-intro {
+      margin: 18px 0;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .page-intro h2 {
+      margin: 4px 0 6px;
+      font-size: 1.35rem;
+    }
+
+    .page-intro p {
+      margin: 0;
+      color: #b9c5ed;
+    }
+
+    .full-page-card {
+      margin-top: 18px;
+    }
+
+    .home-main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .quick-link-card {
+      display: block;
+      padding: 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .quick-link-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 245, 166, 0.34);
+    }
+
+    .quick-link-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .quick-link-card span {
+      color: #b9c5ed;
+      font-size: .86rem;
+    }
+
+    .status-bloqueado {
+      background: rgba(255, 77, 109, 0.16);
+      color: #ffb4c1;
+      border: 1px solid rgba(255, 77, 109, 0.26);
+    }
+
+
+    .occurrence-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 18px 0; }
+    .occurrence-kpi { position: relative; overflow: hidden; padding: 20px; border-radius: 22px; background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(255, 255, 255, 0.10); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16); }
+    .occurrence-kpi::after { content: ""; position: absolute; width: 120px; height: 120px; right: -48px; top: -48px; border-radius: 999px; opacity: 0.28; background: #fff; }
+    .occurrence-kpi span { display: block; color: #b9c5ed; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; }
+    .occurrence-kpi strong { display: block; margin-top: 8px; font-size: 2.25rem; line-height: 1; font-weight: 800; }
+    .occurrence-kpi small { display: block; margin-top: 8px; color: #c7d3ff; font-size: 0.82rem; }
+    .occurrence-kpi.danger strong { color: #ffb4c1; }
+    .occurrence-kpi.success strong { color: #7dffd8; }
+    .occurrence-kpi.warning strong { color: #fff5a6; }
+    .occurrence-kpi.neutral strong { color: #d8e1ff; }
+    /* Layout vertical: cada bloco de ocorrência fica um abaixo do outro. */
+    .occurrence-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: start; }
+    .occurrence-panel-large { grid-row: auto; }
+    .occurrence-head.compact { align-items: flex-start; margin-bottom: 14px; }
+    .occurrence-list-board { display: grid; gap: 10px; }
+    /* Mostra aproximadamente 5 linhas e libera rolagem própria por bloco. */
+    .occurrence-list-board.scrollable-list {
+      max-height: 350px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 8px;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 180, 193, 0.65) rgba(255, 255, 255, 0.08);
+    }
+    .occurrence-list-board.scrollable-list::-webkit-scrollbar { width: 8px; }
+    .occurrence-list-board.scrollable-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.08); border-radius: 999px; }
+    .occurrence-list-board.scrollable-list::-webkit-scrollbar-thumb { background: rgba(255, 180, 193, 0.65); border-radius: 999px; }
+    .occurrence-list-board.scrollable-list::-webkit-scrollbar-thumb:hover { background: rgba(255, 216, 223, 0.86); }
+    .occurrence-rank-row { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 18px; background: rgba(255, 255, 255, 0.045); border: 1px solid rgba(255, 255, 255, 0.08); transition: transform .18s ease, border-color .18s ease; }
+    .occurrence-rank-row:hover { border-color: rgba(255, 180, 193, 0.35); transform: translateY(-1px); }
+    .occurrence-rank-pos { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 14px; background: rgba(255, 255, 255, 0.08); color: #d8e1ff; font-weight: 800; }
+    .occurrence-rank-main { min-width: 0; display: grid; gap: 3px; }
+    .occurrence-rank-main strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.96rem; }
+    .occurrence-rank-main span { color: #aab8df; font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .occurrence-rank-count { min-width: 44px; height: 38px; display: grid; place-items: center; border-radius: 14px; background: rgba(255, 77, 109, 0.20); color: #ffd8df; font-size: 1rem; font-weight: 800; }
+    .occurrence-rank-count.success { background: rgba(20, 211, 166, 0.16); color: #c9fff1; }
+    .occurrence-status-board { display: grid; gap: 12px; }
+    .occurrence-status-board.scrollable-status {
+      max-height: 350px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 8px;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 180, 193, 0.65) rgba(255, 255, 255, 0.08);
+    }
+    .occurrence-status-board.scrollable-status::-webkit-scrollbar { width: 8px; }
+    .occurrence-status-board.scrollable-status::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.08); border-radius: 999px; }
+    .occurrence-status-board.scrollable-status::-webkit-scrollbar-thumb { background: rgba(255, 180, 193, 0.65); border-radius: 999px; }
+    .occurrence-status-row { display: grid; gap: 8px; }
+    .occurrence-status-head { display: flex; justify-content: space-between; gap: 12px; color: #d8e1ff; font-weight: 800; font-size: 0.9rem; }
+    .occurrence-status-track { height: 10px; overflow: hidden; border-radius: 999px; background: rgba(255, 255, 255, 0.09); }
+    .occurrence-status-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff4d6d, #ffb4c1); }
+    @media (max-width: 980px) { .occurrence-layout { grid-template-columns: 1fr; } .occurrence-panel-large { grid-row: auto; } }
+    @media (max-width: 640px) { .occurrence-rank-row { grid-template-columns: 38px minmax(0, 1fr); } .occurrence-rank-count { grid-column: 2; justify-self: start; } }
+
+
+  </style>
+
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <button class="logout-floating" onclick="fazerLogout()">Sair</button>
+
+  <main class="app-shell">
+    <header class="hero card glass">
+      <div class="hero-copy">
+        <p class="eyebrow">Painel motivacional de execução</p>
+        <h1>🏁 Missão <span>Cenários Concluídos</span></h1>
+        <p class="hero-text">
+          Bora transformar entrega em jogo sério. Cada cenário concluído empurra o time para o topo,
+          acende o ranking e deixa claro quem está puxando a fila. Meta: sair do “quase” e entrar no “feito”.
+        </p>
+
+        <div class="data-update-box">
+          <span class="data-update-label">Última atualização do arquivo</span>
+          <strong id="dataAtualizacao">Aguardando leitura do CSV...</strong>
+          <small>Mostrando a coluna <strong>Gerado em</strong> do arquivo processado em Python.</small>
+        </div>
+      </div>
+
+      <div class="hero-scoreboard">
+        <div class="score-badge">
+          <span class="score-label">Clima da corrida</span>
+          <strong id="motivationalTag">Aquecendo os motores</strong>
+        </div>
+        <div class="score-ring-wrap">
+          <div class="score-ring">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="48" class="ring-bg"></circle>
+              <circle cx="60" cy="60" r="48" class="ring-progress" id="ringProgress"></circle>
+            </svg>
+            <div class="ring-center">
+              <strong id="globalPercent">0,00%</strong>
+              <span>concluído</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="view-switcher-panel card" aria-label="Selecionar visão do painel">
+      <div class="view-switcher-copy">
+        <p class="eyebrow">Visões do painel</p>
+        <h2>Escolha a página que quer acompanhar</h2>
+        <p>O cabeçalho é fixo no conceito: muda a análise, não muda a identidade do painel.</p>
+      </div>
+      <div class="view-switcher-control">
+        <label for="viewSelector">Selecionar visão</label>
+        <select id="viewSelector" class="view-select">
+          <option value="index.html">Visão geral</option>
+          <option value="ocorrencias.html">Ocorrências abertas</option>
+          <option value="ranking.html">Ranking de líderes</option>
+          <option value="frentes.html">Frentes em competição</option>
+          <option value="status.html">Status geral</option>
+          <option value="top20.html">Top 20 para destravar</option>
+        </select>
+      </div>
+    </section>
+    <section class="page-intro">
+      <p class="eyebrow">Gestão de impedimentos</p>
+      <h2>🚨 Painel de Ocorrências</h2>
+      <p>
+        Leitura direta do arquivo de ocorrências para destacar o que está aberto, quem está responsável,
+        quais cenários concentram problemas e o que já foi fechado.
+      </p>
+    </section>
+
+    <section class="occurrence-kpi-grid" aria-label="Resumo das ocorrências">
+      <div class="occurrence-kpi danger">
+        <span>Ocorrências gerais abertas</span>
+        <strong id="occTotalAbertas">0</strong>
+        <small id="occStatusResumo">Aguardando CSV...</small>
+      </div>
+      <div class="occurrence-kpi success">
+        <span>Ocorrências fechadas</span>
+        <strong id="occTotalFechadas">0</strong>
+        <small>Encerradas no GTN</small>
+      </div>
+      <div class="occurrence-kpi warning">
+        <span>Abertas sem analista</span>
+        <strong id="occSemAnalista">0</strong>
+        <small>Risco de ficar sem dono</small>
+      </div>
+      <div class="occurrence-kpi neutral">
+        <span>Total analisado</span>
+        <strong id="occTotalGeral">0</strong>
+        <small id="occArquivoFonte">Lendo arquivo...</small>
+      </div>
+    </section>
+
+    <section class="occurrence-layout">
+      <article class="occurrence-panel card full-page-card occurrence-panel-large">
+        <div class="occurrence-head">
+          <div class="occurrence-title">
+            <p class="eyebrow">Por cenário</p>
+            <h3>🚨 Ocorrências abertas relacionadas ao cenário</h3>
+          </div>
+          <div class="occurrence-total">
+            <strong id="occCenariosAbertosQtd">0</strong>
+            <span>cenário(s) com abertura</span>
+          </div>
+        </div>
+        <div id="occAbertasCenarioBoard" class="occurrence-list-board scrollable-list">
+          <div class="occurrence-empty">Aguardando leitura do CSV de ocorrências.</div>
+        </div>
+      </article>
+
+      <article class="occurrence-panel card full-page-card">
+        <div class="occurrence-head compact">
+          <div class="occurrence-title">
+            <p class="eyebrow">Por analista</p>
+            <h3>👤 Ocorrências abertas relacionadas ao analista</h3>
+          </div>
+        </div>
+        <div id="occAbertasAnalistaBoard" class="occurrence-list-board compact-list scrollable-list">
+          <div class="occurrence-empty">Aguardando leitura do CSV de ocorrências.</div>
+        </div>
+      </article>
+
+      <article class="occurrence-panel card full-page-card">
+        <div class="occurrence-head compact">
+          <div class="occurrence-title">
+            <p class="eyebrow">Resolvidas</p>
+            <h3>✅ Ocorrências fechadas relacionadas ao cenário</h3>
+          </div>
+        </div>
+        <div id="occFechadasCenarioBoard" class="occurrence-list-board compact-list scrollable-list">
+          <div class="occurrence-empty">Aguardando leitura do CSV de ocorrências.</div>
+        </div>
+      </article>
+
+      <article class="occurrence-panel card full-page-card">
+        <div class="occurrence-head compact">
+          <div class="occurrence-title">
+            <p class="eyebrow">Geral</p>
+            <h3>📌 Ocorrências gerais abertas</h3>
+          </div>
+        </div>
+        <div id="occStatusBoard" class="occurrence-status-board scrollable-status">
+          <div class="occurrence-empty">Aguardando leitura do CSV de ocorrências.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const OCCURRENCES_CSV_CANDIDATES = [
+      'output/Ocorrencias_Consolidadas_atualizado.csv',
+      './output/Ocorrencias_Consolidadas_atualizado.csv',
+      'Ocorrências.csv',
+      'Ocorrencias.csv',
+      './Ocorrências.csv',
+      './Ocorrencias.csv'
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarCsvOcorrencias();
+    });
+
+    async function carregarCsvOcorrencias() {
+      const fonteEl = document.getElementById('occArquivoFonte');
+
+      for (const candidate of OCCURRENCES_CSV_CANDIDATES) {
+        try {
+          const response = await fetch(`${candidate}?t=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          const buffer = await response.arrayBuffer();
+          const utf8 = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+          const texto = utf8.includes('�')
+            ? new TextDecoder('windows-1252', { fatal: false }).decode(buffer)
+            : utf8;
+
+          const parsed = Papa.parse(texto, { header: true, skipEmptyLines: true, delimiter: ';', quoteChar: '"' });
+          if (parsed.errors?.length) console.warn('Alertas ao ler CSV de ocorrências:', parsed.errors.slice(0, 5));
+
+          const linhas = (parsed.data || []).filter(row => Object.values(row).some(v => String(v ?? '').trim() !== ''));
+          renderizarPainelOcorrencias(linhas);
+          if (fonteEl) fonteEl.textContent = candidate.replace('./', '');
+          return;
+        } catch (error) {
+          console.warn(`Falha ao carregar CSV de ocorrências em ${candidate}:`, error);
+        }
+      }
+
+      preencherErroOcorrencias('Não encontrei o CSV de ocorrências. Coloque o arquivo em output/Ocorrencias_Consolidadas_atualizado.csv.');
+    }
+
+    function renderizarPainelOcorrencias(rows) {
+      const ocorrencias = rows.map(row => {
+        const status = getFirstValue(row, ['Status da Ocorrência', 'Status da Ocorrencia', 'Status Ocorrência', 'Status Ocorrencia']);
+        const analista = getFirstValue(row, ['Analista'], '').trim() || 'Sem analista informado';
+        const cenario = getFirstValue(row, ['Identif. Cenário', 'Identif. Cenario', 'Identificador', 'Cenário', 'Cenario'], '').trim() || 'Cenário não informado';
+        const descricao = getFirstValue(row, ['Descrição', 'Descricao', 'Descrição da Ocorrência', 'Descricao da Ocorrencia'], '').trim();
+        const modulo = getFirstValue(row, ['Módulo/Sistema', 'Modulo/Sistema', 'Módulo', 'Modulo'], '').trim();
+        const area = getFirstValue(row, ['Área de Negócio', 'Area de Negocio'], '').trim();
+        const codigo = getFirstValue(row, ['Código', 'Codigo'], '').trim();
+        return { status, analista, cenario, descricao, modulo, area, codigo, aberta: ehOcorrenciaAberta(status), fechada: ehOcorrenciaFechada(status) };
+      });
+
+      const abertas = ocorrencias.filter(item => item.aberta);
+      const fechadas = ocorrencias.filter(item => item.fechada);
+      const semAnalista = abertas.filter(item => normalize(item.analista) === 'sem analista informado').length;
+      const abertasPorCenario = agruparOcorrencias(abertas, 'cenario');
+
+      setText('occTotalAbertas', abertas.length.toLocaleString('pt-BR'));
+      setText('occTotalFechadas', fechadas.length.toLocaleString('pt-BR'));
+      setText('occSemAnalista', semAnalista.toLocaleString('pt-BR'));
+      setText('occTotalGeral', ocorrencias.length.toLocaleString('pt-BR'));
+      setText('totalOcorrenciasAbertas', abertas.length.toLocaleString('pt-BR'));
+      setText('occCenariosAbertosQtd', abertasPorCenario.length.toLocaleString('pt-BR'));
+
+      renderizarResumoStatus(abertas);
+      renderizarRanking('occAbertasCenarioBoard', abertasPorCenario, { limite: 20, contadorClasse: '', vazio: 'Sem ocorrências abertas vinculadas aos cenários.' });
+      renderizarRanking('occAbertasAnalistaBoard', agruparOcorrencias(abertas, 'analista'), { limite: 15, contadorClasse: '', vazio: 'Sem ocorrências abertas por analista.' });
+      renderizarRanking('occFechadasCenarioBoard', agruparOcorrencias(fechadas, 'cenario'), { limite: 15, contadorClasse: 'success', vazio: 'Sem ocorrências fechadas por cenário.' });
+    }
+
+    function agruparOcorrencias(items, campo) {
+      const mapa = new Map();
+      items.forEach(item => {
+        const chave = item[campo] || 'Não informado';
+        if (!mapa.has(chave)) mapa.set(chave, { nome: chave, total: 0, modulos: new Set(), areas: new Set(), exemplos: [] });
+        const grupo = mapa.get(chave);
+        grupo.total += 1;
+        if (item.modulo) grupo.modulos.add(item.modulo);
+        if (item.area) grupo.areas.add(item.area);
+        if (item.descricao && grupo.exemplos.length < 2) grupo.exemplos.push(item.descricao);
+      });
+      return [...mapa.values()].map(grupo => ({ ...grupo, meta: montarMetaOcorrencia(grupo) })).sort((a, b) => b.total - a.total || a.nome.localeCompare(b.nome, 'pt-BR'));
+    }
+
+    function montarMetaOcorrencia(grupo) {
+      const partes = [];
+      const areas = [...grupo.areas].filter(Boolean);
+      const modulos = [...grupo.modulos].filter(Boolean);
+      if (areas.length) partes.push(areas.slice(0, 2).join(', '));
+      if (modulos.length) partes.push(modulos.slice(0, 1).join(', '));
+      if (grupo.exemplos.length) partes.push(grupo.exemplos[0]);
+      return partes.join(' · ') || 'Sem detalhe complementar';
+    }
+
+    function renderizarRanking(elementId, dados, options = {}) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const lista = dados.slice(0, options.limite || 10);
+      if (!lista.length) {
+        el.innerHTML = `<div class="occurrence-empty">${escapeHtml(options.vazio || 'Sem dados para exibir.')}</div>`;
+        return;
+      }
+      el.innerHTML = lista.map((item, index) => `
+        <div class="occurrence-rank-row" title="${escapeHtml(item.meta)}">
+          <div class="occurrence-rank-pos">${index + 1}º</div>
+          <div class="occurrence-rank-main"><strong>${escapeHtml(item.nome)}</strong><span>${escapeHtml(item.meta)}</span></div>
+          <div class="occurrence-rank-count ${options.contadorClasse || ''}">${item.total.toLocaleString('pt-BR')}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderizarResumoStatus(abertas) {
+      const statusResumoEl = document.getElementById('occStatusResumo');
+      const statusBoard = document.getElementById('occStatusBoard');
+      if (!statusBoard) return;
+      const agrupado = agruparPorStatus(abertas);
+      const total = abertas.length || 1;
+      if (statusResumoEl) statusResumoEl.textContent = agrupado.map(item => `${item.status}: ${item.total}`).join(' | ') || 'Sem abertas';
+      if (!agrupado.length) {
+        statusBoard.innerHTML = '<div class="occurrence-empty">Sem ocorrências abertas no momento.</div>';
+        return;
+      }
+      statusBoard.innerHTML = agrupado.map(item => {
+        const percentual = ((item.total / total) * 100).toFixed(2);
+        return `<div class="occurrence-status-row"><div class="occurrence-status-head"><span>${escapeHtml(item.status)}</span><span>${item.total.toLocaleString('pt-BR')} · ${Number(percentual).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%</span></div><div class="occurrence-status-track"><div class="occurrence-status-fill" style="width:${percentual}%"></div></div></div>`;
+      }).join('');
+    }
+
+    function agruparPorStatus(items) {
+      const mapa = new Map();
+      items.forEach(item => {
+        const status = item.status || 'Sem status';
+        mapa.set(status, (mapa.get(status) || 0) + 1);
+      });
+      return [...mapa.entries()].map(([status, total]) => ({ status, total })).sort((a, b) => b.total - a.total || a.status.localeCompare(b.status, 'pt-BR'));
+    }
+
+    function ehOcorrenciaAberta(status) { return !ehOcorrenciaFechada(status); }
+    function ehOcorrenciaFechada(status) { return normalize(status).includes('fechad'); }
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function preencherErroOcorrencias(mensagem) {
+      ['occAbertasCenarioBoard', 'occAbertasAnalistaBoard', 'occFechadasCenarioBoard', 'occStatusBoard'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = `<div class="occurrence-empty">${escapeHtml(mensagem)}</div>`;
+      });
+      setText('occStatusResumo', mensagem);
+      setText('occArquivoFonte', 'Arquivo não encontrado');
+    }
+  </script>
+</body>
+</html>

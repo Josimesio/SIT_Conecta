@@ -9,12 +9,14 @@ const els = {
   totalNaoIniciado: document.getElementById('totalNaoIniciado'),
   totalBloqueados: document.getElementById('totalBloqueados'),
   totalCancelados: document.getElementById('totalCancelados'),
+  totalOcorrenciasAbertas: document.getElementById('totalOcorrenciasAbertas'),
   headlineCallout: document.getElementById('headlineCallout'),
   headlinePill: document.getElementById('headlinePill'),
   leaderboard: document.getElementById('leaderboard'),
   statusBars: document.getElementById('statusBars'),
   areaBoard: document.getElementById('areaBoard'),
-  focusTable: document.getElementById('focusTable')
+  focusTable: document.getElementById('focusTable'),
+  occurrenceBoard: document.getElementById('occurrenceBoard')
 };
 
 const RING_CIRCUMFERENCE = 301.59;
@@ -31,19 +33,176 @@ const motivationalMessages = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-  tryAutoLoadCsv();
+  initPageLoader();
+  showPageLoader('Sincronizando dados do GTN...', 'Lendo o CSV consolidado e montando a visão.');
+  initViewSelector();
+  tryAutoLoadCsv({ showLoader: true });
 
   setInterval(() => {
-    tryAutoLoadCsv();
+    tryAutoLoadCsv({ showLoader: false });
   }, AUTO_REFRESH_INTERVAL_MS);
 });
 
-async function tryAutoLoadCsv() {
+window.addEventListener('beforeunload', () => {
+  showPageLoader('Abrindo nova visão...', 'Preparando o painel selecionado.');
+});
+
+function initPageLoader() {
+  if (document.getElementById('pageLoader')) return;
+
+  const style = document.createElement('style');
+  style.id = 'pageLoaderStyle';
+  style.textContent = `
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.34), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(20, 211, 166, 0.24), transparent 36%),
+        rgba(5, 10, 28, 0.88);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+
+    .page-loader.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .loader-box {
+      width: min(420px, 100%);
+      border-radius: 28px;
+      padding: 30px 28px;
+      text-align: center;
+      color: #f5f7ff;
+      background:
+        linear-gradient(135deg, rgba(24, 35, 74, 0.92), rgba(11, 36, 48, 0.90));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.40);
+    }
+
+    .loader-spinner {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 18px;
+      border-radius: 999px;
+      border: 7px solid rgba(255, 255, 255, 0.14);
+      border-top-color: #fff29a;
+      border-right-color: #14d3a6;
+      animation: loaderSpin 0.85s linear infinite;
+    }
+
+    .loader-box strong {
+      display: block;
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .loader-box span {
+      display: block;
+      color: #b8c6ef;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .loader-dots::after {
+      content: '';
+      animation: loaderDots 1.2s steps(4, end) infinite;
+    }
+
+    @keyframes loaderSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes loaderDots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75%, 100% { content: '...'; }
+    }
+  `;
+
+  const loader = document.createElement('div');
+  loader.id = 'pageLoader';
+  loader.className = 'page-loader';
+  loader.innerHTML = `
+    <div class="loader-box" role="status" aria-live="polite">
+      <div class="loader-spinner" aria-hidden="true"></div>
+      <strong id="pageLoaderTitle" class="loader-dots">Sincronizando dados do GTN</strong>
+      <span id="pageLoaderText">Lendo o CSV consolidado e preparando o painel.</span>
+    </div>
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(loader);
+}
+
+function showPageLoader(title = 'Sincronizando dados do GTN...', text = 'Lendo o CSV consolidado e montando a visão.') {
+  const loader = document.getElementById('pageLoader');
+  if (!loader) return;
+
+  const titleEl = document.getElementById('pageLoaderTitle');
+  const textEl = document.getElementById('pageLoaderText');
+
+  if (titleEl) titleEl.textContent = title;
+  if (textEl) textEl.textContent = text;
+
+  loader.classList.add('is-active');
+}
+
+function hidePageLoader() {
+  const loader = document.getElementById('pageLoader');
+  if (!loader) return;
+
+  window.setTimeout(() => {
+    loader.classList.remove('is-active');
+  }, 250);
+}
+
+function initViewSelector() {
+  const selector = document.getElementById('viewSelector');
+  if (!selector) return;
+
+  const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const currentOption = [...selector.options].find(option => option.value.toLowerCase() === currentPage);
+
+  if (currentOption) {
+    selector.value = currentOption.value;
+  }
+
+  selector.addEventListener('change', () => {
+    const targetPage = selector.value;
+    if (!targetPage || targetPage.toLowerCase() === currentPage) return;
+
+    const selectedLabel = selector.options[selector.selectedIndex]?.textContent?.trim() || 'nova visão';
+    showPageLoader('Abrindo nova visão...', `Carregando ${selectedLabel} e sincronizando o CSV.`);
+
+    window.setTimeout(() => {
+      window.location.href = targetPage;
+    }, 120);
+  });
+}
+async function tryAutoLoadCsv(options = {}) {
+  const { showLoader = false } = options;
   const candidates = [
     AUTO_CSV_NAME,
     `./${AUTO_CSV_NAME}`,
     '/output/Cenarios_Consolidados_atualizado.csv'
   ];
+
+  if (showLoader) {
+    showPageLoader('Sincronizando dados do GTN...', 'Lendo o CSV consolidado e montando a visão selecionada.');
+  }
 
   setGeneratedAt(`Lendo ${AUTO_CSV_NAME}...`);
 
@@ -60,6 +219,7 @@ async function tryAutoLoadCsv() {
       const buffer = await response.arrayBuffer();
       const text = new TextDecoder('utf-8').decode(buffer);
       parseCsvText(text);
+      if (showLoader) hidePageLoader();
       return;
     } catch (error) {
       console.warn(`Falha ao carregar CSV em ${candidate}:`, error);
@@ -67,6 +227,10 @@ async function tryAutoLoadCsv() {
   }
 
   setGeneratedAt(`Arquivo processado não encontrado. Verifique a pasta output e o nome ${AUTO_CSV_NAME}.`);
+  if (showLoader) {
+    showPageLoader('Não foi possível carregar os dados', `Verifique se o arquivo ${AUTO_CSV_NAME} existe na pasta output.`);
+    window.setTimeout(hidePageLoader, 1800);
+  }
 }
 
 function parseCsvText(text) {
@@ -122,19 +286,98 @@ function getValue(row, target, fallback = '') {
   return key ? row[key] : fallback;
 }
 
+function getFirstValue(row, targets, fallback = '') {
+  for (const target of targets) {
+    const value = getValue(row, target, '');
+    if (String(value ?? '').trim() !== '') return value;
+  }
+  return fallback;
+}
+
+function getOpenOccurrenceCount(row, occurrenceStatus, occurrenceDescription, scenarioStatus) {
+  const countFields = [
+    'Ocorrências abertas',
+    'Ocorrencias abertas',
+    'Ocorrências Abertas',
+    'Ocorrencias Abertas',
+    'Qtd Ocorrências Abertas',
+    'Qtd Ocorrencias Abertas',
+    'Qtde Ocorrências Abertas',
+    'Qtde Ocorrencias Abertas',
+    'Quantidade de Ocorrências Abertas',
+    'Quantidade de Ocorrencias Abertas'
+  ];
+
+  for (const field of countFields) {
+    const value = getValue(row, field, '');
+    const parsed = Number(String(value).replace(',', '.').replace(/[^0-9.]/g, ''));
+    if (Number.isFinite(parsed) && parsed > 0) return parsed;
+  }
+
+  const hasOccurrenceText = hasMeaningfulOccurrenceText(occurrenceDescription);
+  if (hasOccurrenceText && !isOccurrenceClosed(occurrenceStatus)) return 1;
+
+  // Fallback prático: quando o CSV ainda não tem colunas próprias de ocorrência,
+  // tratamos cenário Bloqueado como ocorrência aberta para o painel não ficar cego.
+  if (!hasOccurrenceText && !String(occurrenceStatus || '').trim() && isBlocked(scenarioStatus)) return 1;
+
+  return 0;
+}
+
+function hasMeaningfulOccurrenceText(value) {
+  const text = normalize(value);
+  if (!text) return false;
+  return !['0', '-', 'nao', 'nao informado', 'sem ocorrencia', 'sem ocorrencias', 'n/a', 'na'].includes(text);
+}
+
+function isOccurrenceClosed(status) {
+  const s = normalize(status);
+  if (!s) return false;
+  return s.includes('fechad') || s.includes('concluid') || s.includes('resolvid') || s.includes('cancelad') || s.includes('encerrad') || s === 'closed' || s === 'done';
+}
+
+
 function renderDashboard(rows) {
   const cleanRows = rows
     .filter(row => Object.values(row).some(v => String(v).trim() !== ''))
-    .map(row => ({
-      identificador: getValue(row, 'Identificador'),
-      cenario: getValue(row, 'Cenário') || getValue(row, 'Cenario'),
-      area: getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
-      frente: getValue(row, 'Frente') || getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
-      lider: getValue(row, 'Lider do Cenário') || getValue(row, 'Líder do Cenário') || 'Sem líder',
-      statusOriginal: getValue(row, 'Status') || 'Sem status',
-      prioridade: getValue(row, 'Grupo de Prioridade'),
-      execucoes: Number(String(getValue(row, 'Qtde. Execuções Concluídas') || '0').replace(',', '.')) || 0
-    }));
+    .map(row => {
+      const ocorrenciaStatus = getFirstValue(row, [
+        'Status da Ocorrência',
+        'Status Ocorrência',
+        'Status da Ocorrencia',
+        'Status Ocorrencia',
+        'Situação da Ocorrência',
+        'Situacao da Ocorrencia',
+        'Situação Ocorrência',
+        'Situacao Ocorrencia'
+      ]);
+      const ocorrenciaDescricao = getFirstValue(row, [
+        'Ocorrência',
+        'Ocorrencia',
+        'Descrição da Ocorrência',
+        'Descricao da Ocorrencia',
+        'Ocorrência Aberta',
+        'Ocorrencia Aberta',
+        'Observação da Ocorrência',
+        'Observacao da Ocorrencia'
+      ]);
+      const statusOriginal = getValue(row, 'Status') || 'Sem status';
+      const ocorrenciasAbertasQtd = getOpenOccurrenceCount(row, ocorrenciaStatus, ocorrenciaDescricao, statusOriginal);
+
+      return {
+        identificador: getValue(row, 'Identificador'),
+        cenario: getValue(row, 'Cenário') || getValue(row, 'Cenario'),
+        area: getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
+        frente: getValue(row, 'Frente') || getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada',
+        lider: getValue(row, 'Lider do Cenário') || getValue(row, 'Líder do Cenário') || 'Sem líder',
+        statusOriginal,
+        prioridade: getValue(row, 'Grupo de Prioridade'),
+        execucoes: Number(String(getValue(row, 'Qtde. Execuções Concluídas') || '0').replace(',', '.')) || 0,
+        ocorrenciaStatus,
+        ocorrenciaDescricao,
+        ocorrenciasAbertasQtd
+      };
+    });
 
   const total = cleanRows.length;
   const concluded = cleanRows.filter(row => isConcluded(row.statusOriginal)).length;
@@ -149,29 +392,27 @@ function renderDashboard(rows) {
   renderStatusBars(total, concluded, inProgress, notStarted, blocked, cancelled);
   renderAreaBoard(cleanRows);
   renderFocusTable(cleanRows);
+  renderOccurrenceBoard(cleanRows);
 }
 
 function updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent) {
-  els.totalCenarios.textContent = total.toLocaleString('pt-BR');
-  els.totalConcluidos.textContent = concluded.toLocaleString('pt-BR');
-  els.totalEmAndamento.textContent = inProgress.toLocaleString('pt-BR');
-  els.totalNaoIniciado.textContent = notStarted.toLocaleString('pt-BR');
-  if (els.totalBloqueados) {
-    els.totalBloqueados.textContent = blocked.toLocaleString('pt-BR');
-  }
-  if (els.totalCancelados) {
-    els.totalCancelados.textContent = cancelled.toLocaleString('pt-BR');
-  }
-  els.globalPercent.textContent = formatPercent(percent);
-  els.ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
+  if (els.totalCenarios) els.totalCenarios.textContent = total.toLocaleString('pt-BR');
+  if (els.totalConcluidos) els.totalConcluidos.textContent = concluded.toLocaleString('pt-BR');
+  if (els.totalEmAndamento) els.totalEmAndamento.textContent = inProgress.toLocaleString('pt-BR');
+  if (els.totalNaoIniciado) els.totalNaoIniciado.textContent = notStarted.toLocaleString('pt-BR');
+  if (els.totalBloqueados) els.totalBloqueados.textContent = blocked.toLocaleString('pt-BR');
+  if (els.totalCancelados) els.totalCancelados.textContent = cancelled.toLocaleString('pt-BR');
+  if (els.globalPercent) els.globalPercent.textContent = formatPercent(percent);
+  if (els.ringProgress) els.ringProgress.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
 
   const currentMessage = [...motivationalMessages].reverse().find(item => percent >= item.threshold) || motivationalMessages[0];
-  els.motivationalTag.textContent = currentMessage.tag;
-  els.headlineCallout.textContent = currentMessage.title;
-  els.headlinePill.textContent = currentMessage.pill;
+  if (els.motivationalTag) els.motivationalTag.textContent = currentMessage.tag;
+  if (els.headlineCallout) els.headlineCallout.textContent = currentMessage.title;
+  if (els.headlinePill) els.headlinePill.textContent = currentMessage.pill;
 }
 
 function renderLeaderboard(rows) {
+  if (!els.leaderboard) return;
   if (!rows.length) {
     els.leaderboard.innerHTML = 'Nenhum dado disponível.';
     return;
@@ -270,6 +511,7 @@ function renderLeaderboard(rows) {
 }
 
 function renderStatusBars(total, concluded, inProgress, notStarted, blocked, cancelled) {
+  if (!els.statusBars) return;
   const other = Math.max(total - concluded - inProgress - notStarted - blocked - cancelled, 0);
   const statuses = [
     { label: 'Concluído', value: concluded, percent: getPercent(concluded, total), color: 'linear-gradient(90deg, #14d3a6, #7dffd8)' },
@@ -294,6 +536,7 @@ function renderStatusBars(total, concluded, inProgress, notStarted, blocked, can
 }
 
 function renderAreaBoard(rows) {
+  if (!els.areaBoard) return;
   if (!rows.length) {
     els.areaBoard.innerHTML = 'Nenhum dado disponível.';
     return;
@@ -353,7 +596,74 @@ function renderAreaBoard(rows) {
   `).join('');
 }
 
+
+function renderOccurrenceBoard(rows) {
+  if (!els.occurrenceBoard || !els.totalOcorrenciasAbertas) return;
+
+  const grouped = new Map();
+
+  rows.forEach(row => {
+    const qtd = Number(row.ocorrenciasAbertasQtd) || 0;
+    if (qtd <= 0) return;
+
+    const key = row.identificador || row.cenario || 'Cenário sem identificação';
+    if (!grouped.has(key)) {
+      grouped.set(key, {
+        identificador: row.identificador || '-',
+        cenario: row.cenario || 'Cenário sem nome',
+        lider: row.lider || 'Sem líder',
+        frente: row.frente || row.area || 'Não informada',
+        status: row.statusOriginal || '-',
+        ocorrencias: 0,
+        detalhes: []
+      });
+    }
+
+    const item = grouped.get(key);
+    item.ocorrencias += qtd;
+    if (row.ocorrenciaDescricao) item.detalhes.push(row.ocorrenciaDescricao);
+  });
+
+  const cards = [...grouped.values()]
+    .sort((a, b) => b.ocorrencias - a.ocorrencias || a.cenario.localeCompare(b.cenario, 'pt-BR'));
+
+  const total = cards.reduce((sum, item) => sum + item.ocorrencias, 0);
+  els.totalOcorrenciasAbertas.textContent = total.toLocaleString('pt-BR');
+
+  if (!cards.length) {
+    els.occurrenceBoard.innerHTML = '<div class="occurrence-empty">Sem ocorrências abertas vinculadas aos cenários. Melhor impossível — por enquanto.</div>';
+    return;
+  }
+
+  els.occurrenceBoard.innerHTML = cards.slice(0, 8).map(item => {
+    const detalhes = item.detalhes
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(detail => `<span>📝 ${escapeHtml(detail)}</span>`)
+      .join('');
+
+    return `
+      <div class="occurrence-item">
+        <div class="occurrence-item-top">
+          <div>
+            <div class="occurrence-scenario">${escapeHtml(item.cenario)}</div>
+            <div class="occurrence-meta"><span>${escapeHtml(item.identificador)}</span></div>
+          </div>
+          <div class="occurrence-count">${item.ocorrencias.toLocaleString('pt-BR')}</div>
+        </div>
+        <div class="occurrence-meta">
+          <span>👤 ${escapeHtml(item.lider)}</span>
+          <span>⚔️ ${escapeHtml(item.frente)}</span>
+          <span>📌 ${escapeHtml(item.status)}</span>
+          ${detalhes}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 function renderFocusTable(rows) {
+  if (!els.focusTable) return;
   const priorityRows = rows
     .filter(row => isBlocked(row.statusOriginal) || isNotStarted(row.statusOriginal))
     .sort((a, b) => compareStatusForUnlock(a.statusOriginal, b.statusOriginal) || comparePriority(a.prioridade, b.prioridade) || b.execucoes - a.execucoes || a.cenario.localeCompare(b.cenario, 'pt-BR'))
@@ -440,6 +750,7 @@ function statusPill(status) {
 
   if (isConcluded(status)) className = 'status-concluido';
   else if (isInProgress(status)) className = 'status-andamento';
+  else if (isBlocked(status)) className = 'status-bloqueado';
   else if (isNotStarted(status)) className = 'status-nao-iniciado';
   else if (isCancelled(status)) className = 'status-cancelado';
   else className = 'status-outro';
