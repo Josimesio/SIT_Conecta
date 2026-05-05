@@ -28,12 +28,12 @@ let lastCsvSource = '';
 let lastDataAtualizacaoValue = '';
 
 const motivationalMessages = [
-  { threshold: 0, tag: 'Aquecendo os motores', title: 'O jogo começou. Agora é sair do planejamento e entrar na execução.', pill: 'Sem moleza' },
-  { threshold: 20, tag: 'Ritmo ganhando corpo', title: 'Tem avanço na pista. Agora é apertar o passo e reduzir o estoque de cenário parado.', pill: 'Subindo de nível' },
-  { threshold: 40, tag: 'Competição de verdade', title: 'O time já mostrou serviço. Quem acelerar agora começa a cheirar pódio.', pill: 'Olho no ranking' },
-  { threshold: 60, tag: 'Sprint valendo respeito', title: 'A reta ficou bonita. A turma que concluir agora vira referência, não desculpa.', pill: 'Fase quente' },
-  { threshold: 80, tag: 'Cheiro de vitória', title: 'A meta está no radar. Faltam poucos golpes certeiros para transformar esforço em resultado.', pill: 'Pódio à vista' },
-  { threshold: 100, tag: 'Missão cumprida', title: 'Todos os cenários concluídos. Aqui não teve conversa: teve entrega.', pill: 'Lenda desbloqueada' }
+  { threshold: 0, tag: 'Mapa inicial', title: 'Dados carregados. Agora a leitura é de saúde, risco e destravamento.', pill: 'Gestão por evidência' },
+  { threshold: 20, tag: 'Execução em movimento', title: 'Há avanço, mas ainda existe estoque de cenário parado para priorizar.', pill: 'Atenção aos gargalos' },
+  { threshold: 40, tag: 'Ritmo consistente', title: 'A execução ganhou corpo. O próximo passo é atacar bloqueios e dependências.', pill: 'Remover travas' },
+  { threshold: 60, tag: 'Boa cadência', title: 'A maior parte já andou. Agora a gestão precisa proteger o fluxo e decidir rápido.', pill: 'Decisão e foco' },
+  { threshold: 80, tag: 'Reta de estabilização', title: 'Poucos itens concentram o risco. Ação cirúrgica agora evita ruído no fechamento.', pill: 'Fechar pendências' },
+  { threshold: 100, tag: 'Execução estabilizada', title: 'Todos os cenários concluídos. A base está pronta para auditoria e sustentação.', pill: 'Fluxo fechado' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -499,7 +499,7 @@ function renderLeaderboard(rows) {
     <div class="leader-spotlight">
       <div class="leader-spotlight-top">
         <div>
-          <div class="leader-crown">1º lugar · líder da rodada</div>
+          <div class="leader-crown">Referência de avanço consolidado</div>
           <h4 class="leader-spotlight-name">${escapeHtml(champion.lider)}</h4>
           <div class="leader-spotlight-meta">
             ${champion.concluded} concluídos de ${champion.total} cenários · ${champion.inProgress} em andamento
@@ -507,7 +507,7 @@ function renderLeaderboard(rows) {
         </div>
         <div class="leader-spotlight-score">
           <strong>${formatPercent(champion.percent)}</strong>
-          <span>aproveitamento</span>
+          <span>avanço</span>
         </div>
       </div>
       <div class="leader-spotlight-track">
@@ -522,11 +522,11 @@ function renderLeaderboard(rows) {
         <div class="chaser-card ${index === 0 ? 'top-2' : ''} ${index === 1 ? 'top-3' : ''}">
           <div class="chaser-head">
             <div>
-              <div class="chaser-place">${index + 2}º</div>
+              <div class="chaser-place">#${index + 2}</div>
             </div>
             <div class="chaser-score">
               <strong>${formatPercent(item.percent)}</strong>
-              <span>aproveitamento</span>
+              <span>avanço</span>
             </div>
           </div>
           <div class="chaser-name">${escapeHtml(item.lider)}</div>
@@ -538,11 +538,11 @@ function renderLeaderboard(rows) {
 
   const restHtml = rest.length ? `
     <div class="leaderboard-rest">
-      <div class="leaderboard-rest-title">Demais líderes</div>
+      <div class="leaderboard-rest-title">Demais responsáveis</div>
       <div class="leaderboard-rest-list">
         ${rest.map((item, index) => `
           <div class="leaderboard-rest-row">
-            <div class="rest-position">${index + 4}º</div>
+            <div class="rest-position">#${index + 4}</div>
             <div class="rest-main">
               <strong>${escapeHtml(item.lider)}</strong>
               <span>${item.concluded} concluídos de ${item.total} cenários · ${item.inProgress} em andamento</span>

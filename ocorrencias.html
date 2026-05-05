@@ -6,7 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ocorrências Abertas - Missão Cenários</title>
+  <title>Ocorrências e Impedimentos - Portal de Destravamento</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
     }
 
     .leader-spotlight::after {
-      content: "🏆";
+      content: "🧭";
       position: absolute;
       top: 16px;
       right: 18px;
@@ -644,11 +644,11 @@
   <main class="app-shell">
     <header class="hero card glass">
       <div class="hero-copy">
-        <p class="eyebrow">Painel motivacional de execução</p>
-        <h1>🏁 Missão <span>Cenários Concluídos</span></h1>
+        <p class="eyebrow">Painel de apoio à gestão</p>
+        <h1>🧭 Portal <span>de Destravamento</span></h1>
         <p class="hero-text">
-          Bora transformar entrega em jogo sério. Cada cenário concluído empurra o time para o topo,
-          acende o ranking e deixa claro quem está puxando a fila. Meta: sair do “quase” e entrar no “feito”.
+          Visão executiva para acompanhar a saúde da execução, evidenciar impedimentos reais,
+          dependências, ocorrências e pontos que precisam de ação conjunta. O foco sai da pessoa e vai para o problema.
         </p>
 
         <div class="data-update-box">
@@ -660,8 +660,8 @@
 
       <div class="hero-scoreboard">
         <div class="score-badge">
-          <span class="score-label">Clima da corrida</span>
-          <strong id="motivationalTag">Aquecendo os motores</strong>
+          <span class="score-label">Saúde da execução</span>
+          <strong id="motivationalTag">Aguardando leitura</strong>
         </div>
         <div class="score-ring-wrap">
           <div class="score-ring">
@@ -682,26 +682,27 @@
       <div class="view-switcher-copy">
         <p class="eyebrow">Visões do painel</p>
         <h2>Escolha a página que quer acompanhar</h2>
-        <p>O cabeçalho é fixo no conceito: muda a análise, não muda a identidade do painel.</p>
+        <p>O cabeçalho mantém a identidade do portal; cada visão mostra onde agir para destravar o projeto.</p>
       </div>
       <div class="view-switcher-control">
         <label for="viewSelector">Selecionar visão</label>
         <select id="viewSelector" class="view-select">
           <option value="index.html">Visão geral</option>
           <option value="ocorrencias.html">Ocorrências abertas</option>
-          <option value="ranking.html">Ranking de líderes</option>
-          <option value="frentes.html">Frentes em competição</option>
+          <option value="ranking.html">Mapa de apoio por líder</option>
+          <option value="frentes.html">Apoio por frentes</option>
           <option value="status.html">Status geral</option>
-          <option value="top20.html">Top 20 para destravar</option>
+          <option value="graficos.html">Visão executiva de gargalos</option>
+          <option value="top20.html">Prioridades para destravar</option>
         </select>
       </div>
     </section>
     <section class="page-intro">
-      <p class="eyebrow">Gestão de impedimentos</p>
-      <h2>🚨 Painel de Ocorrências</h2>
+      <p class="eyebrow">Gestão de travamentos</p>
+      <h2>🚨 Ocorrências e Impedimentos</h2>
       <p>
-        Leitura direta do arquivo de ocorrências para destacar o que está aberto, quem está responsável,
-        quais cenários concentram problemas e o que já foi fechado.
+        Leitura direta do arquivo de ocorrências para destacar o que está aberto, quais cenários concentram problemas,
+        onde há risco sem dono e o que precisa de ação conjunta para destravar.
       </p>
     </section>
 
@@ -719,7 +720,7 @@
       <div class="occurrence-kpi warning">
         <span>Abertas sem analista</span>
         <strong id="occSemAnalista">0</strong>
-        <small>Risco de ficar sem dono</small>
+        <small>Ponto crítico para gestão</small>
       </div>
       <div class="occurrence-kpi neutral">
         <span>Total analisado</span>
@@ -749,7 +750,7 @@
         <div class="occurrence-head compact">
           <div class="occurrence-title">
             <p class="eyebrow">Por analista</p>
-            <h3>👤 Ocorrências abertas relacionadas ao analista</h3>
+            <h3>👤 Ocorrências abertas por responsável</h3>
           </div>
         </div>
         <div id="occAbertasAnalistaBoard" class="occurrence-list-board compact-list scrollable-list">
@@ -773,7 +774,7 @@
         <div class="occurrence-head compact">
           <div class="occurrence-title">
             <p class="eyebrow">Geral</p>
-            <h3>📌 Todas as ocorrências gerais abertas</h3>
+            <h3>📌 Mapa geral de ocorrências abertas</h3>
           </div>
         </div>
         <div id="occStatusBoard" class="occurrence-status-board scrollable-status">

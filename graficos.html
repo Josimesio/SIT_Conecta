@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visão Executiva de Gargalos - Portal de Destravamento</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260504_graficos" />
+
+  <script src="auth.js"></script>
+  <script>protegerPagina("login.html");</script>
+
+  <style>
+    .view-switcher-panel {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 245, 166, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(124, 92, 255, 0.18), rgba(20, 211, 166, 0.10));
+      border: 1px solid rgba(255, 245, 166, 0.22);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+    }
+    .view-switcher-copy { min-width: 0; }
+    .view-switcher-copy h2 { margin: 4px 0 5px; font-size: 1.05rem; line-height: 1.2; }
+    .view-switcher-copy p { margin: 0; color: #b9c5ed; font-size: 0.88rem; }
+    .view-switcher-control { min-width: 280px; display: grid; gap: 6px; }
+    .view-switcher-control label { color: #fff5a6; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .view-select {
+      width: 100%; appearance: none; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px;
+      padding: 13px 44px 13px 14px; color: #f8fbff; font: inherit; font-weight: 800;
+      background:
+        linear-gradient(45deg, transparent 50%, #fff5a6 50%) calc(100% - 22px) center / 7px 7px no-repeat,
+        linear-gradient(135deg, rgba(8, 18, 44, 0.92), rgba(20, 37, 76, 0.92));
+      cursor: pointer; outline: none;
+    }
+    .view-select:focus { border-color: rgba(255, 245, 166, 0.65); box-shadow: 0 0 0 4px rgba(255, 245, 166, 0.10); }
+    .view-select option { background: #111a35; color: #ffffff; font-weight: 700; }
+
+    .page-intro { margin: 18px 0; padding: 20px 22px; border-radius: 24px; background: rgba(255, 255, 255, 0.045); border: 1px solid rgba(255, 255, 255, 0.09); }
+    .page-intro h2 { margin: 4px 0 6px; font-size: 1.35rem; }
+    .page-intro p { margin: 0; color: #b9c5ed; line-height: 1.55; }
+
+    .exec-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 18px 0; }
+    .exec-kpi { position: relative; overflow: hidden; padding: 20px; border-radius: 22px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.10); box-shadow: 0 14px 32px rgba(0,0,0,.16); }
+    .exec-kpi::after { content: ""; position: absolute; width: 120px; height: 120px; right: -48px; top: -48px; border-radius: 999px; opacity: .22; background: #fff; }
+    .exec-kpi span { display: block; color: #b9c5ed; font-size: .78rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .exec-kpi strong { display: block; margin-top: 8px; font-size: 2.25rem; line-height: 1; font-weight: 800; }
+    .exec-kpi small { display: block; margin-top: 8px; color: #c7d3ff; font-size: .82rem; line-height: 1.35; }
+    .exec-kpi.success strong { color: #7dffd8; }
+    .exec-kpi.warning strong { color: #fff5a6; }
+    .exec-kpi.danger strong { color: #ffb4c1; }
+    .exec-kpi.neutral strong { color: #d8e1ff; }
+
+    .charts-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .chart-card { padding: 22px; }
+    .chart-card.wide { grid-column: 1 / -1; }
+    .chart-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+    .chart-title h3 { margin: 0; font-size: 1.28rem; }
+    .chart-title p { margin: 5px 0 0; color: #aab8df; font-size: .9rem; line-height: 1.45; }
+    .chart-badge { white-space: nowrap; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.08); color: #fff5a6; font-size: .8rem; font-weight: 800; }
+
+    .bar-board { display: grid; gap: 12px; }
+    .bar-row { display: grid; gap: 7px; }
+    .bar-head { display: flex; justify-content: space-between; gap: 12px; color: #d8e1ff; font-size: .9rem; font-weight: 800; }
+    .bar-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-value { white-space: nowrap; color: #fff5a6; }
+    .bar-track { height: 13px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); }
+    .bar-fill { height: 100%; min-width: 3px; border-radius: inherit; background: linear-gradient(90deg, #7c5cff, #14d3a6); }
+    .bar-fill.warning { background: linear-gradient(90deg, #ffb84d, #fff5a6); }
+    .bar-fill.danger { background: linear-gradient(90deg, #ff4d6d, #ffb4c1); }
+    .bar-fill.neutral { background: linear-gradient(90deg, #98a7d8, #cad5ff); }
+
+    .stack-row { display: grid; gap: 8px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .stack-row:last-child { border-bottom: 0; }
+    .stack-head { display: flex; justify-content: space-between; gap: 12px; font-weight: 800; }
+    .stack-meta { color: #aab8df; font-size: .84rem; }
+    .stack-track { display: flex; height: 16px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); }
+    .stack-part { height: 100%; min-width: 2px; }
+    .stack-part.blocked { background: #ff4d6d; }
+    .stack-part.not-started { background: #7c5cff; }
+    .stack-part.occurrences { background: #ffb84d; }
+
+    .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .matrix-card { padding: 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.045); }
+    .matrix-card span { display: block; color: #aab8df; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; }
+    .matrix-card strong { display: block; margin-top: 8px; font-size: 1.8rem; }
+    .matrix-card small { display: block; margin-top: 6px; color: #b9c5ed; line-height: 1.35; }
+
+    .queue-table-wrap { overflow: auto; border-radius: 18px; border: 1px solid rgba(255,255,255,.06); }
+    .queue-table { width: 100%; border-collapse: collapse; min-width: 980px; background: rgba(255,255,255,.03); }
+    .queue-table th, .queue-table td { padding: 13px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .queue-table thead th { position: sticky; top: 0; background: #1a2347; z-index: 1; }
+    .risk-pill { display: inline-flex; align-items: center; padding: 7px 10px; border-radius: 999px; font-size: .78rem; font-weight: 800; white-space: nowrap; }
+    .risk-critical { background: rgba(255,77,109,.16); color: #ffb4c1; border: 1px solid rgba(255,77,109,.24); }
+    .risk-warning { background: rgba(255,184,77,.16); color: #fff5a6; border: 1px solid rgba(255,184,77,.24); }
+    .risk-attention { background: rgba(124,92,255,.16); color: #cfc6ff; border: 1px solid rgba(124,92,255,.24); }
+    .empty-graph { padding: 18px; border-radius: 18px; background: rgba(20,211,166,.10); border: 1px solid rgba(20,211,166,.20); color: #c9fff1; font-weight: 700; }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; color: #b9c5ed; font-size: .84rem; margin-top: 12px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+    @media (max-width: 980px) { .charts-grid { grid-template-columns: 1fr; } .view-switcher-panel { align-items: stretch; flex-direction: column; } .view-switcher-control { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <button class="logout-floating" onclick="fazerLogout()">Sair</button>
+
+  <main class="app-shell">
+    <header class="hero card glass">
+      <div class="hero-copy">
+        <p class="eyebrow">Visão executiva de destravamento</p>
+        <h1>📊 Gráficos <span>de Gargalos</span></h1>
+        <p class="hero-text">
+          Leitura visual das linhas do GTN para mostrar saúde da execução, concentração de bloqueios,
+          ocorrências abertas e fila de ação. O foco não é comparar pessoas: é localizar o problema e acelerar a decisão.
+        </p>
+        <div class="data-update-box">
+          <span class="data-update-label">Última atualização do arquivo</span>
+          <strong id="dataAtualizacao">Aguardando leitura do CSV...</strong>
+          <small>Base principal: <strong>output/Cenarios_Consolidados_atualizado.csv</strong>. Ocorrências: <strong>output/Ocorrencias_Consolidadas_atualizado.csv</strong>.</small>
+        </div>
+      </div>
+
+      <div class="hero-scoreboard">
+        <div class="score-badge">
+          <span class="score-label">Leitura executiva</span>
+          <strong id="executiveTag">Mapeando gargalos</strong>
+        </div>
+        <div class="score-ring-wrap">
+          <div class="score-ring">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="48" class="ring-bg"></circle>
+              <circle cx="60" cy="60" r="48" class="ring-progress" id="ringProgress"></circle>
+            </svg>
+            <div class="ring-center">
+              <strong id="globalPercent">0,00%</strong>
+              <span>concluído</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="view-switcher-panel card" aria-label="Selecionar visão do painel">
+      <div class="view-switcher-copy">
+        <p class="eyebrow">Visões do painel</p>
+        <h2>Escolha a página que quer acompanhar</h2>
+        <p>Esta visão transforma as linhas do CSV em gráficos para gestão e destravamento.</p>
+      </div>
+      <div class="view-switcher-control">
+        <label for="viewSelector">Selecionar visão</label>
+        <select id="viewSelector" class="view-select">
+          <option value="index.html">Visão geral</option>
+          <option value="ocorrencias.html">Ocorrências abertas</option>
+          <option value="ranking.html">Mapa de apoio por líder</option>
+          <option value="frentes.html">Apoio por frentes</option>
+          <option value="status.html">Status geral</option>
+          <option value="graficos.html">Visão executiva de gargalos</option>
+          <option value="top20.html">Prioridades para destravar</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="page-intro">
+      <p class="eyebrow">Leitura de gestão</p>
+      <h2>Do detalhe operacional para decisão executiva</h2>
+      <p>
+        Cada linha continua sendo respeitada, mas agora aparece consolidada em gráficos. Assim a conversa sai de
+        “quem está atrasado” e vai para “onde está travando, qual o impacto e qual ação precisa ser tomada”.
+      </p>
+    </section>
+
+    <section class="exec-kpi-grid" aria-label="Resumo executivo">
+      <div class="exec-kpi neutral"><span>Total de cenários</span><strong id="kpiTotal">0</strong><small>Base analisada no CSV consolidado.</small></div>
+      <div class="exec-kpi success"><span>Concluídos</span><strong id="kpiConcluidos">0</strong><small id="kpiConcluidosDetalhe">Percentual geral aguardando cálculo.</small></div>
+      <div class="exec-kpi danger"><span>Itens para destravar</span><strong id="kpiTravados">0</strong><small>Bloqueados, não iniciados ou com ocorrência aberta.</small></div>
+      <div class="exec-kpi warning"><span>Ocorrências abertas</span><strong id="kpiOcorrencias">0</strong><small>Leitura do arquivo de ocorrências, quando disponível.</small></div>
+    </section>
+
+    <section class="charts-grid">
+      <article class="chart-card card">
+        <div class="chart-title">
+          <div><p class="eyebrow">Saúde da execução</p><h3>Status dos cenários</h3><p>Mostra o volume por situação para separar avanço real de estoque parado.</p></div>
+          <span class="chart-badge" id="statusTotalBadge">0 itens</span>
+        </div>
+        <div id="statusChart" class="bar-board"><div class="empty-graph">Aguardando dados.</div></div>
+      </article>
+
+      <article class="chart-card card">
+        <div class="chart-title">
+          <div><p class="eyebrow">Apoio por frente</p><h3>Frentes com maior necessidade de ação</h3><p>Combina bloqueados, ocorrências abertas e não iniciados com peso gerencial. Bloqueio pesa mais que volume bruto.</p></div>
+          <span class="chart-badge">Top 10</span>
+        </div>
+        <div id="frontChart" class="bar-board"><div class="empty-graph">Aguardando dados.</div></div>
+        <div class="legend">
+          <span><i style="background:#ff4d6d"></i>Bloqueados ×5</span>
+          <span><i style="background:#7c5cff"></i>Não iniciados ×1</span>
+          <span><i style="background:#ffb84d"></i>Ocorrências ×3</span>
+        </div>
+      </article>
+
+      <article class="chart-card card">
+        <div class="chart-title">
+          <div><p class="eyebrow">Ocorrências</p><h3>Cenários com maior concentração</h3><p>Indica onde o problema está acumulando e precisa de priorização.</p></div>
+          <span class="chart-badge">Top 12</span>
+        </div>
+        <div id="occScenarioChart" class="bar-board"><div class="empty-graph">Aguardando CSV de ocorrências.</div></div>
+      </article>
+
+      <article class="chart-card card">
+        <div class="chart-title">
+          <div><p class="eyebrow">Responsável de tratativa</p><h3>Distribuição de ocorrências abertas</h3><p>Leitura de capacidade e apoio necessário, sem tom de cobrança individual.</p></div>
+          <span class="chart-badge">Top 12</span>
+        </div>
+        <div id="occAnalystChart" class="bar-board"><div class="empty-graph">Aguardando CSV de ocorrências.</div></div>
+      </article>
+
+      <article class="chart-card card wide">
+        <div class="chart-title">
+          <div><p class="eyebrow">Matriz executiva</p><h3>Atenção gerencial por tipo de ação</h3><p>Resumo para reunião: onde acompanhar, onde decidir e onde destravar primeiro.</p></div>
+          <span class="chart-badge">Gestão por evidência</span>
+        </div>
+        <div id="matrixBoard" class="matrix-grid"><div class="empty-graph">Aguardando dados.</div></div>
+      </article>
+
+      <article class="chart-card card wide">
+        <div class="chart-title">
+          <div><p class="eyebrow">Fila de destravamento</p><h3>Prioridades para ação gerencial</h3><p>Lista os itens que pedem atenção primeiro: bloqueios, não iniciados e cenários com ocorrência aberta.</p></div>
+          <span class="chart-badge">Top 20</span>
+        </div>
+        <div class="queue-table-wrap">
+          <table class="queue-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Identificador</th><th>Cenário</th><th>Frente</th><th>Líder</th><th>Status</th><th>Ocorrências</th><th>Leitura</th>
+              </tr>
+            </thead>
+            <tbody id="queueTable"><tr><td colspan="8" class="empty-cell">Aguardando dados.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+    const RING_CIRCUMFERENCE = 301.59;
+    const CENARIOS_CSV = 'output/Cenarios_Consolidados_atualizado.csv';
+    const OCORRENCIAS_CSV = 'output/Ocorrencias_Consolidadas_atualizado.csv';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      initViewSelector();
+      setText('dataAtualizacao', 'Lendo arquivos do GTN...');
+      const [cenarios, ocorrencias] = await Promise.all([
+        loadCsvWithFallback([CENARIOS_CSV, './' + CENARIOS_CSV]),
+        loadCsvWithFallback([OCORRENCIAS_CSV, './' + OCORRENCIAS_CSV], true)
+      ]);
+      renderExecutiveCharts(cenarios.rows, ocorrencias.rows);
+      if (cenarios.rows.length) {
+        const generated = getValue(cenarios.rows[0], 'Gerado em') || 'CSV carregado sem coluna Gerado em';
+        setText('dataAtualizacao', generated);
+      } else {
+        setText('dataAtualizacao', 'Não foi possível carregar o CSV principal.');
+      }
+    });
+
+    function initViewSelector() {
+      const selector = document.getElementById('viewSelector');
+      if (!selector) return;
+      const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      const currentOption = [...selector.options].find(option => option.value.toLowerCase() === currentPage);
+      if (currentOption) selector.value = currentOption.value;
+      selector.addEventListener('change', () => {
+        const targetPage = selector.value;
+        if (!targetPage || targetPage.toLowerCase() === currentPage) return;
+        window.location.assign(targetPage);
+      });
+    }
+
+    async function loadCsvWithFallback(candidates, optional = false) {
+      for (const candidate of candidates) {
+        try {
+          const response = await fetch(`${candidate}?v=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const buffer = await response.arrayBuffer();
+          const text = decodeBuffer(buffer);
+          const parsed = Papa.parse(text, { header: true, skipEmptyLines: true, delimiter: detectDelimiter(text), quoteChar: '"' });
+          const rows = (parsed.data || []).filter(row => Object.values(row).some(v => String(v ?? '').trim() !== ''));
+          return { rows, source: candidate };
+        } catch (error) {
+          console.warn(`Falha ao carregar ${candidate}:`, error);
+        }
+      }
+      if (!optional) console.warn('CSV principal não encontrado.');
+      return { rows: [], source: '' };
+    }
+
+    function decodeBuffer(buffer) {
+      const utf8 = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+      if (!utf8.includes('�')) return utf8;
+      return new TextDecoder('windows-1252', { fatal: false }).decode(buffer);
+    }
+
+    function detectDelimiter(text) {
+      const firstLine = String(text || '').split(/\r?\n/).find(line => line.trim()) || '';
+      return [';', ',', '\t', '|']
+        .map(delimiter => ({ delimiter, count: firstLine.split(delimiter).length - 1 }))
+        .sort((a, b) => b.count - a.count)[0]?.delimiter || ';';
+    }
+
+    function renderExecutiveCharts(cenarioRows, occurrenceRows) {
+      const occurrenceSummary = buildOccurrenceSummary(occurrenceRows);
+      const rows = normalizeScenarioRows(cenarioRows, occurrenceSummary.byScenario);
+      const total = rows.length;
+      const concluded = rows.filter(r => isConcluded(r.status)).length;
+      const inProgress = rows.filter(r => isInProgress(r.status)).length;
+      const blocked = rows.filter(r => isBlocked(r.status)).length;
+      const notStarted = rows.filter(r => isNotStarted(r.status)).length;
+      const cancelled = rows.filter(r => isCancelled(r.status)).length;
+      const other = Math.max(total - concluded - inProgress - blocked - notStarted - cancelled, 0);
+      const percent = getPercent(concluded, total);
+      const toUnlock = rows.filter(r => r.riskScore > 0).length;
+
+      setText('kpiTotal', formatNumber(total));
+      setText('kpiConcluidos', formatNumber(concluded));
+      setText('kpiConcluidosDetalhe', `${formatPercent(percent)} de conclusão geral.`);
+      setText('kpiTravados', formatNumber(toUnlock));
+      setText('kpiOcorrencias', formatNumber(occurrenceSummary.openTotal));
+      setText('globalPercent', formatPercent(percent));
+      setText('executiveTag', getExecutiveTag(percent, toUnlock));
+      const ring = document.getElementById('ringProgress');
+      if (ring) ring.style.strokeDashoffset = `${RING_CIRCUMFERENCE * (1 - percent / 100)}`;
+
+      renderStatusChart(total, { concluded, inProgress, blocked, notStarted, cancelled, other });
+      renderFrontChart(rows);
+      renderOccurrenceChart('occScenarioChart', occurrenceSummary.byScenario, 'cenário');
+      renderOccurrenceChart('occAnalystChart', occurrenceSummary.byAnalyst, 'responsável');
+      renderMatrix(rows, { concluded, inProgress, blocked, notStarted, occurrenceOpen: occurrenceSummary.openTotal });
+      renderQueue(rows);
+    }
+
+    function normalizeScenarioRows(rows, occurrencesByScenario) {
+      return rows.filter(row => Object.values(row).some(v => String(v ?? '').trim() !== '')).map(row => {
+        const identificador = getValue(row, 'Identificador') || '-';
+        const cenario = getValue(row, 'Cenário') || getValue(row, 'Cenario') || '-';
+        const frente = getValue(row, 'Frente') || getValue(row, 'Área de Negócio') || getValue(row, 'Area de Negocio') || 'Não informada';
+        const lider = getValue(row, 'Lider do Cenário') || getValue(row, 'Líder do Cenário') || 'Sem líder';
+        const status = getValue(row, 'Status') || 'Sem status';
+        const ocorrencias = (occurrencesByScenario.get(normalize(identificador)) || 0) + (occurrencesByScenario.get(normalize(cenario)) || 0);
+        const riskScore = (isBlocked(status) ? 100 : 0) + (isNotStarted(status) ? 45 : 0) + (ocorrencias * 15) + (isInProgress(status) ? 5 : 0);
+        return { identificador, cenario, frente, lider, status, ocorrencias, riskScore };
+      });
+    }
+
+    function buildOccurrenceSummary(rows) {
+      const byScenario = new Map();
+      const byAnalyst = new Map();
+      let openTotal = 0;
+      rows.forEach(row => {
+        const status = getFirstValue(row, ['Status da Ocorrência', 'Status da Ocorrencia', 'Status Ocorrência', 'Status Ocorrencia']);
+        if (!isOccurrenceOpen(status)) return;
+        openTotal += 1;
+        const scenario = getFirstValue(row, ['Identif. Cenário', 'Identif. Cenario', 'Identificador', 'Cenário', 'Cenario'], 'Cenário não informado');
+        const analyst = getFirstValue(row, ['Analista', 'Dono', 'Responsável', 'Responsavel'], 'Sem responsável informado');
+        incrementMap(byScenario, normalize(scenario), scenario);
+        incrementMap(byAnalyst, normalize(analyst), analyst);
+      });
+      return { byScenario, byAnalyst, openTotal };
+    }
+
+    function incrementMap(map, key, label) {
+      if (!map.has(key)) map.set(key, { label, value: 0 });
+      map.get(key).value += 1;
+      // chave auxiliar por label normalizada também permite cruzar por identificador/cenário.
+      map.set(key, map.get(key));
+    }
+
+    function renderStatusChart(total, values) {
+      setText('statusTotalBadge', `${formatNumber(total)} itens`);
+      const items = [
+        { label: 'Concluídos', value: values.concluded, className: '' },
+        { label: 'Em andamento', value: values.inProgress, className: 'warning' },
+        { label: 'Bloqueados', value: values.blocked, className: 'danger' },
+        { label: 'Não iniciados', value: values.notStarted, className: 'neutral' },
+        { label: 'Cancelados', value: values.cancelled, className: 'neutral' },
+        { label: 'Outros', value: values.other, className: 'neutral' }
+      ];
+      document.getElementById('statusChart').innerHTML = items.map(item => barRow(item.label, item.value, total, item.className)).join('') || emptyGraph('Sem status para exibir.');
+    }
+
+    function renderFrontChart(rows) {
+      const grouped = new Map();
+      rows.forEach(row => {
+        const key = row.frente || 'Não informada';
+        if (!grouped.has(key)) grouped.set(key, { frente: key, blocked: 0, notStarted: 0, occurrences: 0, total: 0 });
+        const item = grouped.get(key);
+        item.total += 1;
+        if (isBlocked(row.status)) item.blocked += 1;
+        if (isNotStarted(row.status)) item.notStarted += 1;
+        item.occurrences += row.ocorrencias || 0;
+      });
+      const fronts = [...grouped.values()]
+        .map(item => {
+          const blockedWeight = item.blocked * 5;
+          const notStartedWeight = item.notStarted * 1;
+          const occurrenceWeight = item.occurrences * 3;
+          return {
+            ...item,
+            blockedWeight,
+            notStartedWeight,
+            occurrenceWeight,
+            supportIndex: blockedWeight + notStartedWeight + occurrenceWeight
+          };
+        })
+        .filter(item => item.supportIndex > 0)
+        .sort((a, b) => b.supportIndex - a.supportIndex || a.frente.localeCompare(b.frente, 'pt-BR'))
+        .slice(0, 10);
+      const max = Math.max(...fronts.map(f => f.supportIndex), 1);
+      const html = fronts.map(item => {
+        const blockedPct = (item.blockedWeight / max) * 100;
+        const notStartedPct = (item.notStartedWeight / max) * 100;
+        const occPct = (item.occurrenceWeight / max) * 100;
+        return `
+          <div class="stack-row">
+            <div class="stack-head"><span class="bar-label">${escapeHtml(item.frente)}</span><span>${formatNumber(item.supportIndex)} índice de apoio</span></div>
+            <div class="stack-meta">
+              ${item.blocked} bloqueado(s) ×5 · ${item.notStarted} não iniciado(s) ×1 · ${item.occurrences} ocorrência(s) ×3
+            </div>
+            <div class="stack-track" title="${escapeHtml(item.frente)}">
+              <div class="stack-part blocked" style="width:${blockedPct}%"></div>
+              <div class="stack-part not-started" style="width:${notStartedPct}%"></div>
+              <div class="stack-part occurrences" style="width:${occPct}%"></div>
+            </div>
+          </div>`;
+      }).join('');
+      document.getElementById('frontChart').innerHTML = html || emptyGraph('Nenhuma frente com bloqueio, não iniciado ou ocorrência aberta encontrada.');
+    }
+
+    function renderOccurrenceChart(elementId, map, emptyLabel) {
+      const items = [...new Set([...map.values()])]
+        .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, 'pt-BR'))
+        .slice(0, 12);
+      const max = Math.max(...items.map(i => i.value), 1);
+      document.getElementById(elementId).innerHTML = items.map(item => barRow(item.label, item.value, max, 'danger', false)).join('') || emptyGraph(`Nenhuma ocorrência aberta por ${emptyLabel} encontrada.`);
+    }
+
+    function renderMatrix(rows, totals) {
+      const withOccurrence = rows.filter(r => r.ocorrencias > 0).length;
+      const critical = rows.filter(r => isBlocked(r.status) && r.ocorrencias > 0).length;
+      const attention = rows.filter(r => isNotStarted(r.status) || (isInProgress(r.status) && r.ocorrencias > 0)).length;
+      const healthy = rows.filter(r => isConcluded(r.status) && !r.ocorrencias).length;
+      const cards = [
+        { label: 'Crítico', value: critical, detail: 'Bloqueado com ocorrência aberta. Exige ação imediata.' },
+        { label: 'Atenção', value: attention, detail: 'Não iniciado ou em andamento com ocorrência. Precisa de acompanhamento.' },
+        { label: 'Com ocorrência', value: withOccurrence, detail: 'Cenários que possuem problema aberto relacionado.' },
+        { label: 'Saudável', value: healthy, detail: 'Concluídos sem ocorrência aberta relacionada.' }
+      ];
+      document.getElementById('matrixBoard').innerHTML = cards.map(card => `
+        <div class="matrix-card">
+          <span>${escapeHtml(card.label)}</span>
+          <strong>${formatNumber(card.value)}</strong>
+          <small>${escapeHtml(card.detail)}</small>
+        </div>
+      `).join('');
+    }
+
+    function renderQueue(rows) {
+      const queue = rows
+        .filter(row => row.riskScore > 0 && !isConcluded(row.status) && !isCancelled(row.status))
+        .sort((a, b) => b.riskScore - a.riskScore || b.ocorrencias - a.ocorrencias || a.frente.localeCompare(b.frente, 'pt-BR'))
+        .slice(0, 20);
+      const tbody = document.getElementById('queueTable');
+      if (!queue.length) {
+        tbody.innerHTML = '<tr><td colspan="8" class="empty-cell">Nenhum item crítico para destravar encontrado.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = queue.map((row, index) => {
+        const risk = getRiskLabel(row);
+        return `<tr>
+          <td>${index + 1}</td>
+          <td>${escapeHtml(row.identificador)}</td>
+          <td>${escapeHtml(row.cenario)}</td>
+          <td>${escapeHtml(row.frente)}</td>
+          <td>${escapeHtml(row.lider)}</td>
+          <td>${escapeHtml(row.status)}</td>
+          <td>${formatNumber(row.ocorrencias)}</td>
+          <td><span class="risk-pill ${risk.className}">${risk.label}</span></td>
+        </tr>`;
+      }).join('');
+    }
+
+    function getRiskLabel(row) {
+      if (isBlocked(row.status) && row.ocorrencias > 0) return { label: 'Crítico: bloqueio + ocorrência', className: 'risk-critical' };
+      if (isBlocked(row.status)) return { label: 'Bloqueado', className: 'risk-critical' };
+      if (row.ocorrencias > 0) return { label: 'Ocorrência aberta', className: 'risk-warning' };
+      if (isNotStarted(row.status)) return { label: 'Aguardando início', className: 'risk-attention' };
+      return { label: 'Acompanhar', className: 'risk-attention' };
+    }
+
+    function barRow(label, value, total, className = '', percentByTotal = true) {
+      const percent = percentByTotal ? getPercent(value, total) : (total ? (value / total) * 100 : 0);
+      const detail = percentByTotal ? `${formatNumber(value)} · ${formatPercent(percent)}` : `${formatNumber(value)}`;
+      return `<div class="bar-row">
+        <div class="bar-head"><span class="bar-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span><span class="bar-value">${detail}</span></div>
+        <div class="bar-track"><div class="bar-fill ${className}" style="width:${Math.max(0, Math.min(100, percent)).toFixed(2)}%"></div></div>
+      </div>`;
+    }
+
+    function emptyGraph(text) { return `<div class="empty-graph">${escapeHtml(text)}</div>`; }
+    function getExecutiveTag(percent, toUnlock) {
+      if (!toUnlock && percent >= 95) return 'Execução estabilizada';
+      if (toUnlock > 50) return 'Gargalos exigem ação';
+      if (percent >= 80) return 'Foco no fechamento';
+      if (percent >= 50) return 'Cadência com atenção';
+      return 'Mapeando gargalos';
+    }
+
+    function normalize(text = '') { return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
+    function findKey(row, target) { const hit = Object.keys(row).find(key => normalize(key) === normalize(target)); return hit || null; }
+    function getValue(row, target, fallback = '') { const key = findKey(row, target); return key ? String(row[key] ?? '').trim() : fallback; }
+    function getFirstValue(row, targets, fallback = '') { for (const target of targets) { const value = getValue(row, target, ''); if (value) return value; } return fallback; }
+    function isConcluded(status) { return normalize(status).includes('concluido') || normalize(status).includes('concluida'); }
+    function isInProgress(status) { const s = normalize(status); return s.includes('andamento') || s.includes('em execucao') || s.includes('progresso'); }
+    function isBlocked(status) { const s = normalize(status); return s.includes('bloqueado') || s.includes('bloqueada') || s.includes('imped'); }
+    function isNotStarted(status) { const s = normalize(status); return s.includes('nao iniciado') || s.includes('não iniciado'); }
+    function isCancelled(status) { const s = normalize(status); return s.includes('cancelado') || s.includes('cancelada') || s.includes('cancel'); }
+    function isOccurrenceOpen(status) { const s = normalize(status); return !s.includes('fechad') && !s.includes('concluid') && !s.includes('resolvid') && !s.includes('cancelad') && !s.includes('encerrad') && s !== 'closed' && s !== 'done'; }
+    function getPercent(value, total) { return total ? Number(((value / total) * 100).toFixed(2)) : 0; }
+    function formatPercent(value) { return `${(Number(value) || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`; }
+    function formatNumber(value) { return (Number(value) || 0).toLocaleString('pt-BR'); }
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function escapeHtml(value) { return String(value ?? '').replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])); }
+  </script>
+</body>
+</html>

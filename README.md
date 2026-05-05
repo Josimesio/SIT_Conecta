@@ -1,11 +1,11 @@
 # SIT_Conecta
 
-Automação e painel visual para acompanhamento dos cenários do **SIT Conecta**.
+Automação e portal visual para acompanhamento dos cenários do **SIT Conecta**, com foco em apoio à gestão e destravamento do projeto.
 
 Este repositório tem dois blocos principais:
 
 - **Automação em Python + Playwright** para acessar o GTN, baixar relatórios CSV e consolidar os arquivos em um único resultado.
-- **Dashboard web estático** para leitura do CSV consolidado e exibição de indicadores, ranking e visão gerencial da execução dos cenários.
+- **Dashboard web estático** para leitura do CSV consolidado e exibição de indicadores, visão gerencial, ocorrências, bloqueios e prioridades para destravamento dos cenários.
 
 ## O que este projeto faz
 
@@ -22,8 +22,8 @@ O dashboard:
 
 - lê automaticamente o arquivo `output/Cenarios_Consolidados_atualizado.csv`
 - exibe total de cenários, concluídos, em andamento e não iniciados
-- mostra ranking de líderes
-- mostra áreas com melhor desempenho
+- mostra mapa de apoio por líderes/responsáveis
+- mostra frentes com avanço, bloqueios e necessidade de apoio
 - atualiza automaticamente em intervalo configurado no front-end
 
 ---
