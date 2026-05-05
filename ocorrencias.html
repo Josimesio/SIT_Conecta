@@ -610,6 +610,63 @@
     .occurrence-rank-main span { color: #aab8df; font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .occurrence-rank-count { min-width: 44px; height: 38px; display: grid; place-items: center; border-radius: 14px; background: rgba(255, 77, 109, 0.20); color: #ffd8df; font-size: 1rem; font-weight: 800; }
     .occurrence-rank-count.success { background: rgba(20, 211, 166, 0.16); color: #c9fff1; }
+
+    .occurrence-rank-group { display: grid; gap: 8px; }
+    .occurrence-rank-row.has-detail { grid-template-columns: 46px minmax(0, 1fr) auto auto; }
+    .occurrence-detail-button {
+      border: 1px solid rgba(255, 245, 166, 0.28);
+      background: rgba(255, 245, 166, 0.10);
+      color: #fff5a6;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 9px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .occurrence-detail-button:hover { transform: translateY(-1px); border-color: rgba(255, 245, 166, 0.58); background: rgba(255, 245, 166, 0.16); }
+    .occurrence-detail-button[aria-expanded="true"] { background: rgba(20, 211, 166, 0.14); border-color: rgba(20, 211, 166, 0.34); color: #c9fff1; }
+    .occurrence-detail-panel {
+      display: none;
+      margin: -2px 0 8px 58px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(5, 10, 28, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .occurrence-detail-panel.is-open { display: grid; gap: 10px; }
+    .occurrence-detail-alert {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 184, 77, 0.12);
+      border: 1px solid rgba(255, 184, 77, 0.22);
+      color: #ffe1aa;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+    .occurrence-detail-item {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .occurrence-detail-item strong { color: #f5f7ff; font-size: 0.92rem; }
+    .occurrence-detail-item span { color: #b9c5ed; font-size: 0.82rem; line-height: 1.35; }
+    .occurrence-detail-chipline { display: flex; flex-wrap: wrap; gap: 6px; }
+    .occurrence-detail-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: rgba(255, 255, 255, 0.07);
+      color: #d8e1ff;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
     .occurrence-status-board { display: grid; gap: 12px; }
     .occurrence-status-board.scrollable-status {
       max-height: 350px;
@@ -838,7 +895,13 @@
         const modulo = getFirstValue(row, ['Módulo/Sistema', 'Modulo/Sistema', 'Módulo', 'Modulo'], '').trim();
         const area = getFirstValue(row, ['Área de Negócio', 'Area de Negocio'], '').trim();
         const codigo = getFirstValue(row, ['Código', 'Codigo'], '').trim();
-        return { status, analista, cenario, descricao, modulo, area, codigo, aberta: ehOcorrenciaAberta(status), fechada: ehOcorrenciaFechada(status) };
+        const tipo = getFirstValue(row, ['Tipo de Ocorrência', 'Tipo de Ocorrencia', 'Tipo'], '').trim();
+        const atividade = getFirstValue(row, ['Atividade'], '').trim();
+        const motivo = getFirstValue(row, ['Motivo da Ocorrência', 'Motivo da Ocorrencia', 'Motivo'], '').trim();
+        const criadoEm = getFirstValue(row, ['Criado em', 'Criado Em'], '').trim();
+        const criadoPor = getFirstValue(row, ['Criado Por', 'Criado por'], '').trim();
+        const dono = getFirstValue(row, ['Dono', 'Responsável', 'Responsavel'], '').trim();
+        return { status, analista, cenario, descricao, modulo, area, codigo, tipo, atividade, motivo, criadoEm, criadoPor, dono, aberta: ehOcorrenciaAberta(status), fechada: ehOcorrenciaFechada(status) };
       });
 
       const abertas = ocorrencias.filter(item => item.aberta);
@@ -854,9 +917,9 @@
       setText('occCenariosAbertosQtd', abertasPorCenario.length.toLocaleString('pt-BR'));
 
       renderizarResumoStatus(abertas);
-      renderizarRanking('occAbertasCenarioBoard', abertasPorCenario, { limite: abertasPorCenario.length, contadorClasse: '', vazio: 'Sem ocorrências abertas vinculadas aos cenários.' });
-      renderizarRanking('occAbertasAnalistaBoard', agruparOcorrencias(abertas, 'analista'), { limite: abertas.length, contadorClasse: '', vazio: 'Sem ocorrências abertas por analista.' });
-      renderizarRanking('occFechadasCenarioBoard', agruparOcorrencias(fechadas, 'cenario'), { limite: fechadas.length, contadorClasse: 'success', vazio: 'Sem ocorrências fechadas por cenário.' });
+      renderizarRanking('occAbertasCenarioBoard', abertasPorCenario, { limite: abertasPorCenario.length, contadorClasse: '', vazio: 'Sem ocorrências abertas vinculadas aos cenários.', detalhar: true });
+      renderizarRanking('occAbertasAnalistaBoard', agruparOcorrencias(abertas, 'analista'), { limite: abertas.length, contadorClasse: '', vazio: 'Sem ocorrências abertas por responsável.', detalhar: true });
+      renderizarRanking('occFechadasCenarioBoard', agruparOcorrencias(fechadas, 'cenario'), { limite: fechadas.length, contadorClasse: 'success', vazio: 'Sem ocorrências fechadas por cenário.', detalhar: true });
       renderizarTodasOcorrenciasAbertas(abertas);
     }
 
@@ -864,12 +927,13 @@
       const mapa = new Map();
       items.forEach(item => {
         const chave = item[campo] || 'Não informado';
-        if (!mapa.has(chave)) mapa.set(chave, { nome: chave, total: 0, modulos: new Set(), areas: new Set(), exemplos: [] });
+        if (!mapa.has(chave)) mapa.set(chave, { nome: chave, total: 0, modulos: new Set(), areas: new Set(), exemplos: [], detalhes: [] });
         const grupo = mapa.get(chave);
         grupo.total += 1;
         if (item.modulo) grupo.modulos.add(item.modulo);
         if (item.area) grupo.areas.add(item.area);
         if (item.descricao && grupo.exemplos.length < 2) grupo.exemplos.push(item.descricao);
+        grupo.detalhes.push(item);
       });
       return [...mapa.values()].map(grupo => ({ ...grupo, meta: montarMetaOcorrencia(grupo) })).sort((a, b) => b.total - a.total || a.nome.localeCompare(b.nome, 'pt-BR'));
     }
@@ -892,13 +956,70 @@
         el.innerHTML = `<div class="occurrence-empty">${escapeHtml(options.vazio || 'Sem dados para exibir.')}</div>`;
         return;
       }
-      el.innerHTML = lista.map((item, index) => `
-        <div class="occurrence-rank-row" title="${escapeHtml(item.meta)}">
-          <div class="occurrence-rank-pos">${index + 1}º</div>
-          <div class="occurrence-rank-main"><strong>${escapeHtml(item.nome)}</strong><span>${escapeHtml(item.meta)}</span></div>
-          <div class="occurrence-rank-count ${options.contadorClasse || ''}">${item.total.toLocaleString('pt-BR')}</div>
+
+      el.innerHTML = lista.map((item, index) => {
+        const detalheId = `${elementId}_detalhe_${index}`;
+        const temDetalhe = options.detalhar && Array.isArray(item.detalhes) && item.detalhes.length;
+        const semResponsavel = normalize(item.nome) === 'sem analista informado' || normalize(item.nome) === 'sem responsavel informado' || normalize(item.nome) === 'nao informado';
+
+        const detalheHtml = temDetalhe ? `
+          <div id="${detalheId}" class="occurrence-detail-panel" aria-live="polite">
+            ${semResponsavel ? '<div class="occurrence-detail-alert">Atenção: estas ocorrências estão sem responsável de tratativa. Definir dono ajuda a destravar o acompanhamento.</div>' : ''}
+            ${item.detalhes.map((detalhe, detalheIndex) => montarHtmlDetalheOcorrencia(detalhe, detalheIndex)).join('')}
+          </div>
+        ` : '';
+
+        return `
+          <div class="occurrence-rank-group">
+            <div class="occurrence-rank-row ${temDetalhe ? 'has-detail' : ''}" title="${escapeHtml(item.meta)}">
+              <div class="occurrence-rank-pos">${index + 1}º</div>
+              <div class="occurrence-rank-main"><strong>${escapeHtml(item.nome)}</strong><span>${escapeHtml(item.meta)}</span></div>
+              ${temDetalhe ? `<button type="button" class="occurrence-detail-button" aria-expanded="false" aria-controls="${detalheId}" onclick="toggleDetalheOcorrencias(this, '${detalheId}')">Detalhar</button>` : ''}
+              <div class="occurrence-rank-count ${options.contadorClasse || ''}">${item.total.toLocaleString('pt-BR')}</div>
+            </div>
+            ${detalheHtml}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function montarHtmlDetalheOcorrencia(item, index) {
+      const titulo = item.cenario || 'Cenário não informado';
+      const descricao = item.descricao || 'Ocorrência sem descrição informada.';
+      const chips = [
+        item.codigo ? `Código: ${item.codigo}` : '',
+        item.status ? `Status: ${item.status}` : 'Status não informado',
+        item.tipo ? `Tipo: ${item.tipo}` : '',
+        item.modulo ? `Módulo: ${item.modulo}` : '',
+        item.area ? `Área: ${item.area}` : '',
+        item.criadoEm ? `Criado em: ${item.criadoEm}` : '',
+        item.criadoPor ? `Criado por: ${item.criadoPor}` : ''
+      ].filter(Boolean);
+
+      const complemento = [
+        item.atividade ? `Atividade: ${item.atividade}` : '',
+        item.motivo ? `Motivo: ${item.motivo}` : '',
+        item.dono ? `Dono: ${item.dono}` : ''
+      ].filter(Boolean).join(' · ');
+
+      return `
+        <div class="occurrence-detail-item">
+          <strong>${index + 1}. ${escapeHtml(titulo)}</strong>
+          <span>${escapeHtml(descricao)}</span>
+          ${complemento ? `<span>${escapeHtml(complemento)}</span>` : ''}
+          <div class="occurrence-detail-chipline">
+            ${chips.map(chip => `<span class="occurrence-detail-chip">${escapeHtml(chip)}</span>`).join('')}
+          </div>
         </div>
-      `).join('');
+      `;
+    }
+
+    function toggleDetalheOcorrencias(botao, detalheId) {
+      const painel = document.getElementById(detalheId);
+      if (!painel) return;
+      const aberto = painel.classList.toggle('is-open');
+      botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      botao.textContent = aberto ? 'Ocultar' : 'Detalhar';
     }
 
     function renderizarTodasOcorrenciasAbertas(abertas) {
@@ -926,16 +1047,23 @@
         ].filter(Boolean).join(' · ');
 
         const detalhe = item.descricao || 'Sem descrição informada';
+        const detalheId = `occStatusBoard_detalhe_${index}`;
 
         return `
-          <div class="occurrence-rank-row" title="${escapeHtml(detalhe)}">
-            <div class="occurrence-rank-pos">${index + 1}</div>
-            <div class="occurrence-rank-main">
-              <strong>${escapeHtml(item.cenario || 'Cenário não informado')}</strong>
-              <span>${escapeHtml(meta)}</span>
-              <span>${escapeHtml(detalhe)}</span>
+          <div class="occurrence-rank-group">
+            <div class="occurrence-rank-row has-detail" title="${escapeHtml(detalhe)}">
+              <div class="occurrence-rank-pos">${index + 1}</div>
+              <div class="occurrence-rank-main">
+                <strong>${escapeHtml(item.cenario || 'Cenário não informado')}</strong>
+                <span>${escapeHtml(meta)}</span>
+                <span>${escapeHtml(detalhe)}</span>
+              </div>
+              <button type="button" class="occurrence-detail-button" aria-expanded="false" aria-controls="${detalheId}" onclick="toggleDetalheOcorrencias(this, '${detalheId}')">Detalhar</button>
+              <div class="occurrence-rank-count">1</div>
             </div>
-            <div class="occurrence-rank-count">1</div>
+            <div id="${detalheId}" class="occurrence-detail-panel" aria-live="polite">
+              ${montarHtmlDetalheOcorrencia(item, 0)}
+            </div>
           </div>
         `;
       }).join('');
