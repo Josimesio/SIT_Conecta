@@ -1,6 +1,14 @@
 const AUTH_CONFIG = {
-  usuario: "conecta",
-  senha: "ti@2026",
+  usuarios: [
+    {
+      usuario: "conecta",
+      senha: "ti@2026"
+    },
+    {
+      usuario: "igor.longo",
+      senha: "log@2026"
+    }
+  ],
   chaveAuth: "dashboard_auth"
 };
 
@@ -9,20 +17,28 @@ function jaAutenticado() {
 }
 
 function fazerLogin(usuario, senha) {
-  if (usuario !== AUTH_CONFIG.usuario) {
+
+  const usuarioEncontrado = AUTH_CONFIG.usuarios.find(
+    u => u.usuario === usuario
+  );
+
+  if (!usuarioEncontrado) {
     return { sucesso: false, erro: "usuario" };
   }
 
-  if (senha !== AUTH_CONFIG.senha) {
+  if (usuarioEncontrado.senha !== senha) {
     return { sucesso: false, erro: "senha" };
   }
 
   sessionStorage.setItem(AUTH_CONFIG.chaveAuth, "ok");
+  sessionStorage.setItem("usuario_logado", usuario);
+
   return { sucesso: true };
 }
 
 function fazerLogout() {
   sessionStorage.removeItem(AUTH_CONFIG.chaveAuth);
+  sessionStorage.removeItem("usuario_logado");
   window.location.replace("login.html");
 }
 
@@ -34,4 +50,5 @@ function protegerPagina(destinoLogin = "login.html") {
 
 function limparSessao() {
   sessionStorage.removeItem(AUTH_CONFIG.chaveAuth);
+  sessionStorage.removeItem("usuario_logado");
 }
