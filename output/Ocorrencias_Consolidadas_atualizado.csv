@@ -239,7 +239,11 @@ OC1";Fechada;Renato Mezzalira;;;;COPRIMAR.PTM.001.V2;180 - Gerenciar Documento n
 200;Padrão;Livro contábil da Douramix não está vinculado, não sendo possível prosseguir com os testes.;Fechada;Luan Santos;Juliana Farjo;;;DOURAMIX.FTS.007.V6;Gerar lote de caixa / Contabilização de conciliação bancária;XTPG:Tesouraria;Financeiro;TES#06;Problema em Cadastro;08/04/2026 15:48:52;Luan Santos;09/04/2026 17:58:57;Luan Santos
 201;Padrão;Item não está cadastrado;Fechada;Franciele Almeida;Leonardo Gomes;;;MAR_E_TERRA.PTM.0490.V1;Pré-Validação de Cadastros - ITEM;Fusion: INV;Cadastros;;Problema em Cadastro;08/04/2026 17:31:51;Franciele Almeida;21/04/2026 16:07:21;Marcelo Silva
 202;Padrão;Não consta o item, mesmo do cenário GRF.07.0101;Fechada;Franciele Almeida;Leonardo Gomes;;;MAR_E_TERRA.PTM.0514.V1;Pré-Validação de Cadastros - ITEM;Fusion: INV;Cadastros;;Problema em Cadastro;08/04/2026 17:36:06;Franciele Almeida;21/04/2026 16:06:43;Marcelo Silva
+<<<<<<< HEAD
 203;Padrão;Teste realizado com um centro de custo errado e filial errada.;Solicitado mais informações;Franciele Almeida;Antônio Boing;;;PLUMA_AGRO.CUSTOM.0024.V1;;Customizacoes;Customizacao;;Problema em Procedimento;09/04/2026 07:55:37;Camila Lorena Maciel;19/05/2026 10:32:14;Franciele Almeida
+=======
+203;Padrão;Teste realizado com um centro de custo errado e filial errada.;Nova;Franciele Almeida;;;;PLUMA_AGRO.CUSTOM.0024.V1;;Customizacoes;Customizacao;;;09/04/2026 07:55:37;Camila Lorena Maciel;18/05/2026 18:12:59;Roberto Costa
+>>>>>>> 0de48a6a6f7da8e7a389189b9ee8295aa8ec9ff2
 204;Padrão;Precisa correção no OTm,  para conseguimos criar as remessas para faturamento;Nova;Jonathan Vieira;Leonardo Augusto da Silva Guilherme;;;BELLO.OTC.0480.V1;Transmissão envio com Parceiro;Fusion: FDG;Comercial Vendas - Faturamento;;;09/04/2026 09:17:46;Jonathan Vieira;;
 205;Padrão;Precisa de uma correção no OTm,  para conseguimos criar as remessas para faturamento;Nova;Jonathan Vieira;Leonardo Augusto da Silva Guilherme;;;BELLO.OTC.0345.V1;Transmissão envio com Parceiro;Fusion: FDG;Comercial Vendas - Faturamento;;;09/04/2026 09:24:05;Jonathan Vieira;;
 206;Padrão;Precisa de uma correção no OTm,  para conseguimos criar as remessas para faturamento;Nova;Jonathan Vieira;Leonardo Augusto da Silva Guilherme;;;BELLO.OTC.0658.V1;Transmissão envio com Parceiro;Fusion: FDG;Comercial Vendas - Faturamento;;;09/04/2026 09:26:50;Jonathan Vieira;;
@@ -883,6 +887,7 @@ O Cadastro de motoristas e transportadores de frango vivo não será necessário po
 648;Padrão;Não gerou NF por falta de saldo no estoque, não realizamos o processo completo.;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8574.V1;3 - Emissão de notas (transferência/remessa);Agrosys;Fiscal;;;15/05/2026 17:12:31;Luiz Antonio Carrasco Junior;;
 649;Padrão;Falta treinamento.;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8460.V1;1 - Recebimento de notas;Agrosys;Matrizes;;;15/05/2026 17:14:40;Luiz Antonio Carrasco Junior;;
 650;Padrão;Falta Treinamento.;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8460.V1;2 - Baixa de estoque de insumos;Agrosys;Matrizes;;;15/05/2026 17:14:57;Luiz Antonio Carrasco Junior;;
+<<<<<<< HEAD
 651;Padrão;Saldo bancário não está de acordo com o saldo da conta corrente.;Nova;Luan Santos;Luan Santos;;;MAR_E_TERRA.FTS.025.V11;Efetuar leituras de extratos padrão CNAB;XTPG:Tesouraria;Financeiro;;;18/05/2026 15:19:05;Luan Santos;19/05/2026 15:41:07;Juliana Farjo
 652;Padrão;Saldo banco não bate com o saldo do extrato.;Nova;Luan Santos;Luan Santos;;;PLUMA_GEN.FTS.025.V11;Efetuar leituras de extratos padrão CNAB;XTPG:Tesouraria;Financeiro;;;19/05/2026 08:29:22;Luan Santos;19/05/2026 15:41:36;Juliana Farjo
 653;Padrão;"XTPG orientou a checarmos com os bancos as configurações para processamento de arquivo retorno, e conferência com a base Pluma para termos a certeza de que os cadastros estão completos e atualizados.
@@ -907,3 +912,6 @@ Segue em anexo arquivo CNAB enviado mais retorno do banco com o erro.";Nova;Eloí
 667;Padrão;Telas em desenvolvimento, emissão gtas, notas e programação;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8468.V1;;Agrosys:GM - Granja de Matrizes;Matrizes;;;19/05/2026 17:54:36;Luiz Antonio Carrasco Junior;;
 668;Padrão;Não temos o I3PC nas matrizes leves.;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8610.V1;;Agrosys:GM - Granja de Matrizes;Matrizes;;;19/05/2026 18:02:28;Luiz Antonio Carrasco Junior;;
 669;Padrão;Fizemos a baixa do estoque porém não gerou NF na Oracle.;Nova;Luiz Antonio Carrasco Junior;Sandy Ribeiro;;;PLUMA_AGRO.PPE.8598.V1;;Agrosys:GM - Granja de Matrizes;Matrizes;;;20/05/2026 08:28:40;Luiz Antonio Carrasco Junior;;
+=======
+651;Padrão;Saldo bancário não está de acordo com o saldo da conta corrente.;Nova;Luan Santos;Juliana Farjo;;;MAR_E_TERRA.FTS.025.V11;Efetuar leituras de extratos padrão CNAB;XTPG:Tesouraria;Financeiro;;;18/05/2026 15:19:05;Luan Santos;;
+>>>>>>> 0de48a6a6f7da8e7a389189b9ee8295aa8ec9ff2
