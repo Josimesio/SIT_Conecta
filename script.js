@@ -4,6 +4,7 @@ const els = {
   ringProgress: document.getElementById('ringProgress'),
   motivationalTag: document.getElementById('motivationalTag'),
   totalCenarios: document.getElementById('totalCenarios'),
+  totalCenariosBase: document.getElementById('totalCenariosBase'),
   totalConcluidos: document.getElementById('totalConcluidos'),
   totalEmAndamento: document.getElementById('totalEmAndamento'),
   totalNaoIniciado: document.getElementById('totalNaoIniciado'),
@@ -439,7 +440,9 @@ function renderDashboard(rows) {
   const blocked = cleanRows.filter(row => isBlocked(row.statusOriginal)).length;
   const notStarted = cleanRows.filter(row => isNotStarted(row.statusOriginal)).length;
   const cancelled = cleanRows.filter(row => isCancelled(row.statusOriginal)).length;
-  const percent = getPercent(concluded, total);
+  const totalInvalidos = blocked + cancelled;
+  const totalValidos = Math.max(total - totalInvalidos, 0);
+  const percent = getPercent(concluded, totalValidos);
 
   updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent);
   renderLeaderboard(cleanRows);
@@ -450,7 +453,13 @@ function renderDashboard(rows) {
 }
 
 function updateSummary(total, concluded, inProgress, notStarted, blocked, cancelled, percent) {
-  if (els.totalCenarios) els.totalCenarios.textContent = total.toLocaleString('pt-BR');
+  const totalInvalidos = blocked + cancelled;
+  const totalValidos = Math.max(total - totalInvalidos, 0);
+
+  if (els.totalCenariosBase) {
+    els.totalCenariosBase.textContent = `Total: ${total.toLocaleString('pt-BR')} - Bloqueados/Cancelados: ${totalInvalidos.toLocaleString('pt-BR')}`;
+  }
+  if (els.totalCenarios) els.totalCenarios.textContent = totalValidos.toLocaleString('pt-BR');
   if (els.totalConcluidos) els.totalConcluidos.textContent = concluded.toLocaleString('pt-BR');
   if (els.totalEmAndamento) els.totalEmAndamento.textContent = inProgress.toLocaleString('pt-BR');
   if (els.totalNaoIniciado) els.totalNaoIniciado.textContent = notStarted.toLocaleString('pt-BR');

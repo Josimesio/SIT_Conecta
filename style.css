@@ -202,6 +202,15 @@ body {
   margin: 8px 0 4px;
 }
 .mini-label, .mini-card small { color: var(--muted); }
+.mini-overline {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: -2px;
+  color: #fff5a6 !important;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
 .gradient {
   margin-top: 18px;
   padding: 22px 24px;

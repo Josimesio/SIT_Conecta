@@ -140,7 +140,9 @@ function renderDashboard(rows) {
   const inProgress = cleanRows.filter(row => isInProgress(row.statusOriginal)).length;
   const notStarted = cleanRows.filter(row => isNotStarted(row.statusOriginal)).length;
   const cancelled = cleanRows.filter(row => isCancelled(row.statusOriginal)).length;
-  const percent = getPercent(concluded, total);
+  const totalInvalidos = cancelled;
+  const totalValidos = Math.max(total - totalInvalidos, 0);
+  const percent = getPercent(concluded, totalValidos);
 
   updateSummary(total, concluded, inProgress, notStarted, cancelled, percent);
   renderLeaderboard(cleanRows);

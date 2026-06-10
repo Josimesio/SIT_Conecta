@@ -332,8 +332,10 @@
       const blocked = rows.filter(r => isBlocked(r.status)).length;
       const notStarted = rows.filter(r => isNotStarted(r.status)).length;
       const cancelled = rows.filter(r => isCancelled(r.status)).length;
+      const totalInvalidos = blocked + cancelled;
+      const totalValidos = Math.max(total - totalInvalidos, 0);
       const other = Math.max(total - concluded - inProgress - blocked - notStarted - cancelled, 0);
-      const percent = getPercent(concluded, total);
+      const percent = getPercent(concluded, totalValidos);
       const toUnlock = rows.filter(r => r.riskScore > 0).length;
 
       setText('kpiTotal', formatNumber(total));
