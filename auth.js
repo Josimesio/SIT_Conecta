@@ -7,6 +7,10 @@ const AUTH_CONFIG = {
     {
       usuario: "igor.longo",
       senha: "log@2026"
+    },
+    {
+      usuario: "daniel.jacob",
+      senha: "xuxu@2026"
     }
   ],
   chaveAuth: "dashboard_auth"
