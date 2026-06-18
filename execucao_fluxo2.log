@@ -21024,3 +21024,415 @@ Call log:
 [2026-06-17 09:07:28] 🐞 Arquivo de ocorrências final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Ocorrencias_Consolidadas_atualizado.csv
 [2026-06-17 09:07:28] 🗂️ Arquivo consolidado final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
 [2026-06-17 09:07:29] ✅ Execução encerrada com sucesso.
+[2026-06-18 08:53:57] ==================================================
+[2026-06-18 08:53:57] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-06-18 08:53:57] ==================================================
+[2026-06-18 08:54:02] 🌐 Abrindo tela de login...
+[2026-06-18 08:54:25] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-06-18 08:54:28] 🔐 Preenchendo credenciais...
+[2026-06-18 08:54:28] ➡️ Clicando em Acessar...
+[2026-06-18 08:54:45] ⏳ Aguardando estabilidade: pós-login
+[2026-06-18 08:54:54] ✅ Pós-login. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=614109667220033
+[2026-06-18 08:54:54] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=614109667220033
+[2026-06-18 08:54:54] ⏳ Aguardando estabilidade: estado atual após login
+[2026-06-18 08:54:55] 🧭 Abrindo navegação principal com seletor alternativo #1...
+[2026-06-18 08:54:56] 🌲 Rodada 1: toggles visíveis encontrados na árvore: 1
+[2026-06-18 08:54:57] 🧪 Entrando em Execução de Testes com seletor alternativo #1...
+[2026-06-18 08:55:21] 🧪 Abrindo Execução de Testes por link encontrado no HTML: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=614109667220033&cs=3hqrBocvHgpeL6Sg7e1h8qzGnludMxeke1BG43rLho
+[2026-06-18 08:55:46] 🧪 Aguardando renderização completa da Execução de Testes (abertura por link encontrado no HTML)...
+[2026-06-18 08:55:46] ✅ URL da Execução de Testes detectada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=614109667220033&cs=3hqrBocvHgpeL6Sg7e1h8qzGnludMxeke1BG43rLho2QBrjqjR7DTaG2HvkE593xzkUgOyT317TSDejhCwynN9w
+[2026-06-18 08:55:48] 🌀 Aguardando refresh APEX: renderização da página Execução de Testes
+[2026-06-18 08:55:50] ✅ Execução de Testes renderizada. Componente pronto: #R35932200234408468_saved_reports
+[2026-06-18 08:55:50] 🌀 Aguardando refresh APEX: pós-renderização da grade Execução de Testes
+[2026-06-18 08:55:52] ✅ Tela de execução carregada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=614109667220033&cs=3hqrBocvHgpeL6Sg7e1h8qzGnludMxeke1BG43rLho2QBrjqjR7DTaG2HvkE593xzkUgOyT317TSDejhCwynN9w
+[2026-06-18 08:55:52] --------------------------------------------------
+[2026-06-18 08:55:52] 🚚 Processando relatório 1/9: relatorio_01
+[2026-06-18 08:55:52] 📑 Selecionando relatório relatorio_01 (75126574677490011)...
+[2026-06-18 08:55:52] ⏳ Aguardando estabilidade: seleção do relatório relatorio_01
+[2026-06-18 08:55:54] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 3. LINHA 1
+[2026-06-18 08:55:54] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 08:55:54] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 08:56:45] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 08:56:47] 📤 Abrindo menu de download...
+[2026-06-18 08:56:48] 📄 Selecionando opção de download...
+[2026-06-18 08:56:50] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 08:56:50] ⬇️ Iniciando rotina blindada de download do relatório relatorio_01...
+[2026-06-18 08:56:50] ⬇️ Tentativa 1/3 de download para relatorio_01...
+[2026-06-18 08:56:56] ✅ Evento de download capturado para relatorio_01.
+[2026-06-18 08:56:57] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_085657_relatorio_01_Cenários.csv
+[2026-06-18 08:56:57] 🪟 Janela/modal de download fechada.
+[2026-06-18 08:56:58] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 08:56:59] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 08:57:00] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 08:57:07] 🔤 Lendo 20260618_085657_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-06-18 08:57:07] 🧮 20260618_085657_relatorio_01_Cenários.csv -> linhas de dados: 1160 | hash: 2ec96b6feb205039
+[2026-06-18 08:57:07] --------------------------------------------------
+[2026-06-18 08:57:07] 🚚 Processando relatório 2/9: relatorio_02
+[2026-06-18 08:57:07] 📑 Selecionando relatório relatorio_02 (75307651324595294)...
+[2026-06-18 08:57:07] ⏳ Aguardando estabilidade: seleção do relatório relatorio_02
+[2026-06-18 08:57:09] 🧾 Relatório selecionado na tela -> id atual: 75307651324595294 | nome visível: 4. LINHA 2
+[2026-06-18 08:57:09] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 08:57:09] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 08:58:10] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 08:58:12] 📤 Abrindo menu de download...
+[2026-06-18 08:58:13] 📄 Selecionando opção de download...
+[2026-06-18 08:58:14] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 08:58:14] ⬇️ Iniciando rotina blindada de download do relatório relatorio_02...
+[2026-06-18 08:58:15] ⬇️ Tentativa 1/3 de download para relatorio_02...
+[2026-06-18 08:58:41] ✅ Evento de download capturado para relatorio_02.
+[2026-06-18 08:58:43] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_085843_relatorio_02_Cenários.csv
+[2026-06-18 08:58:43] 🪟 Janela/modal de download fechada.
+[2026-06-18 08:58:44] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 08:58:44] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 08:58:45] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 08:58:52] 🔤 Lendo 20260618_085843_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-06-18 08:58:52] 🧮 20260618_085843_relatorio_02_Cenários.csv -> linhas de dados: 8964 | hash: cd81991b163600fd
+[2026-06-18 08:58:52] --------------------------------------------------
+[2026-06-18 08:58:52] 🚚 Processando relatório 3/9: relatorio_03
+[2026-06-18 08:58:52] 📑 Selecionando relatório relatorio_03 (75308641635576924)...
+[2026-06-18 08:58:52] ⏳ Aguardando estabilidade: seleção do relatório relatorio_03
+[2026-06-18 08:58:54] 🧾 Relatório selecionado na tela -> id atual: 75308641635576924 | nome visível: 5. LINHA 3
+[2026-06-18 08:58:54] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 08:58:54] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 08:58:55] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 08:58:57] 📤 Abrindo menu de download...
+[2026-06-18 08:58:58] 📄 Selecionando opção de download...
+[2026-06-18 08:59:08] ❌ Falha ao baixar relatorio_03: Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for get_by_role("menuitem", name="Fazer Download")
+
+[2026-06-18 08:59:08] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\falha_relatorio_03_20260618_085908.png
+[2026-06-18 08:59:08] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\falha_relatorio_03_20260618_085908.html
+[2026-06-18 08:59:08] ⏰ Timeout: Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for get_by_role("menuitem", name="Fazer Download")
+
+[2026-06-18 08:59:08] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\timeout_20260618_085908.png
+[2026-06-18 08:59:08] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\timeout_20260618_085908.html
+[2026-06-18 08:59:09] ❌ Falha geral na execução: Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for get_by_role("menuitem", name="Fazer Download")
+
+[2026-06-18 08:59:09] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_com_ocorrencias_prioridades_corrigido.py", line 1427, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_com_ocorrencias_prioridades_corrigido.py", line 1386, in executar_fluxo
+    arquivos_baixados = processar_relatorios(page)
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_com_ocorrencias_prioridades_corrigido.py", line 1081, in processar_relatorios
+    arquivo = baixar_relatorio(page, relatorio["nome"])
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_com_ocorrencias_prioridades_corrigido.py", line 930, in baixar_relatorio
+    abrir_download_csv(page)
+    ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_com_ocorrencias_prioridades_corrigido.py", line 834, in abrir_download_csv
+    page.get_by_role("menuitem", name="Fazer Download").click(timeout=10000, force=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\sync_api\_generated.py", line 15631, in click
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.click(
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_locator.py", line 162, in click
+    return await self._frame._click(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_frame.py", line 566, in _click
+    await self._channel.send("click", self._timeout, locals_to_params(locals()))
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for get_by_role("menuitem", name="Fazer Download")
+
+
+[2026-06-18 09:05:04] ==================================================
+[2026-06-18 09:05:04] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-06-18 09:05:04] ==================================================
+[2026-06-18 09:05:05] 🌐 Abrindo tela de login...
+[2026-06-18 09:05:10] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-06-18 09:05:16] 🔐 Preenchendo credenciais...
+[2026-06-18 09:05:16] ➡️ Clicando em Acessar...
+[2026-06-18 09:05:24] ⏳ Aguardando estabilidade: pós-login
+[2026-06-18 09:05:30] ✅ Pós-login. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=607945062808233
+[2026-06-18 09:05:30] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=607945062808233
+[2026-06-18 09:05:30] ⏳ Aguardando estabilidade: estado atual após login
+[2026-06-18 09:05:31] 🧭 Abrindo navegação principal com seletor alternativo #1...
+[2026-06-18 09:05:32] 🌲 Rodada 1: toggles visíveis encontrados na árvore: 1
+[2026-06-18 09:05:33] 🧪 Entrando em Execução de Testes com seletor alternativo #1...
+[2026-06-18 09:05:40] 🧪 Aguardando renderização completa da Execução de Testes (clique no menu - seletor #1)...
+[2026-06-18 09:05:42] ✅ URL da Execução de Testes detectada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=607945062808233&cs=3bwhq2j21P0myYErRreHc5jVjtImOdQ9eeGW9VLZcSOUMeILIlEG3EaQ9AuYStg3_k4JjMocYet9UMb6rWO1TUQ
+[2026-06-18 09:05:43] 🌀 Aguardando refresh APEX: renderização da página Execução de Testes
+[2026-06-18 09:05:44] ✅ Execução de Testes renderizada. Componente pronto: #R35932200234408468_saved_reports
+[2026-06-18 09:05:44] 🌀 Aguardando refresh APEX: pós-renderização da grade Execução de Testes
+[2026-06-18 09:05:47] ✅ Tela de execução carregada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=607945062808233&cs=3bwhq2j21P0myYErRreHc5jVjtImOdQ9eeGW9VLZcSOUMeILIlEG3EaQ9AuYStg3_k4JjMocYet9UMb6rWO1TUQ
+[2026-06-18 09:05:47] --------------------------------------------------
+[2026-06-18 09:05:47] 🚚 Processando relatório 1/9: relatorio_01
+[2026-06-18 09:05:47] 📑 Selecionando relatório relatorio_01 (75126574677490011)...
+[2026-06-18 09:05:47] ⏳ Aguardando estabilidade: seleção do relatório relatorio_01
+[2026-06-18 09:05:49] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 3. LINHA 1
+[2026-06-18 09:05:49] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:05:49] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:06:02] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:06:04] 📤 Abrindo menu de download...
+[2026-06-18 09:06:05] 📄 Selecionando opção de download...
+[2026-06-18 09:06:07] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:06:07] ⬇️ Iniciando rotina blindada de download do relatório relatorio_01...
+[2026-06-18 09:06:07] ⬇️ Tentativa 1/3 de download para relatorio_01...
+[2026-06-18 09:06:10] ✅ Evento de download capturado para relatorio_01.
+[2026-06-18 09:06:10] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090610_relatorio_01_Cenários.csv
+[2026-06-18 09:06:10] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:06:11] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:06:12] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:06:13] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:06:20] 🔤 Lendo 20260618_090610_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-06-18 09:06:20] 🧮 20260618_090610_relatorio_01_Cenários.csv -> linhas de dados: 1160 | hash: 2ec96b6feb205039
+[2026-06-18 09:06:20] --------------------------------------------------
+[2026-06-18 09:06:20] 🚚 Processando relatório 2/9: relatorio_02
+[2026-06-18 09:06:20] 📑 Selecionando relatório relatorio_02 (75307651324595294)...
+[2026-06-18 09:06:20] ⏳ Aguardando estabilidade: seleção do relatório relatorio_02
+[2026-06-18 09:06:22] 🧾 Relatório selecionado na tela -> id atual: 75307651324595294 | nome visível: 4. LINHA 2
+[2026-06-18 09:06:22] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:06:22] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:06:23] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:06:24] 📤 Abrindo menu de download...
+[2026-06-18 09:06:25] 📄 Selecionando opção de download...
+[2026-06-18 09:06:27] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:06:27] ⬇️ Iniciando rotina blindada de download do relatório relatorio_02...
+[2026-06-18 09:06:27] ⬇️ Tentativa 1/3 de download para relatorio_02...
+[2026-06-18 09:06:47] ✅ Evento de download capturado para relatorio_02.
+[2026-06-18 09:06:50] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090650_relatorio_02_Cenários.csv
+[2026-06-18 09:06:50] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:06:51] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:06:51] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:07:55] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:08:02] 🔤 Lendo 20260618_090650_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-06-18 09:08:02] 🧮 20260618_090650_relatorio_02_Cenários.csv -> linhas de dados: 8964 | hash: cd81991b163600fd
+[2026-06-18 09:08:02] --------------------------------------------------
+[2026-06-18 09:08:03] 🚚 Processando relatório 3/9: relatorio_03
+[2026-06-18 09:08:03] 📑 Selecionando relatório relatorio_03 (75308641635576924)...
+[2026-06-18 09:08:03] ⏳ Aguardando estabilidade: seleção do relatório relatorio_03
+[2026-06-18 09:08:05] 🧾 Relatório selecionado na tela -> id atual: 75308641635576924 | nome visível: 5. LINHA 3
+[2026-06-18 09:08:05] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:08:05] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:08:06] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:08:08] 📤 Abrindo menu de download...
+[2026-06-18 09:08:08] 📄 Selecionando opção de download...
+[2026-06-18 09:08:10] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:08:10] ⬇️ Iniciando rotina blindada de download do relatório relatorio_03...
+[2026-06-18 09:08:10] ⬇️ Tentativa 1/3 de download para relatorio_03...
+[2026-06-18 09:08:17] ✅ Evento de download capturado para relatorio_03.
+[2026-06-18 09:08:18] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090818_relatorio_03_Cenários.csv
+[2026-06-18 09:08:18] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:08:19] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:08:22] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:08:25] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:08:32] 🔤 Lendo 20260618_090818_relatorio_03_Cenários.csv com encoding: cp1252
+[2026-06-18 09:08:32] 🧮 20260618_090818_relatorio_03_Cenários.csv -> linhas de dados: 1512 | hash: 052d68cc9ac60e78
+[2026-06-18 09:08:32] --------------------------------------------------
+[2026-06-18 09:08:32] 🚚 Processando relatório 4/9: relatorio_04
+[2026-06-18 09:08:32] 📑 Selecionando relatório relatorio_04 (75312931254550487)...
+[2026-06-18 09:08:32] ⏳ Aguardando estabilidade: seleção do relatório relatorio_04
+[2026-06-18 09:08:33] 🧾 Relatório selecionado na tela -> id atual: 75312931254550487 | nome visível: 6. LINHA 4
+[2026-06-18 09:08:33] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:08:33] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:08:34] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:08:36] 📤 Abrindo menu de download...
+[2026-06-18 09:08:37] 📄 Selecionando opção de download...
+[2026-06-18 09:08:38] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:08:39] ⬇️ Iniciando rotina blindada de download do relatório relatorio_04...
+[2026-06-18 09:08:39] ⬇️ Tentativa 1/3 de download para relatorio_04...
+[2026-06-18 09:08:50] ✅ Evento de download capturado para relatorio_04.
+[2026-06-18 09:08:51] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090851_relatorio_04_Cenários.csv
+[2026-06-18 09:08:51] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:08:52] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:08:52] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:09:17] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:09:24] 🔤 Lendo 20260618_090851_relatorio_04_Cenários.csv com encoding: cp1252
+[2026-06-18 09:09:24] 🧮 20260618_090851_relatorio_04_Cenários.csv -> linhas de dados: 5306 | hash: fe99d19c44f2e625
+[2026-06-18 09:09:24] --------------------------------------------------
+[2026-06-18 09:09:24] 🚚 Processando relatório 5/9: relatorio_05
+[2026-06-18 09:09:24] 📑 Selecionando relatório relatorio_05 (75313445605545355)...
+[2026-06-18 09:09:24] ⏳ Aguardando estabilidade: seleção do relatório relatorio_05
+[2026-06-18 09:09:26] 🧾 Relatório selecionado na tela -> id atual: 75313445605545355 | nome visível: 7. LINHA 5
+[2026-06-18 09:09:26] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:09:26] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:09:27] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:09:29] 📤 Abrindo menu de download...
+[2026-06-18 09:09:29] 📄 Selecionando opção de download...
+[2026-06-18 09:09:31] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:09:31] ⬇️ Iniciando rotina blindada de download do relatório relatorio_05...
+[2026-06-18 09:09:31] ⬇️ Tentativa 1/3 de download para relatorio_05...
+[2026-06-18 09:09:37] ✅ Evento de download capturado para relatorio_05.
+[2026-06-18 09:09:38] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090938_relatorio_05_Cenários.csv
+[2026-06-18 09:09:43] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:09:44] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:09:44] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:09:45] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:09:52] 🔤 Lendo 20260618_090938_relatorio_05_Cenários.csv com encoding: cp1252
+[2026-06-18 09:09:52] 🧮 20260618_090938_relatorio_05_Cenários.csv -> linhas de dados: 2047 | hash: 4b5fc8e4680463d9
+[2026-06-18 09:09:52] --------------------------------------------------
+[2026-06-18 09:09:52] 🚚 Processando relatório 6/9: relatorio_06
+[2026-06-18 09:09:52] 📑 Selecionando relatório relatorio_06 (75313959829541095)...
+[2026-06-18 09:09:52] ⏳ Aguardando estabilidade: seleção do relatório relatorio_06
+[2026-06-18 09:09:54] 🧾 Relatório selecionado na tela -> id atual: 75313959829541095 | nome visível: 8. LINHA 6
+[2026-06-18 09:09:54] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:09:54] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:09:55] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:09:57] 📤 Abrindo menu de download...
+[2026-06-18 09:09:58] 📄 Selecionando opção de download...
+[2026-06-18 09:10:03] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:10:03] ⬇️ Iniciando rotina blindada de download do relatório relatorio_06...
+[2026-06-18 09:10:03] ⬇️ Tentativa 1/3 de download para relatorio_06...
+[2026-06-18 09:10:05] ✅ Evento de download capturado para relatorio_06.
+[2026-06-18 09:10:05] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091005_relatorio_06_Cenários.csv
+[2026-06-18 09:10:05] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:10:06] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:10:06] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:10:08] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:10:15] 🔤 Lendo 20260618_091005_relatorio_06_Cenários.csv com encoding: cp1252
+[2026-06-18 09:10:15] 🧮 20260618_091005_relatorio_06_Cenários.csv -> linhas de dados: 630 | hash: 48c6f59c9cdafb66
+[2026-06-18 09:10:15] --------------------------------------------------
+[2026-06-18 09:10:15] 🚚 Processando relatório 7/9: relatorio_07
+[2026-06-18 09:10:15] 📑 Selecionando relatório relatorio_07 (75314469764536662)...
+[2026-06-18 09:10:15] ⏳ Aguardando estabilidade: seleção do relatório relatorio_07
+[2026-06-18 09:10:16] 🧾 Relatório selecionado na tela -> id atual: 75314469764536662 | nome visível: 9. LINHA 7
+[2026-06-18 09:10:16] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:10:17] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:10:18] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:10:19] 📤 Abrindo menu de download...
+[2026-06-18 09:10:20] 📄 Selecionando opção de download...
+[2026-06-18 09:10:21] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:10:22] ⬇️ Iniciando rotina blindada de download do relatório relatorio_07...
+[2026-06-18 09:10:22] ⬇️ Tentativa 1/3 de download para relatorio_07...
+[2026-06-18 09:10:26] ✅ Evento de download capturado para relatorio_07.
+[2026-06-18 09:10:27] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091027_relatorio_07_Cenários.csv
+[2026-06-18 09:10:27] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:10:28] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:10:28] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:10:35] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:10:42] 🔤 Lendo 20260618_091027_relatorio_07_Cenários.csv com encoding: cp1252
+[2026-06-18 09:10:42] 🧮 20260618_091027_relatorio_07_Cenários.csv -> linhas de dados: 2271 | hash: 45afb9ddc05bc656
+[2026-06-18 09:10:42] --------------------------------------------------
+[2026-06-18 09:10:42] 🚚 Processando relatório 8/9: relatorio_08
+[2026-06-18 09:10:42] 📑 Selecionando relatório relatorio_08 (75314905291531893)...
+[2026-06-18 09:10:42] ⏳ Aguardando estabilidade: seleção do relatório relatorio_08
+[2026-06-18 09:10:43] 🧾 Relatório selecionado na tela -> id atual: 75314905291531893 | nome visível: 10. LINHA 8
+[2026-06-18 09:10:43] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:10:43] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:10:45] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:10:46] 📤 Abrindo menu de download...
+[2026-06-18 09:10:47] 📄 Selecionando opção de download...
+[2026-06-18 09:10:48] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:10:49] ⬇️ Iniciando rotina blindada de download do relatório relatorio_08...
+[2026-06-18 09:10:49] ⬇️ Tentativa 1/3 de download para relatorio_08...
+[2026-06-18 09:10:58] ✅ Evento de download capturado para relatorio_08.
+[2026-06-18 09:10:59] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091059_relatorio_08_Cenários.csv
+[2026-06-18 09:10:59] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:11:00] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:11:00] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:11:09] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:11:16] 🔤 Lendo 20260618_091059_relatorio_08_Cenários.csv com encoding: cp1252
+[2026-06-18 09:11:16] 🧮 20260618_091059_relatorio_08_Cenários.csv -> linhas de dados: 2158 | hash: aa0204ac5c8d5f16
+[2026-06-18 09:11:16] --------------------------------------------------
+[2026-06-18 09:11:16] 🚚 Processando relatório 9/9: relatorio_09
+[2026-06-18 09:11:16] 📑 Selecionando relatório relatorio_09 (75315471314525895)...
+[2026-06-18 09:11:16] ⏳ Aguardando estabilidade: seleção do relatório relatorio_09
+[2026-06-18 09:11:18] 🧾 Relatório selecionado na tela -> id atual: 75315471314525895 | nome visível: 11. LINHA 9
+[2026-06-18 09:11:18] 📄 Ajustando quantidade de linhas para 100000...
+[2026-06-18 09:11:18] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-06-18 09:11:19] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-06-18 09:11:21] 📤 Abrindo menu de download...
+[2026-06-18 09:11:22] 📄 Selecionando opção de download...
+[2026-06-18 09:11:23] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:11:24] ⬇️ Iniciando rotina blindada de download do relatório relatorio_09...
+[2026-06-18 09:11:24] ⬇️ Tentativa 1/3 de download para relatorio_09...
+[2026-06-18 09:11:29] ✅ Evento de download capturado para relatorio_09.
+[2026-06-18 09:11:31] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091131_relatorio_09_Cenários.csv
+[2026-06-18 09:11:31] 🪟 Janela/modal de download fechada.
+[2026-06-18 09:11:32] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-06-18 09:11:32] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-06-18 09:11:38] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-06-18 09:11:45] 🔤 Lendo 20260618_091131_relatorio_09_Cenários.csv com encoding: cp1252
+[2026-06-18 09:11:45] 🧮 20260618_091131_relatorio_09_Cenários.csv -> linhas de dados: 1886 | hash: e85dcbd93debb3c5
+[2026-06-18 09:11:45] 🐞 Abrindo tela de Ocorrências...
+[2026-06-18 09:11:46] 🐞 Entrando em Ocorrências com seletor alternativo #1...
+[2026-06-18 09:11:48] ⏳ Aguardando estabilidade: entrada em Ocorrências
+[2026-06-18 09:11:51] 📄 Ajustando quantidade de linhas das Ocorrências para 100000...
+[2026-06-18 09:11:51] 🌀 Aguardando refresh APEX: ajuste de linhas em Ocorrências
+[2026-06-18 09:11:52] ⏳ Aguardando estabilidade: ajuste de linhas em Ocorrências
+[2026-06-18 09:11:54] 📤 Abrindo menu de download...
+[2026-06-18 09:11:55] 📄 Selecionando opção de download...
+[2026-06-18 09:11:59] ✅ Formato CSV selecionado explicitamente.
+[2026-06-18 09:12:00] ⬇️ Iniciando download do relatório de Ocorrências...
+[2026-06-18 09:12:09] ✅ Ocorrências salvas em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Ocorrencias_Consolidadas_atualizado.csv
+[2026-06-18 09:12:09] 🪟 Janela/modal de download de ocorrências fechada.
+[2026-06-18 09:12:12] 🔤 Lendo Ocorrencias_Consolidadas_atualizado.csv com encoding: cp1252
+[2026-06-18 09:12:12] 🧮 Ocorrencias_Consolidadas_atualizado.csv -> linhas de dados: 853
+[2026-06-18 09:12:12] 🧩 Consolidando arquivo: 20260618_090610_relatorio_01_Cenários.csv
+[2026-06-18 09:12:12] 🔤 Lendo 20260618_090610_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:12] 🧱 Cabeçalho base definido com 13 colunas.
+[2026-06-18 09:12:12] 🧭 Coluna 'Frente' criada na posição 7, baseada em 'Área de Negócio'.
+[2026-06-18 09:12:12] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:12] ✅ 20260618_090610_relatorio_01_Cenários.csv: 1033 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 127.
+[2026-06-18 09:12:12] 🧩 Consolidando arquivo: 20260618_090650_relatorio_02_Cenários.csv
+[2026-06-18 09:12:12] 🔤 Lendo 20260618_090650_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:12] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:13] ✅ 20260618_090650_relatorio_02_Cenários.csv: 3395 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 5569.
+[2026-06-18 09:12:13] 🧩 Consolidando arquivo: 20260618_090818_relatorio_03_Cenários.csv
+[2026-06-18 09:12:13] 🔤 Lendo 20260618_090818_relatorio_03_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:13] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:13] ✅ 20260618_090818_relatorio_03_Cenários.csv: 823 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 689.
+[2026-06-18 09:12:13] 🧩 Consolidando arquivo: 20260618_090851_relatorio_04_Cenários.csv
+[2026-06-18 09:12:13] 🔤 Lendo 20260618_090851_relatorio_04_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:13] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:13] ✅ 20260618_090851_relatorio_04_Cenários.csv: 2480 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 2826.
+[2026-06-18 09:12:13] 🧩 Consolidando arquivo: 20260618_090938_relatorio_05_Cenários.csv
+[2026-06-18 09:12:13] 🔤 Lendo 20260618_090938_relatorio_05_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:13] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:14] ✅ 20260618_090938_relatorio_05_Cenários.csv: 867 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 1180.
+[2026-06-18 09:12:14] 🧩 Consolidando arquivo: 20260618_091005_relatorio_06_Cenários.csv
+[2026-06-18 09:12:14] 🔤 Lendo 20260618_091005_relatorio_06_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:14] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:14] ✅ 20260618_091005_relatorio_06_Cenários.csv: 460 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 170.
+[2026-06-18 09:12:14] 🧩 Consolidando arquivo: 20260618_091027_relatorio_07_Cenários.csv
+[2026-06-18 09:12:14] 🔤 Lendo 20260618_091027_relatorio_07_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:14] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:14] ✅ 20260618_091027_relatorio_07_Cenários.csv: 1947 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 324.
+[2026-06-18 09:12:14] 🧩 Consolidando arquivo: 20260618_091059_relatorio_08_Cenários.csv
+[2026-06-18 09:12:14] 🔤 Lendo 20260618_091059_relatorio_08_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:14] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:14] ✅ 20260618_091059_relatorio_08_Cenários.csv: 739 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 1419.
+[2026-06-18 09:12:14] 🧩 Consolidando arquivo: 20260618_091131_relatorio_09_Cenários.csv
+[2026-06-18 09:12:14] 🔤 Lendo 20260618_091131_relatorio_09_Cenários.csv com encoding: cp1252
+[2026-06-18 09:12:14] 🎯 Filtro de cenários ativo: considerando somente prioridades P1, P2, P3, P9 pela coluna 'Grupo de Prioridade'.
+[2026-06-18 09:12:14] ✅ 20260618_091131_relatorio_09_Cenários.csv: 1459 linhas adicionadas ao consolidado com prioridades P1/P2/P3/P9. Linhas ignoradas por prioridade fora do escopo: 427.
+[2026-06-18 09:12:14] 📦 Consolidado gerado em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
+[2026-06-18 09:12:14] 📊 Total de linhas no geral.csv: 13203
+[2026-06-18 09:12:15] 📸 Screenshot salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\final_sucesso_20260618_091214.png
+[2026-06-18 09:12:15] 📝 HTML salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\final_sucesso_20260618_091214.html
+[2026-06-18 09:12:15] 🎯 Processo concluído com sucesso.
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090610_relatorio_01_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090650_relatorio_02_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090818_relatorio_03_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090851_relatorio_04_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_090938_relatorio_05_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091005_relatorio_06_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091027_relatorio_07_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091059_relatorio_08_Cenários.csv
+[2026-06-18 09:12:15] 📥 Arquivo baixado: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20260618_091131_relatorio_09_Cenários.csv
+[2026-06-18 09:12:15] 🐞 Arquivo de ocorrências final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Ocorrencias_Consolidadas_atualizado.csv
+[2026-06-18 09:12:15] 🗂️ Arquivo consolidado final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
+[2026-06-18 09:12:16] ✅ Execução encerrada com sucesso.
