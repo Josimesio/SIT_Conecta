@@ -1,3 +1,5 @@
+# V2 - 16/10/2026: navegacao especifica para Execucao dos Testes
+# e limite unico de espera pela grade, preservando exportacoes e filtros.
 from pathlib import Path
 from dotenv import load_dotenv
 from playwright.sync_api import (
@@ -14,6 +16,8 @@ import traceback
 import csv
 import hashlib
 import re
+import unicodedata
+from urllib.parse import unquote, urljoin, urlsplit
 
 load_dotenv()
 
@@ -58,6 +62,32 @@ MAX_TENTATIVAS_DOWNLOAD = int(os.getenv("GTN_MAX_TENTATIVAS_DOWNLOAD", "3"))
 MAX_TENTATIVAS_APLICAR_RELATORIO = int(os.getenv("GTN_MAX_TENTATIVAS_APLICAR_RELATORIO", "3"))
 APEX_REFRESH_TIMEOUT_MS = int(os.getenv("GTN_APEX_REFRESH_TIMEOUT_MS", "45000"))
 EXECUCAO_TESTES_READY_TIMEOUT_MS = int(os.getenv("GTN_EXECUCAO_TESTES_READY_TIMEOUT_MS", "120000"))
+
+
+class ErroNavegacaoExecucaoTestes(RuntimeError):
+    """Destino de testes acionado, mas sem confirmacao da grade correta."""
+
+
+PADRAO_MENU_EXECUCAO_TESTES = re.compile(
+    r"^\s*Execu[cç][aã]o\s+(?:de|dos)\s+Testes?\s*$", re.I
+)
+ALIASES_EXECUCAO_TESTES = frozenset({
+    "execucao-dos-testes",
+    "execucao-de-testes",
+    "execucao-testes",
+    "execucao-de-teste",
+})
+
+
+def normalizar_texto_navegacao(texto: str) -> str:
+    texto = unicodedata.normalize("NFD", unquote(texto or ""))
+    texto = "".join(char for char in texto if not unicodedata.combining(char))
+    return " ".join(texto.casefold().split())
+
+
+def url_e_execucao_testes(url: str) -> bool:
+    alias = urlsplit(url or "").path.rstrip("/").rsplit("/", 1)[-1]
+    return normalizar_texto_navegacao(alias) in ALIASES_EXECUCAO_TESTES
 
 
 def url_tem_sessao(url: str) -> bool:
@@ -237,67 +267,50 @@ def aguardar_estabilidade(page: Page, motivo: str = "") -> None:
 
 
 def aguardar_execucao_testes_renderizada(page: Page, origem: str = "") -> None:
-    """Aguarda a página Execução de Testes terminar de renderizar de verdade.
+    """Confirma a grade especifica dentro de um unico prazo total.
 
-    Em APEX, o clique/goto pode alterar a URL antes da região da grade estar pronta.
-    Por isso o sinal principal de pronto é o select de relatórios salvos da região
-    #R35932200234408468_saved_reports ficar visível.
+    Nao usa botoes genericos de outras telas como prova de chegada. A URL
+    pode conter acentos codificados; a confirmacao e o select real da grade.
     """
     detalhe = f" ({origem})" if origem else ""
     log(f"🧪 Aguardando renderização completa da Execução de Testes{detalhe}...")
+    inicio = time.monotonic()
+    prazo = inicio + max(EXECUCAO_TESTES_READY_TIMEOUT_MS, 1) / 1000
+    proximo_aviso = inicio + 10
 
-    try:
-        page.wait_for_url(
-            lambda url: (
-                "execu" in (url or "").lower()
-                and ("teste" in (url or "").lower() or "testes" in (url or "").lower())
-            ),
-            timeout=EXECUCAO_TESTES_READY_TIMEOUT_MS,
-        )
-        log(f"✅ URL da Execução de Testes detectada: {page.url}")
-    except Exception:
-        log("⚠️ A URL não mudou claramente para Execução de Testes. Vou validar pelo componente da tela.")
-
-    try:
-        page.wait_for_load_state("domcontentloaded", timeout=EXECUCAO_TESTES_READY_TIMEOUT_MS)
-    except Exception:
-        pass
-
-    try:
-        page.wait_for_load_state("networkidle", timeout=30000)
-    except Exception:
-        # APEX às vezes mantém requisições abertas; não pode travar por isso.
-        pass
-
-    aguardar_processamento_apex(page, "renderização da página Execução de Testes")
-
-    seletores_prontos = [
-        "#R35932200234408468_saved_reports",
-        "#R35932200234408468 button:has-text('Ações')",
-        "#R35932200234408468 label:has-text('Linhas')",
-        "button:has-text('Ações')",
-        "label:has-text('Linhas')",
-    ]
-
-    ultimo_erro = None
-    for seletor in seletores_prontos:
-        try:
-            page.locator(seletor).first.wait_for(
-                state="visible",
-                timeout=EXECUCAO_TESTES_READY_TIMEOUT_MS,
+    while True:
+        if not pagina_aberta(page):
+            raise ErroNavegacaoExecucaoTestes(
+                "O navegador foi fechado enquanto a grade de Execução de Testes era aguardada."
             )
-            log(f"✅ Execução de Testes renderizada. Componente pronto: {seletor}")
-            aguardar_processamento_apex(page, "pós-renderização da grade Execução de Testes")
-            page.wait_for_timeout(1500)
+        if tela_execucao_testes_ativa(page):
+            decorrido = time.monotonic() - inicio
+            log(
+                f"✅ Grade de Execução de Testes confirmada em {decorrido:.1f}s: "
+                "#R35932200234408468_saved_reports visível e habilitado."
+            )
             return
-        except Exception as e:
-            ultimo_erro = e
-            continue
+
+        agora = time.monotonic()
+        restante = prazo - agora
+        if restante <= 0:
+            break
+        if agora >= proximo_aviso:
+            pagina_atual = unquote(urlsplit(page.url).path)
+            log(
+                f"⏳ A grade específica ainda não apareceu. Página atual: {pagina_atual}. "
+                f"Restam {restante:.0f}s do prazo de abertura."
+            )
+            proximo_aviso = agora + 10
+        page.wait_for_timeout(min(500, restante * 1000))
 
     salvar_debug(page, "execucao_testes_renderizacao_incompleta")
-    raise RuntimeError(
-        "A página Execução de Testes foi acionada, mas a grade/select de relatórios não ficou disponível "
-        f"dentro de {EXECUCAO_TESTES_READY_TIMEOUT_MS} ms. Último erro: {ultimo_erro}"
+    raise ErroNavegacaoExecucaoTestes(
+        "A navegação foi acionada, mas o select específico de Execução de Testes "
+        "(#R35932200234408468_saved_reports) não ficou visível e habilitado "
+        f"no prazo total de {EXECUCAO_TESTES_READY_TIMEOUT_MS} ms. "
+        f"Página atual: {unquote(urlsplit(page.url).path)}. "
+        "Confira a captura e o HTML de diagnóstico antes de alterar os seletores."
     )
 
 
@@ -420,18 +433,12 @@ def listar_botoes_visiveis(page: Page) -> None:
 
 
 def tela_execucao_testes_ativa(page: Page) -> bool:
-    candidatos = [
-        "#R35932200234408468_saved_reports",
-        "label:has-text('Linhas')",
-        "button:has-text('Ações')",
-    ]
-    for seletor in candidatos:
-        try:
-            if page.locator(seletor).first.is_visible(timeout=1500):
-                return True
-        except Exception:
-            continue
-    return False
+    """Acoes/Linhas tambem existem em Projetos e nao identificam esta tela."""
+    try:
+        seletor = page.locator("#R35932200234408468_saved_reports").first
+        return seletor.is_visible() and seletor.is_enabled()
+    except Exception:
+        return False
 
 
 def tentar_abrir_menu_navegacao(page: Page) -> bool:
@@ -461,36 +468,43 @@ def tentar_abrir_menu_navegacao(page: Page) -> bool:
 
 
 def obter_link_apex_por_texto(page: Page, texto_procurado: str) -> str | None:
-    """Procura links no DOM inteiro, inclusive itens ocultos do menu APEX."""
+    """Procura links reais, incluindo menus ocultos, sem aceitar qualquer 'teste'."""
     try:
-        return page.evaluate(
-            """(textoProcurado) => {
-                const normalizar = (v) => (v || '')
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .toLowerCase()
-                    .replace(/\\s+/g, ' ')
-                    .trim();
-
-                const alvo = normalizar(textoProcurado);
-                const links = Array.from(document.querySelectorAll('a'));
-
-                for (const a of links) {
-                    const texto = normalizar(a.innerText || a.textContent || a.getAttribute('aria-label') || a.title || '');
-                    const href = a.href || a.getAttribute('href') || '';
-                    const hrefNorm = normalizar(href);
-
-                    if ((texto && texto.includes(alvo)) || (hrefNorm && hrefNorm.includes(alvo.replace(/ /g, '-')))) {
-                        return href;
-                    }
-                }
-
-                return null;
-            }""",
-            texto_procurado,
+        links = page.locator("a[href]").evaluate_all(
+            """elements => elements.map(a => ({
+                texto: a.innerText || a.textContent || a.getAttribute('aria-label') || a.title || '',
+                href: a.href || a.getAttribute('href') || ''
+            }))"""
         )
+        alvo = normalizar_texto_navegacao(texto_procurado)
+        eh_execucao = bool(re.fullmatch(r"execucao (?:de|dos) testes?", alvo))
+        origem = urlsplit(page.url)
+        encontrados = []
+        for item in links:
+            href = (item.get("href") or "").strip()
+            if not href or href.startswith("#"):
+                continue
+            destino = urljoin(page.url, href)
+            parsed = urlsplit(destino)
+            if parsed.scheme not in {"http", "https"} or (
+                parsed.scheme, parsed.netloc
+            ) != (origem.scheme, origem.netloc):
+                continue
+            if parsed.username is not None or parsed.password is not None:
+                continue
+            texto = normalizar_texto_navegacao(item.get("texto") or "")
+            if eh_execucao:
+                if url_e_execucao_testes(destino):
+                    encontrados.append((0, destino))
+                elif re.fullmatch(r"execucao (?:de|dos) testes?", texto):
+                    encontrados.append((1, destino))
+            elif texto == alvo:
+                encontrados.append((0, destino))
+        if encontrados:
+            return min(encontrados, key=lambda item: item[0])[1]
     except Exception:
-        return None
+        pass
+    return None
 
 
 def listar_links_relevantes_debug(page: Page) -> None:
@@ -608,8 +622,12 @@ def tentar_expandir_arvore(page: Page) -> None:
 
                     if tentar_abrir_execucao_testes_pelo_menu(page):
                         return
+                except ErroNavegacaoExecucaoTestes:
+                    raise
                 except Exception:
                     continue
+        except ErroNavegacaoExecucaoTestes:
+            raise
         except Exception:
             continue
 
@@ -620,90 +638,65 @@ def tentar_expandir_arvore(page: Page) -> None:
 
 
 def tentar_abrir_execucao_testes_pelo_menu(page: Page) -> bool:
+    # O log do GTN confirma o alias execucao-dos-testes, com acentos na URL.
+    # Um href real, mesmo em item oculto, evita clicar em 'Projetos de Testes'.
+    link = obter_link_apex_por_texto(page, "Execução dos Testes")
+    if link:
+        log(f"🧪 Abrindo link específico da Execução de Testes: {unquote(urlsplit(link).path)}")
+        try:
+            page.goto(link, wait_until="domcontentloaded", timeout=DEFAULT_TIMEOUT_MS)
+        except Exception as e:
+            log(f"⚠️ Não foi possível carregar o link específico: {e}")
+            return False
+        aguardar_execucao_testes_renderizada(page, "link real localizado no menu")
+        return True
+
     candidatos = [
-        page.get_by_role("treeitem", name="Execução de Testes"),
-        page.get_by_role("link", name="Execução de Testes"),
-        page.get_by_text("Execução de Testes", exact=True),
-        page.locator("a:has-text('Execução de Testes')"),
-        page.locator("span:has-text('Execução de Testes')"),
-        page.locator("text=/Execu[cç][aã]o de Testes/i"),
-        page.locator("a[href*='execucao'][href*='teste']"),
-        page.locator("a[href*='teste']"),
+        page.get_by_role("treeitem", name=PADRAO_MENU_EXECUCAO_TESTES),
+        page.get_by_role("link", name=PADRAO_MENU_EXECUCAO_TESTES),
+        page.get_by_text(PADRAO_MENU_EXECUCAO_TESTES),
     ]
 
     for i, candidato in enumerate(candidatos, start=1):
         try:
-            alvo = candidato.first
-            if alvo.is_visible(timeout=1800):
-                log(f"🧪 Entrando em Execução de Testes com seletor alternativo #{i}...")
-                alvo.scroll_into_view_if_needed()
-                alvo.click(timeout=10000, force=True)
-                aguardar_execucao_testes_renderizada(page, f"clique no menu - seletor #{i}")
-                if tela_execucao_testes_ativa(page):
-                    return True
+            quantidade = min(candidato.count(), 5)
         except Exception:
             continue
-
-    link = obter_link_apex_por_texto(page, "Execução de Testes")
-    if link:
-        try:
-            log(f"🧪 Abrindo Execução de Testes por link encontrado no HTML: {link[:160]}")
-            page.goto(link, wait_until="domcontentloaded", timeout=EXECUCAO_TESTES_READY_TIMEOUT_MS)
-            aguardar_execucao_testes_renderizada(page, "abertura por link encontrado no HTML")
-            return tela_execucao_testes_ativa(page)
-        except Exception as e:
-            log(f"⚠️ Link encontrado, mas falhou ao abrir Execução de Testes: {e}")
+        for indice in range(quantidade):
+            alvo = candidato.nth(indice)
+            try:
+                if not alvo.is_visible():
+                    continue
+                log(f"🧪 Clicando no item específico Execução de/dos Testes - seletor #{i}...")
+                alvo.scroll_into_view_if_needed(timeout=3000)
+                alvo.click(timeout=10000)
+            except Exception as e:
+                log(f"ℹ️ Item específico #{i} não pôde ser clicado: {e}")
+                continue
+            # Uma falha de renderizacao deve subir ao fluxo, sem cliques em outras telas.
+            aguardar_execucao_testes_renderizada(page, f"item específico do menu #{i}")
+            return True
 
     return False
 
 
 def tentar_abrir_execucao_testes_por_url_amigavel(page: Page) -> bool:
-    """Último fallback: tenta aliases comuns do APEX preservando a sessão atual."""
+    """Reconsulta links reais apos a expansao; nao monta aliases por tentativa.
+
+    Os parametros session/cs permanecem exatamente como o GTN os forneceu
+    no link da pagina de destino, sem reaproveitar um checksum de outra tela.
+    """
+    link = obter_link_apex_por_texto(page, "Execução dos Testes")
+    if not link:
+        log("ℹ️ Não há link real de Execução de Testes no HTML atual. URLs não serão adivinhadas.")
+        return False
     try:
-        from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
-
-        atual = page.url
-        parsed = urlparse(atual)
-        partes = parsed.path.rstrip('/').split('/')
-
-        if not partes:
-            return False
-
-        # Troca somente o alias da página, preservando /ords/r/workspace/app/
-        base_path = '/'.join(partes[:-1])
-        query = parse_qs(parsed.query)
-
-        session = None
-        for chave in ["session", "cs"]:
-            if chave in query and query[chave]:
-                session = query[chave][0]
-                break
-
-        aliases = [
-            "execucao-de-testes",
-            "execucao-testes",
-            "execu%C3%A7%C3%A3o-de-testes",
-            "execu%C3%A7%C3%A3o-testes",
-            "execucao-de-teste",
-        ]
-
-        for alias in aliases:
-            nova_query = parsed.query
-            nova_url = urlunparse((parsed.scheme, parsed.netloc, f"{base_path}/{alias}", '', nova_query, ''))
-            log(f"🧭 Tentando URL amigável da Execução de Testes: {nova_url}")
-            try:
-                page.goto(nova_url, wait_until="domcontentloaded", timeout=EXECUCAO_TESTES_READY_TIMEOUT_MS)
-                aguardar_execucao_testes_renderizada(page, f"fallback URL {alias}")
-                if tela_execucao_testes_ativa(page):
-                    log("✅ Execução de Testes aberta via URL amigável.")
-                    return True
-            except Exception as e:
-                log(f"ℹ️ Alias {alias} não abriu a tela esperada: {e}")
-
+        page.goto(link, wait_until="domcontentloaded", timeout=DEFAULT_TIMEOUT_MS)
     except Exception as e:
-        log(f"⚠️ Falha no fallback de URL amigável: {e}")
-
-    return False
+        log(f"⚠️ O link real de Execução de Testes não carregou: {e}")
+        return False
+    aguardar_execucao_testes_renderizada(page, "link real reconsultado após expansão")
+    return True
 
 
 def abrir_execucao_testes(page: Page) -> None:
@@ -722,6 +715,10 @@ def abrir_execucao_testes(page: Page) -> None:
 
     if tela_execucao_testes_ativa(page):
         log("✅ Tela de Execução de Testes ficou disponível sem precisar navegar de novo.")
+        return
+
+    if tentar_abrir_execucao_testes_pelo_menu(page):
+        log("✅ Execução de Testes aberta pelo destino específico encontrado na página.")
         return
 
     menu_aberto = tentar_abrir_menu_navegacao(page)
@@ -1655,6 +1652,7 @@ def executar() -> None:
 
         log("==================================================")
         log("🚀 Iniciando execução do fluxo 2 GTN")
+        log("🧭 Versão V2: navegação específica de testes e prazo único de renderização.")
         log("==================================================")
 
         executar_fluxo()

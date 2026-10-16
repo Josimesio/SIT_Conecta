@@ -31822,3 +31822,184 @@ RuntimeError: Não encontrei a opção 'Execução de Testes' no menu lateral ne
 [2026-10-16 08:28:53] 🐞 Arquivo de ocorrências final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Ocorrencias_Consolidadas_atualizado.csv
 [2026-10-16 08:28:53] 🗂️ Arquivo consolidado final: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\output\Cenarios_Consolidados_atualizado.csv
 [2026-10-16 08:28:54] ✅ Execução encerrada com sucesso.
+[2026-10-16 17:39:09] ==================================================
+[2026-10-16 17:39:09] 🚀 Iniciando execução do fluxo 2 GTN
+[2026-10-16 17:39:09] 🧭 Versão V2: navegação específica de testes e prazo único de renderização.
+[2026-10-16 17:39:09] ==================================================
+[2026-10-16 17:39:11] 🌐 Abrindo tela de login...
+[2026-10-16 17:39:19] ⏳ Aguardando estabilidade: carregamento inicial da tela de login
+[2026-10-16 17:39:21] 🔐 Preenchendo credenciais...
+[2026-10-16 17:39:22] ➡️ Clicando em Acessar...
+[2026-10-16 17:39:34] ⏳ Aguardando estabilidade: pós-login
+[2026-10-16 17:39:39] ✅ Pós-login. URL atual: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=226336119006353
+[2026-10-16 17:39:39] 🔎 URL atual antes de abrir menu: https://gtn.ninecon.com.br/ords/r/gtn/gtn/home?session=226336119006353
+[2026-10-16 17:39:39] ⏳ Aguardando estabilidade: estado atual após login
+[2026-10-16 17:39:41] 🧭 Abrindo navegação principal com seletor alternativo #1...
+[2026-10-16 17:39:42] 🌲 Rodada 1: toggles visíveis encontrados na árvore: 3
+[2026-10-16 17:39:43] 🧪 Abrindo link específico da Execução de Testes: /ords/r/gtn/gtn/execução-dos-testes
+[2026-10-16 17:39:46] 🧪 Aguardando renderização completa da Execução de Testes (link real localizado no menu)...
+[2026-10-16 17:39:47] ✅ Grade de Execução de Testes confirmada em 0.6s: #R35932200234408468_saved_reports visível e habilitado.
+[2026-10-16 17:39:47] ✅ Tela de execução carregada: https://gtn.ninecon.com.br/ords/r/gtn/gtn/execu%C3%A7%C3%A3o-dos-testes?request=.&clear=NO&session=226336119006353&cs=3uomiyy6Qq07xX5oXrNuo6GB_ZAOOD4RFZ3zBPXeeSOs-WUUiRBkHbn_hAqsLGZvol7huUfc1D_Vn63TzXnDt1g
+[2026-10-16 17:39:47] 🎯 Selecionando plano de teste: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:39:47] 🌀 Aguardando refresh APEX: alteração do plano de teste para SIT02
+[2026-10-16 17:39:55] ⏳ Aguardando estabilidade: seleção do plano de teste
+[2026-10-16 17:39:56] ✅ Plano de teste confirmado: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:39:56] --------------------------------------------------
+[2026-10-16 17:39:56] 🚚 Processando relatório 1/9: relatorio_01
+[2026-10-16 17:39:56] 📑 Selecionando relatório relatorio_01 (75126574677490011)...
+[2026-10-16 17:39:56] ⏳ Aguardando estabilidade: seleção do relatório relatorio_01
+[2026-10-16 17:39:58] 🧾 Relatório selecionado na tela -> id atual: 75126574677490011 | nome visível: 15. LINHA 1
+[2026-10-16 17:39:58] ✅ Plano de teste confirmado: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:39:58] 📄 Ajustando quantidade de linhas para 100000...
+[2026-10-16 17:39:58] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-10-16 17:41:07] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-10-16 17:41:08] 📤 Abrindo menu Ações do relatório...
+[2026-10-16 17:41:09] 🌀 Aguardando refresh APEX: antes de abrir menu Ações
+[2026-10-16 17:41:17] ✅ Clique efetuado em menu Ações: botão Ações por role
+[2026-10-16 17:41:18] 📄 Selecionando opção de download...
+[2026-10-16 17:41:24] ✅ Clique efetuado em opção Fazer Download/Download: menuitem Fazer Download/Download
+[2026-10-16 17:41:26] ✅ Clique efetuado em formato CSV: option CSV
+[2026-10-16 17:41:26] ✅ Formato CSV selecionado explicitamente.
+[2026-10-16 17:41:27] ⬇️ Iniciando rotina blindada de download do relatório relatorio_01...
+[2026-10-16 17:41:27] ⬇️ Tentativa 1/3 de download para relatorio_01...
+[2026-10-16 17:41:28] ✅ Clique efetuado em botão final de download: botão Fazer Download/Download/Baixar por role
+[2026-10-16 17:41:38] ✅ Evento de download capturado para relatorio_01.
+[2026-10-16 17:41:39] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20261016_174139_relatorio_01_Cenários.csv
+[2026-10-16 17:41:41] 🪟 Janela/modal de download fechada.
+[2026-10-16 17:41:42] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-10-16 17:41:42] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-10-16 17:41:49] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-10-16 17:41:56] 🔤 Lendo 20261016_174139_relatorio_01_Cenários.csv com encoding: cp1252
+[2026-10-16 17:41:56] 🧮 20261016_174139_relatorio_01_Cenários.csv -> linhas de dados: 5186 | hash: 6ba2629e05cd2ae7
+[2026-10-16 17:41:56] --------------------------------------------------
+[2026-10-16 17:41:56] 🚚 Processando relatório 2/9: relatorio_02
+[2026-10-16 17:41:56] 📑 Selecionando relatório relatorio_02 (75307651324595294)...
+[2026-10-16 17:41:56] ⏳ Aguardando estabilidade: seleção do relatório relatorio_02
+[2026-10-16 17:41:58] 🧾 Relatório selecionado na tela -> id atual: 75307651324595294 | nome visível: 16. LINHA 2
+[2026-10-16 17:41:58] ✅ Plano de teste confirmado: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:41:58] 📄 Ajustando quantidade de linhas para 100000...
+[2026-10-16 17:41:58] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-10-16 17:41:59] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-10-16 17:42:01] 📤 Abrindo menu Ações do relatório...
+[2026-10-16 17:42:01] 🌀 Aguardando refresh APEX: antes de abrir menu Ações
+[2026-10-16 17:42:38] ✅ Clique efetuado em menu Ações: botão Ações por role
+[2026-10-16 17:42:39] 📄 Selecionando opção de download...
+[2026-10-16 17:42:42] ✅ Clique efetuado em opção Fazer Download/Download: menuitem Fazer Download/Download
+[2026-10-16 17:42:47] ✅ Clique efetuado em formato CSV: option CSV
+[2026-10-16 17:42:47] ✅ Formato CSV selecionado explicitamente.
+[2026-10-16 17:42:48] ⬇️ Iniciando rotina blindada de download do relatório relatorio_02...
+[2026-10-16 17:42:48] ⬇️ Tentativa 1/3 de download para relatorio_02...
+[2026-10-16 17:42:49] ✅ Clique efetuado em botão final de download: botão Fazer Download/Download/Baixar por role
+[2026-10-16 17:42:55] ✅ Evento de download capturado para relatorio_02.
+[2026-10-16 17:42:55] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20261016_174255_relatorio_02_Cenários.csv
+[2026-10-16 17:42:56] 🪟 Janela/modal de download fechada.
+[2026-10-16 17:42:57] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-10-16 17:42:57] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-10-16 17:43:03] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-10-16 17:43:10] 🔤 Lendo 20261016_174255_relatorio_02_Cenários.csv com encoding: cp1252
+[2026-10-16 17:43:10] 🧮 20261016_174255_relatorio_02_Cenários.csv -> linhas de dados: 3334 | hash: 0699c22e10c71079
+[2026-10-16 17:43:10] --------------------------------------------------
+[2026-10-16 17:43:10] 🚚 Processando relatório 3/9: relatorio_03
+[2026-10-16 17:43:10] 📑 Selecionando relatório relatorio_03 (75308641635576924)...
+[2026-10-16 17:43:11] ⏳ Aguardando estabilidade: seleção do relatório relatorio_03
+[2026-10-16 17:43:12] 🧾 Relatório selecionado na tela -> id atual: 75308641635576924 | nome visível: 17. LINHA 3
+[2026-10-16 17:43:12] ✅ Plano de teste confirmado: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:43:12] 📄 Ajustando quantidade de linhas para 100000...
+[2026-10-16 17:43:12] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-10-16 17:43:14] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-10-16 17:43:15] 📤 Abrindo menu Ações do relatório...
+[2026-10-16 17:43:16] 🌀 Aguardando refresh APEX: antes de abrir menu Ações
+[2026-10-16 17:43:22] ✅ Clique efetuado em menu Ações: botão Ações por role
+[2026-10-16 17:43:23] 📄 Selecionando opção de download...
+[2026-10-16 17:43:24] ✅ Clique efetuado em opção Fazer Download/Download: menuitem Fazer Download/Download
+[2026-10-16 17:43:25] ✅ Clique efetuado em formato CSV: option CSV
+[2026-10-16 17:43:25] ✅ Formato CSV selecionado explicitamente.
+[2026-10-16 17:43:26] ⬇️ Iniciando rotina blindada de download do relatório relatorio_03...
+[2026-10-16 17:43:26] ⬇️ Tentativa 1/3 de download para relatorio_03...
+[2026-10-16 17:43:26] ✅ Clique efetuado em botão final de download: botão Fazer Download/Download/Baixar por role
+[2026-10-16 17:43:28] ✅ Evento de download capturado para relatorio_03.
+[2026-10-16 17:43:28] ✅ Download salvo em: C:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\downloads\20261016_174328_relatorio_03_Cenários.csv
+[2026-10-16 17:43:29] 🪟 Janela/modal de download fechada.
+[2026-10-16 17:43:30] 🎯 Aplicando seleção pós-modal no relatório 36017690830433903...
+[2026-10-16 17:43:30] 🌀 Aguardando refresh APEX: seleção pós-modal
+[2026-10-16 17:43:31] ⏳ Aguardando 5 segundos após select_option pós-modal...
+[2026-10-16 17:43:38] 🔤 Lendo 20261016_174328_relatorio_03_Cenários.csv com encoding: cp1252
+[2026-10-16 17:43:38] 🧮 20261016_174328_relatorio_03_Cenários.csv -> linhas de dados: 763 | hash: 2610c2589146481a
+[2026-10-16 17:43:38] --------------------------------------------------
+[2026-10-16 17:43:38] 🚚 Processando relatório 4/9: relatorio_04
+[2026-10-16 17:43:38] 📑 Selecionando relatório relatorio_04 (75312931254550487)...
+[2026-10-16 17:43:38] ⏳ Aguardando estabilidade: seleção do relatório relatorio_04
+[2026-10-16 17:43:40] 🧾 Relatório selecionado na tela -> id atual: 75312931254550487 | nome visível: 18. LINHA 4
+[2026-10-16 17:43:40] ✅ Plano de teste confirmado: PLANO DE TESTES INTEGRADOS PROGRAMA CONECTA SIT02 (Em Execução)
+[2026-10-16 17:43:40] 📄 Ajustando quantidade de linhas para 100000...
+[2026-10-16 17:43:40] 🌀 Aguardando refresh APEX: ajuste da quantidade de linhas
+[2026-10-16 17:43:41] ⏳ Aguardando estabilidade: ajuste da quantidade de linhas
+[2026-10-16 17:43:43] 📤 Abrindo menu Ações do relatório...
+[2026-10-16 17:43:43] 🌀 Aguardando refresh APEX: antes de abrir menu Ações
+[2026-10-16 17:44:29] ✅ Clique efetuado em menu Ações: botão Ações por role
+[2026-10-16 17:44:30] 📄 Selecionando opção de download...
+[2026-10-16 17:44:35] ✅ Clique efetuado em opção Fazer Download/Download: menuitem Fazer Download/Download
+[2026-10-16 17:44:40] ✅ Clique efetuado em formato CSV: option CSV
+[2026-10-16 17:44:41] ✅ Formato CSV selecionado explicitamente.
+[2026-10-16 17:44:41] ⬇️ Iniciando rotina blindada de download do relatório relatorio_04...
+[2026-10-16 17:44:41] ⬇️ Tentativa 1/3 de download para relatorio_04...
+[2026-10-16 17:44:42] ✅ Clique efetuado em botão final de download: botão Fazer Download/Download/Baixar por role
+[2026-10-16 17:44:48] ⚠️ Falha ao acionar botão final de download do relatorio_04 na tentativa 1: Target page, context or browser has been closed
+=========================== logs ===========================
+waiting for event "download"
+============================================================
+[2026-10-16 17:44:48] ⚠️ Página já estava fechada. Debug visual não pôde ser salvo.
+[2026-10-16 17:44:48] ℹ️ Não foi possível fechar modal explicitamente. Seguindo o fluxo.
+[2026-10-16 17:44:48] 📤 Abrindo menu Ações do relatório...
+[2026-10-16 17:44:48] 🌀 Aguardando refresh APEX: antes de abrir menu Ações
+[2026-10-16 17:44:48] ❌ Falha ao baixar relatorio_04: Page.wait_for_timeout: Target page, context or browser has been closed
+[2026-10-16 17:44:48] ⚠️ Página já estava fechada. Debug visual não pôde ser salvo.
+[2026-10-16 17:44:48] ❌ Erro: Page.wait_for_timeout: Target page, context or browser has been closed
+[2026-10-16 17:44:48] ⚠️ Página já estava fechada. Debug visual não pôde ser salvo.
+[2026-10-16 17:44:49] ❌ Falha geral na execução: Page.wait_for_timeout: Target page, context or browser has been closed
+[2026-10-16 17:44:49] Traceback (most recent call last):
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 1658, in executar
+    executar_fluxo()
+    ~~~~~~~~~~~~~~^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 1616, in executar_fluxo
+    arquivos_baixados = processar_relatorios(page)
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 1310, in processar_relatorios
+    arquivo = baixar_relatorio(page, relatorio["nome"])
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 1160, in baixar_relatorio
+    download = esperar_download_com_fallback(page, relatorio_nome)
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 1149, in esperar_download_com_fallback
+    abrir_download_csv(page)
+    ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 988, in abrir_download_csv
+    abrir_menu_acoes_relatorio(page)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 952, in abrir_menu_acoes_relatorio
+    aguardar_processamento_apex(page, "antes de abrir menu Ações")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\REPOSITORIOS\GTN_GERAL\SIT_Conecta\Script_Oficial_plano_SIT-2.py", line 148, in aguardar_processamento_apex
+    page.wait_for_timeout(1200)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\sync_api\_generated.py", line 12696, in wait_for_timeout
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.wait_for_timeout(timeout=to_milliseconds(timeout))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_page.py", line 1142, in wait_for_timeout
+    await self._main_frame.wait_for_timeout(timeout)
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_frame.py", line 924, in wait_for_timeout
+    await self._channel.send("waitForTimeout", None, {"waitTimeout": timeout})
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 76, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\JOSIMESIO.PEREIRA\AppData\Local\Programs\Python\Python313\Lib\site-packages\playwright\_impl\_connection.py", line 632, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: Page.wait_for_timeout: Target page, context or browser has been closed
+
